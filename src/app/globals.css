@@ -45,7 +45,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #24366B;
+  --background: #24366b;
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -118,9 +118,6 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-paytone), sans-serif;
   }
-}
-body {
-  @apply font-sans;
-  font-family: var(--font-paytone), sans-serif;
 }
