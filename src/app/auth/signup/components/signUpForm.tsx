@@ -21,7 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { signUpSchema } from "@/lib/schemas";
+import { signUpSchema, signUpType } from "@/lib/schemas";
 
 export function RegisterForm() {
   const form = useForm({
@@ -37,16 +37,14 @@ export function RegisterForm() {
       confirmarSenha: "",
     },
   });
-  //eslint-disable-next-line
-  function onSubmit(values: any) {
+  function onSubmit(values: signUpType) {
     console.log(values);
   }
-
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 w-full max-w-lg"
+        className="space-y-4 w-full max-w-md mx-auto p-4"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-1 m-0">
           <FormField
@@ -88,6 +86,7 @@ export function RegisterForm() {
               <FormItem className="col-span-full">
                 <FormLabel>Data de Nascimento</FormLabel>
                 <FormControl>
+                  {/* trocar por um Date Picker */}
                   <Input type="date" {...field} />
                 </FormControl>
                 <FormMessage />
@@ -211,10 +210,11 @@ export function RegisterForm() {
             )}
           />
         </div>
-
-        <Button type="submit" className="w-full">
-          Cadastrar
-        </Button>
+        <div className="flex justify-center items-center">
+          <Button type="submit" className=" w-[60%]">
+            Cadastrar
+          </Button>
+        </div>
       </form>
     </Form>
   );

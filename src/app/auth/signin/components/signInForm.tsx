@@ -34,7 +34,7 @@ export default function SignInForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4 max-w-sm mx-auto p-4 w-full"
+        className="space-y-4 max-w-md mx-auto p-4 w-full"
       >
         <FormField
           control={form.control}
