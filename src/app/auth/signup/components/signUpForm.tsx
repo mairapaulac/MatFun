@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { signUpSchema, signUpType } from "@/lib/schemas";
+import { signUpSchema, /*signUpType*/ } from "@/lib/schemas";
 import { ConfirmData } from "./confirmData.tsx";
 
 export function RegisterForm() {

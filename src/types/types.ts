@@ -7,7 +7,7 @@ export interface ISignInFormValues {
 }
 
 //tipagem do modal de cadastro
-export type confirmDataProps = {
+export interface confirmDataProps  {
   open: boolean
   onOpenChange: (open: boolean) => void
   data: {
