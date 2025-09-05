@@ -1,29 +1,12 @@
 "use client"
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
+import { registrationMock } from "@/assets/data"
+import { confirmDataProps } from "@/types/types"
 
-type confirmDataProps = {
-  open: boolean
-  onOpenChange: (open: boolean) => void
-  data: {
-    nome: string
-    email: string
-    nascimento: string
-    escola: string
-    ano: string
-    turma: string
-  }
-}
 //eslint-disable-next-line
 export function ConfirmData({ open, onOpenChange, data }: confirmDataProps) {
-  const dataMock = {
-    nome: "Joaozinho",
-    email: "joazinho@email.com",
-    nascimento: "11/09/2001",
-    escola: "Rui Barbosa",
-    ano: "5º ano",
-    turma: "Turma C"
-  }
+  const dataMock = registrationMock
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
