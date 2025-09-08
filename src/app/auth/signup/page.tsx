@@ -1,5 +1,6 @@
 import { RegisterForm } from "./components/signUpForm"
 import Image from "next/image"
+import Link from "next/link"
 export default function signUpPage(){
     return(
         <div className="flex flex-col items-center   min-h-screen ">
@@ -14,6 +15,7 @@ export default function signUpPage(){
                 MAT <span className="text-[#F43F5E]">FUN</span>
               </h1>
               <RegisterForm></RegisterForm>
+              <span className="text-white">Já possui uma conta? <Link className="text-[#22C55E] underline" href={"http://localhost:3000/auth/signin"}>Autentique-se</Link></span>
             </div>
     )
 }

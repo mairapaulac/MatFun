@@ -29,7 +29,7 @@ export function ConfirmData({ open, onOpenChange, data }: confirmDataProps) {
             Confira se suas informações estão corretas antes de finalizar o cadastro.
           </DialogDescription>
         </DialogHeader>
-
+        {/*TODO: componentizar essa feiura abaixo */}
         <div className="mt-4 grid gap-1 bg-white p-4 rounded-[38px] border-6 border-black">
           <div className="flex items-start gap-3">
             <UserCircle className="size-5 text-gray-500 mt-0.5" />
