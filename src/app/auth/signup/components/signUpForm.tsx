@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/select";
 
 import { signUpSchema, /*signUpType*/ } from "@/lib/schemas";
-import { ConfirmData } from "./confirmData.tsx";
+import { ConfirmData } from "./confirmData";
 
 export function RegisterForm() {
   const [open, setOpen] = useState(false);
