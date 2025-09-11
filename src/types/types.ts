@@ -6,16 +6,24 @@ export interface ISignInFormValues {
   password: string;
 }
 
-//tipagem do modal de cadastro
-export interface confirmDataProps  {
-  open: boolean
-  onOpenChange: (open: boolean) => void
+// modal de confirmação cadastro
+export interface confirmDataProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
   data: {
-    nome: string
-    email: string
-    nascimento: string
-    escola: string
-    ano: string
-    turma: string
-  }
+    nome: string;
+    email: string;
+    nascimento: string;
+    escola: string;
+    ano: string;
+    turma: string;
+  };
+}
+// card de jogardor na pagina de ranking
+export interface IPlayerCard {
+  rank: number;
+  name: string;
+  points: number;
+  trophy?: string | null;
+  // isUser:boolean
 }

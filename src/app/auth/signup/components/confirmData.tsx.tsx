@@ -74,6 +74,7 @@ export function ConfirmData({ open, onOpenChange, data }: confirmDataProps) {
             </div>
           </div>
         </div>
+        {/* até aqui */}
         <div className=" flex w-full justify-between gap-10">
           <Button variant="secondary" className="bg-[#182a5c] flex-1 text-white border-white">
             Editar

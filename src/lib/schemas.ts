@@ -1,6 +1,7 @@
 //aqui ficarão os schemas do zod que serão utilizados nas validações de formularios
+//schemas de forms são basicamente o "molde" do formato que aquele formulário deve capturar
 import z from "zod";
-
+//TODO:ajustar .email() deprecado
 export const signInSchema = z.object({
   email: z
     .string()
