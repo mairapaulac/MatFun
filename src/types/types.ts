@@ -19,11 +19,11 @@ export interface confirmDataProps {
     turma: string;
   };
 }
-// card de jogardor na pagina de ranking
+// card de jogador na pagina de ranking
 export interface IPlayerCard {
   rank: number;
   name: string;
   points: number;
   trophy?: string | null;
-  // isUser:boolean
+  isUser?:boolean
 }

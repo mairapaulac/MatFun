@@ -76,10 +76,10 @@ export function ConfirmData({ open, onOpenChange, data }: confirmDataProps) {
         </div>
         {/* até aqui */}
         <div className=" flex w-full justify-between gap-10">
-          <Button variant="secondary" className="bg-[#182a5c] flex-1 text-white border-white">
+          <Button variant="secondary" className="bg-[#182a5c] flex-1 text-white border-white" onClick={()=>onOpenChange(false)}>
             Editar
           </Button>
-          <Button className="flex-1">
+          <Button type="submit" className="flex-1" >
             Cadastrar
           </Button>
         </div>
