@@ -6,7 +6,7 @@ import { userData, geralRankingData, turmaRankingData } from "@/assets/data";
 
 export default function RankingScreen() {
   return (
-    <div className="flex flex-col items-center   min-h-screen max-h-[1280px] justify-center text-white border-4">
+    <div className="flex flex-col items-center   min-h-screen max-h-[1280px] justify-center text-white ">
       <header className="relative flex justify-center items-center mb-4 w-[450px]  ">
         <h1 className="text-7xl font-light ">Ranking</h1>
       </header>
