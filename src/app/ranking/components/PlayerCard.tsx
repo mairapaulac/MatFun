@@ -27,8 +27,8 @@ export default function PlayerCard({ rank, name, points, trophy,isUser }:IPlayer
         />
       </div>
       <div className="flex-grow">
-        <p className={`font-medium ${isUser ? "text-2xl" : "text-xl"}`}>{name}</p>
-        <p className={`text-gray-300 ${isUser ? "text-base" : "text-sm"}`}>
+        <p className={`font-medium ${isUser ? "text-3xl" : "text-2xl"}`}>{name}</p>
+        <p className={`text-gray-300 ${isUser ? "text-lg" : "text-md"}`}>
           {points} Pontos
         </p>
       </div>
