@@ -52,7 +52,7 @@ export default function Keypad({
             onClick={() => handleKeyPress(key)}
             onKeyDown={(e) => handleKeyDown(e, key)}
             className={`
-              w-20 h-20 sm:w-24 sm:h-24 
+              w-20 h-20 sm:w-20 sm:h-20 
               rounded-xl font-bold text-[48px]
               transition-all duration-150 ease-in-out
               focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2
@@ -75,7 +75,7 @@ export default function Keypad({
             tabIndex={disabled || isEmpty ? -1 : 0}
           >
             {isBackspace ? (
-              <DeleteIcon size={64}></DeleteIcon>
+              <DeleteIcon size={50}></DeleteIcon>
             ) : (
               key
             )}
