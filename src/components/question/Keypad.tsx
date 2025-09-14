@@ -3,9 +3,9 @@ import { KeypadProps } from '@/types/question';
 
 const DEFAULT_KEYS = [
   '7', '8', '9', '⌫',
-  '4', '5', '6', '',
+  '4', '5', '6', '0',
   '1', '2', '3', '',
-  '0', '', '', ''
+  '', '', '', ''
 ];
 
 export default function Keypad({ 
@@ -53,7 +53,7 @@ export default function Keypad({
             onKeyDown={(e) => handleKeyDown(e, key)}
             className={`
               w-20 h-20 sm:w-24 sm:h-24 
-              rounded-xl font-bold text-lg
+              rounded-xl font-bold text-[48px]
               transition-all duration-150 ease-in-out
               focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2
               disabled:opacity-50 disabled:cursor-not-allowed
@@ -75,7 +75,7 @@ export default function Keypad({
             tabIndex={disabled || isEmpty ? -1 : 0}
           >
             {isBackspace ? (
-              <span className="text-xl">⌫</span>
+              <span className="text-[36px]">⌫</span>
             ) : (
               key
             )}
