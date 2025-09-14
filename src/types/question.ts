@@ -25,6 +25,7 @@ export interface QuestionCardProps {
   questionNumber: number;
   moduleLabel: string;
   children: React.ReactNode; // the question skeleton
+  isDesktop?: boolean;
 }
 
 export interface TimeBarProps {
@@ -39,6 +40,7 @@ export interface KeypadProps {
   onSubmit?: () => void;
   keys?: string[]; // default digits + '/', '.', '⌫'
   disabled?: boolean;
+  isDesktop?: boolean;
 }
 
 export interface QuestionScreenProps {

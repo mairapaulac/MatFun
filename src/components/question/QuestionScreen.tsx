@@ -17,7 +17,7 @@ export default function QuestionScreen({
   totalMs = 60000,
   onSubmit,
   onTimeout
-}: QuestionScreenProps): JSX.Element {
+}: QuestionScreenProps): React.JSX.Element {
   const [answer, setAnswer] = useState(initialAnswer);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [timerKey, setTimerKey] = useState(0);
@@ -66,52 +66,113 @@ export default function QuestionScreen({
   const isDisabled = isSubmitted || timer.elapsedMs >= totalMs;
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center px-6 py-4 space-y-8">
-      {/* Score Display */}
-      <div className="text-center">
-        <h2 
-          className="text-4xl sm:text-5xl font-bold text-rose-500 leading-tight drop-shadow-lg"
-          style={{ color: '#FF3366' }}
+    <div className="min-h-screen bg-background">
+      {/* Mobile Layout (default) */}
+      <div className="flex flex-col items-center px-6 py-4 space-y-8 lg:hidden">
+        {/* Score Display */}
+        <div className="text-center">
+          <h2 
+            className="text-4xl sm:text-5xl font-bold text-rose-500 leading-tight drop-shadow-lg"
+            style={{ color: '#FF3366' }}
+          >
+            Pontuação: {score}
+          </h2>
+        </div>
+
+        {/* Question Card */}
+        <QuestionCard 
+          questionNumber={questionNumber}
+          moduleLabel={moduleLabel}
         >
-          Pontuação: {score}
-        </h2>
+          {questionSkeleton}
+        </QuestionCard>
+
+        {/* Time Bar */}
+        <div className="w-full max-w-md">
+          <TimeBar 
+            progress={timer.progress}
+            totalMs={totalMs}
+            showLabels={true}
+          />
+        </div>
+
+        {/* Keypad */}
+        <div className="w-full max-w-sm">
+          <Keypad
+            value={answer}
+            onChange={handleAnswerChange}
+            disabled={isDisabled}
+          />
+        </div>
+
+        {/* Submit Button */}
+        <div className="w-full max-w-sm">
+          <Button
+            onClick={handleSubmit}
+            disabled={isDisabled || answer.trim() === ''}
+            className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-full text-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitted ? 'Respondido!' : 'Responder!'}
+          </Button>
+        </div>
       </div>
 
-      {/* Question Card */}
-      <QuestionCard 
-        questionNumber={questionNumber}
-        moduleLabel={moduleLabel}
-      >
-        {questionSkeleton}
-      </QuestionCard>
+      {/* Desktop Layout */}
+      <div className="hidden lg:flex lg:min-h-screen lg:px-8 lg:py-6">
+        {/* Left Side - Question */}
+        <div className="flex-1 flex flex-col items-center justify-center space-y-8 pr-8">
+          {/* Score Display */}
+          <div className="text-center">
+            <h2 
+              className="text-5xl xl:text-6xl font-bold text-rose-500 leading-tight drop-shadow-lg"
+              style={{ color: '#FF3366' }}
+            >
+              Pontuação: {score}
+            </h2>
+          </div>
 
-      {/* Time Bar */}
-      <div className="w-full max-w-md">
-        <TimeBar 
-          progress={timer.progress}
-          totalMs={totalMs}
-          showLabels={true}
-        />
-      </div>
+          {/* Question Card */}
+          <QuestionCard 
+            questionNumber={questionNumber}
+            moduleLabel={moduleLabel}
+            isDesktop={true}
+          >
+            {questionSkeleton}
+          </QuestionCard>
 
-      {/* Keypad */}
-      <div className="w-full max-w-sm">
-        <Keypad
-          value={answer}
-          onChange={handleAnswerChange}
-          disabled={isDisabled}
-        />
-      </div>
+          {/* Time Bar */}
+          <div className="w-full max-w-lg">
+            <TimeBar 
+              progress={timer.progress}
+              totalMs={totalMs}
+              showLabels={true}
+            />
+          </div>
+        </div>
 
-      {/* Submit Button */}
-      <div className="w-full max-w-sm">
-        <Button
-          onClick={handleSubmit}
-          disabled={isDisabled || answer.trim() === ''}
-          className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-full text-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isSubmitted ? 'Respondido!' : 'Responder!'}
-        </Button>
+        {/* Right Side - Controls */}
+        <div className="flex-1 flex flex-col items-center justify-center space-y-8 pl-8">
+          {/* Keypad */}
+          <div className="w-full max-w-md">
+            <Keypad
+              value={answer}
+              onChange={handleAnswerChange}
+              disabled={isDisabled}
+              isDesktop={true}
+            />
+          </div>
+
+          {/* Submit Button */}
+          <div className="w-full max-w-md">
+            <Button
+              onClick={handleSubmit}
+              disabled={isDisabled || answer.trim() === ''}
+              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-8 rounded-full text-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitted ? 'Respondido!' : 'Responder!'}
+            </Button>
+          </div>
+        </div>
       </div>
 
       {/* Time's up indicator */}

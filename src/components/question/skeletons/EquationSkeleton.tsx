@@ -21,8 +21,8 @@ export interface GeneratedProblem {
 
 // Função para gerar problema aleatório
 export function generateRandomProblem(): GeneratedProblem {
-  const firstNumber = Math.floor(Math.random() * 9) + 2; // 2-9
-  const secondNumber = Math.floor(Math.random() * 9) + 2; // 2-9
+  const firstNumber = Math.floor(Math.random() * 9) + 1; // 1-9
+  const secondNumber = Math.floor(Math.random() * 9) + 1; // 1-9
   const result = firstNumber * secondNumber;
   
   const types: ProblemType[] = ['both_empty', 'first_filled', 'second_filled', 'result_empty'];
@@ -134,13 +134,13 @@ export default function EquationSkeleton({
   const renderField = (value: string, onChange: (value: string) => void, isEditable: boolean) => {
     if (isEditable) {
       return (
-        <div className="w-16 h-12 text-center text-2xl font-bold border-2 border-slate-300 rounded-lg flex items-center justify-center bg-white">
+        <div className="w-16 h-12 sm:w-20 sm:h-16 lg:w-24 lg:h-20 text-center text-2xl sm:text-3xl lg:text-4xl font-bold border-2 border-slate-300 rounded-lg flex items-center justify-center bg-white">
           {value || ''}
         </div>
       );
     } else {
       return (
-        <div className="w-16 h-12 text-center text-2xl font-bold border-2 border-slate-400 rounded-lg flex items-center justify-center bg-slate-100 text-slate-600">
+        <div className="w-16 h-12 sm:w-20 sm:h-16 lg:w-24 lg:h-20 text-center text-2xl sm:text-3xl lg:text-4xl font-bold border-2 border-slate-400 rounded-lg flex items-center justify-center bg-slate-100 text-slate-600">
           {value}
         </div>
       );
@@ -151,14 +151,14 @@ export default function EquationSkeleton({
     <div className="text-center space-y-4">
       {/* Background symbols */}
       <div className="absolute inset-0 flex items-center justify-center opacity-10">
-        <div className="text-6xl text-slate-300 space-x-8">
+        <div className="text-6xl sm:text-8xl lg:text-9xl text-slate-300 space-x-8">
           <span>+</span>
           <span>×</span>
         </div>
       </div>
       
       {/* Main equation */}
-      <div className="relative flex items-center justify-center space-x-2 text-2xl font-bold text-slate-900">
+      <div className="relative flex items-center justify-center space-x-2 sm:space-x-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900">
         {/* Primeiro número */}
         {problem.type === 'first_filled' || problem.type === 'result_empty' ? (
           renderField(problem.firstNumber.toString(), () => {}, false)

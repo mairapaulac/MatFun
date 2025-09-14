@@ -13,8 +13,9 @@ export default function Keypad({
   onChange, 
   onSubmit, 
   keys = DEFAULT_KEYS,
-  disabled = false 
-}: KeypadProps): JSX.Element {
+  disabled = false,
+  isDesktop = false
+}: KeypadProps): React.JSX.Element {
   
   const handleKeyPress = (key: string) => {
     if (disabled) return;
@@ -39,7 +40,9 @@ export default function Keypad({
   };
 
   return (
-    <div className="grid grid-cols-4 gap-3 w-full max-w-sm mx-auto">
+    <div className={`grid grid-cols-4 gap-3 w-full mx-auto ${
+      isDesktop ? 'max-w-lg gap-4' : 'max-w-sm'
+    }`}>
       {keys.map((key, index) => {
         const isEmpty = key === '';
         const isBackspace = key === '⌫';
@@ -52,11 +55,13 @@ export default function Keypad({
             onClick={() => handleKeyPress(key)}
             onKeyDown={(e) => handleKeyDown(e, key)}
             className={`
-              w-20 h-20 sm:w-20 sm:h-20 
-              rounded-xl font-bold text-[48px]
-              transition-all duration-150 ease-in-out
+              rounded-xl font-bold transition-all duration-150 ease-in-out
               focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2
-              disabled:opacity-50 disabled:cursor-not-allowed  flex items-center justify-center
+              disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center
+              ${isDesktop 
+                ? 'w-24 h-24 text-[56px]' 
+                : 'w-20 h-20 text-[48px]'
+              }
               ${isEmpty 
                 ? 'invisible' 
                 : isBackspace
@@ -75,7 +80,7 @@ export default function Keypad({
             tabIndex={disabled || isEmpty ? -1 : 0}
           >
             {isBackspace ? (
-              <DeleteIcon size={50}></DeleteIcon>
+              <DeleteIcon size={isDesktop ? 60 : 50}></DeleteIcon>
             ) : (
               key
             )}
