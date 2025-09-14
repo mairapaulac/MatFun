@@ -1,11 +1,11 @@
 import React from 'react';
 import { KeypadProps } from '@/types/question';
-
+import { DeleteIcon } from 'lucide-react';
 const DEFAULT_KEYS = [
   '7', '8', '9', '⌫',
   '4', '5', '6', '0',
   '1', '2', '3', '',
-  '', '', '', ''
+ 
 ];
 
 export default function Keypad({ 
@@ -56,7 +56,7 @@ export default function Keypad({
               rounded-xl font-bold text-[48px]
               transition-all duration-150 ease-in-out
               focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2
-              disabled:opacity-50 disabled:cursor-not-allowed
+              disabled:opacity-50 disabled:cursor-not-allowed  flex items-center justify-center
               ${isEmpty 
                 ? 'invisible' 
                 : isBackspace
@@ -75,7 +75,7 @@ export default function Keypad({
             tabIndex={disabled || isEmpty ? -1 : 0}
           >
             {isBackspace ? (
-              <span className="text-[36px]">⌫</span>
+              <DeleteIcon size={64}></DeleteIcon>
             ) : (
               key
             )}

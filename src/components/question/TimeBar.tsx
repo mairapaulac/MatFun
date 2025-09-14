@@ -44,10 +44,10 @@ export default function TimeBar({
     <div className="w-full space-y-2">
       {/* Time remaining and current multiplier */}
       <div className="flex justify-between items-center text-sm text-white">
-        <span className="font-semibold">
+        <span className="font-normal text-xl">
           Tempo: {remainingSeconds}s
         </span>
-        <span className="font-bold text-emerald-400">
+        <span className="font-normal text-lg text-emerald-400">
           {currentMultiplier}x Multiplicador
         </span>
       </div>

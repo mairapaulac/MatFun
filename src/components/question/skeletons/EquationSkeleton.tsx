@@ -21,8 +21,8 @@ export interface GeneratedProblem {
 
 // Função para gerar problema aleatório
 export function generateRandomProblem(): GeneratedProblem {
-  const firstNumber = Math.floor(Math.random() * 9) + 1; // 1-9
-  const secondNumber = Math.floor(Math.random() * 9) + 1; // 1-9
+  const firstNumber = Math.floor(Math.random() * 9) + 2; // 2-9
+  const secondNumber = Math.floor(Math.random() * 9) + 2; // 2-9
   const result = firstNumber * secondNumber;
   
   const types: ProblemType[] = ['both_empty', 'first_filled', 'second_filled', 'result_empty'];
