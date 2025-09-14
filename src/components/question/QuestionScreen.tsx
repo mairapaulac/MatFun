@@ -66,7 +66,7 @@ export default function QuestionScreen({
   const isDisabled = isSubmitted || timer.elapsedMs >= totalMs;
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col items-center px-6 py-8 space-y-8">
+    <div className="min-h-screen bg-background flex flex-col items-center px-6 py-8 space-y-8">
       {/* Score Display */}
       <div className="text-center">
         <h2 
