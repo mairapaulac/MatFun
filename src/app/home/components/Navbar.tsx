@@ -5,16 +5,16 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="w-full h-[180px] sm:h-[230px] bg-[#314991] px-4 py-4 sm:py-6 drop-shadow-xl">
+    <nav className="w-full h-[120px] sm:h-[120px] bg-[#314991] px-4 py-4 sm:py-6 drop-shadow-xl">
       <div className="w-full max-w-[800px] mx-auto h-full flex justify-between items-center">
-        {/* Botão de configurações */}
+        {/* configs */}
         <div className="flex items-center justify-center w-[50px] h-[50px] sm:w-[60px] sm:h-[60px]">
           <Link href={"/settings"}>
             <Settings className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] text-white hover:text-gray-300 transition-colors" />
           </Link>
         </div>
         
-        {/* Avatar e informações do usuário */}
+        {/* user info*/}
         <div className="flex-grow flex justify-center items-center gap-2 sm:gap-4">
           <div className="flex items-center gap-2 sm:gap-4">
             <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center">
@@ -27,7 +27,7 @@ export default function Navbar() {
           </div>
         </div>
         
-        {/* Botão de logout */}
+        {/* logout */}
         <div className="flex items-center justify-center w-[50px] h-[50px] sm:w-[60px] sm:h-[60px]">
           <Link href={"/auth/signin"}>
             <LogOut className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] text-red-400 hover:text-red-300 transition-colors" />
