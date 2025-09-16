@@ -4,15 +4,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { registrationMock } from "@/assets/data"
 import { confirmDataProps } from "@/types/types"
 import { Button } from "@/components/ui/button"
-import {
-  CheckCircle,
-  UserCircle,
-  Mail,
-  Calendar,
-  School,
-  BookText,
-  Users,
-} from "lucide-react"
+import { UserDataCard } from "@/components/ui/user-data-card"
+import { CheckCircle } from "lucide-react"
 //eslint-disable-next-line
 export function ConfirmData({ open, onOpenChange, data }: confirmDataProps) {
   const dataMock = registrationMock
@@ -29,52 +22,7 @@ export function ConfirmData({ open, onOpenChange, data }: confirmDataProps) {
             Confira se suas informações estão corretas antes de finalizar o cadastro.
           </DialogDescription>
         </DialogHeader>
-        {/*TODO: componentizar essa feiura abaixo */}
-        <div className="mt-4 grid gap-1 bg-white p-4 rounded-[38px] border-6 border-black">
-          <div className="flex items-start gap-3">
-            <UserCircle className="size-5 text-gray-500 mt-0.5" />
-            <div>
-              <h2 className="text-sm font-medium text-gray-950">Nome</h2>
-              <p className="text-lg font-semibold text-gray-700">{dataMock.nome}</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3">
-            <Mail className="size-5 text-gray-500 mt-0.5" />
-            <div>
-              <h2 className="text-sm font-medium text-gray-950">Email</h2>
-              <p className="text-lg font-semibold text-gray-700">{dataMock.email}</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3">
-            <Calendar className="size-5 text-gray-500 mt-0.5" />
-            <div>
-              <h2 className="text-sm font-medium text-gray-950">Data de Nascimento</h2>
-              <p className="text-lg font-semibold text-gray-700">{dataMock.nascimento}</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3">
-            <School className="size-5 text-gray-500 mt-0.5" />
-            <div>
-              <h2 className="text-sm font-medium text-gray-950">Escola</h2>
-              <p className="text-lg font-semibold text-gray-700">{dataMock.escola}</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3">
-            <BookText className="size-5 text-gray-500 mt-0.5" />
-            <div>
-              <h2 className="text-sm font-medium text-gray-950">Ano</h2>
-              <p className="text-lg font-semibold text-gray-700">{dataMock.ano}</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3">
-            <Users className="size-5 text-gray-500 mt-0.5" />
-            <div>
-              <h2 className="text-sm font-medium text-gray-950">Turma</h2>
-              <p className="text-lg font-semibold text-gray-700">{dataMock.turma}</p>
-            </div>
-          </div>
-        </div>
-        {/* até aqui */}
+        <UserDataCard data={dataMock} />
         <div className=" flex w-full justify-between gap-10">
           <Button variant="secondary" className="bg-[#182a5c] flex-1 text-white border-white" onClick={()=>onOpenChange(false)}>
             Editar

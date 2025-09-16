@@ -89,16 +89,26 @@ export function RegisterForm() {
             <FormField
               control={form.control}
               name="dataNascimento"
-              render={({ field }) => (
-                <FormItem className="col-span-full">
-                  <FormLabel>Data de Nascimento</FormLabel>
-                  <FormControl>
-                    {/* trocar por um Date Picker */}
-                    <Input type="date" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+              render={({ field }) => {
+                const today = new Date();
+                const minDate = new Date(today.getFullYear() - 120, 0, 1).toISOString().split('T')[0];
+                const maxDate = new Date(today.getFullYear() - 5, 11, 31).toISOString().split('T')[0];
+                
+                return (
+                  <FormItem className="col-span-full">
+                    <FormLabel>Data de Nascimento</FormLabel>
+                    <FormControl>
+                      <Input 
+                        type="date" 
+                        min={minDate}
+                        max={maxDate}
+                        {...field} 
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
             />
           </div>
 

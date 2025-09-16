@@ -18,9 +18,21 @@ export const signUpSchema = z
     email: z.string().email({
       message: "Por favor, insira um e-mail válido.",
     }),
-    dataNascimento: z.string().min(1, {
-      message: "A data de nascimento é obrigatória.",
-    }),
+    dataNascimento: z
+      .string()
+      .min(1, {
+        message: "A data de nascimento é obrigatória.",
+      })
+      .refine((date) => {
+        const birthDate = new Date(date);
+        const today = new Date();
+        const minDate = new Date(today.getFullYear() - 120, 0, 1); // 120 anos atrás
+        const maxDate = new Date(today.getFullYear() - 5, 11, 31); // 5 anos atrás
+        
+        return birthDate >= minDate && birthDate <= maxDate;
+      }, {
+        message: "A data de nascimento deve ser entre 5 e 120 anos atrás.",
+      }),
     serie: z.string().min(1, {
       message: "A série é obrigatória.",
     }),

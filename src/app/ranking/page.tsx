@@ -12,7 +12,7 @@ export default function RankingScreen() {
       </header>
 
       <Tabs defaultValue="geral" className="w-full max-w-md">
-        <TabsList className="flex justify-center w-1/2 mx-auto">
+        <TabsList className="flex justify-center w-1/2 mx-auto gap-20">
           <TabsTrigger value="turma">Turma</TabsTrigger>
           <TabsTrigger value="geral">Geral</TabsTrigger>
         </TabsList>
