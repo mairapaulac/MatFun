@@ -23,21 +23,21 @@ export default function HomePage() {
         <div className="mb-4 sm:mb-6 flex items-center w-full">
           <Button
             onClick={() => router.push("/ranking")}
-            className="w-full h-[60px] max-w-[420px] mx-auto rounded-4xl "
+            className="w-full h-[50px] max-w-[420px] mx-auto rounded-4xl "
           > 
-             <Trophy className="h-13 w-10"></Trophy> 
+             <Trophy className="h-8 w-8"></Trophy> 
             <span className="text-3xl">Ranking</span>
           </Button>
         </div>
 
-        <div className="mb-4 sm:mb-6 space-y-3 sm:space-y-4 flex-1 min-h-0">
-          <Card className="w-full h-[110px] sm:h-[130px] flex items-center gap-3 sm:gap-4 p-4 sm:p-6">
+        <div className="mb-4 sm:mb-6 space-y-5 sm:space-y-4 flex-1 min-h-0">
+          <Card className="w-full h-[90px] sm:h-[130px] flex items-center gap-3 sm:gap-4 p-4 sm:p-6">
             <div className="flex-shrink-0">
               <Sword className="w-6 h-6 sm:w-8 sm:h-8 text-[#2B3A67]" />
             </div>
             <div className="flex-1">
               <h3
-                className="text-lg sm:text-xl font-semibold mb-1"
+                className="text-xl sm:text-2xl font-semibold mb-1"
                 style={{ color: "rgba(29, 45, 88, 0.75)" }}
               >
                 Guerreiro da Matemática
@@ -51,13 +51,13 @@ export default function HomePage() {
             </div>
           </Card>
 
-          <Card className="w-full h-[110px] sm:h-[130px] flex items-center gap-3 sm:gap-4 p-4 sm:p-6">
+          <Card className="w-full h-[90px] sm:h-[130px] flex items-center gap-3 sm:gap-4 p-4 sm:p-6">
             <div className="flex-shrink-0">
               <Target className="w-6 h-6 sm:w-8 sm:h-8 text-[#2B3A67]" />
             </div>
             <div className="flex-1">
               <h3
-                className="text-lg sm:text-xl font-semibold mb-1"
+                className="text-xl sm:text-2xl font-semibold mb-1"
                 style={{ color: "rgba(29, 45, 88, 0.75)" }}
               >
                 Ninja das Frações
@@ -71,13 +71,13 @@ export default function HomePage() {
             </div>
           </Card>
 
-          <Card className="w-full h-[110px] sm:h-[130px] flex items-center gap-3 sm:gap-4 p-4 sm:p-6">
+          <Card className="w-full h-[90px] sm:h-[130px] flex items-center gap-3 sm:gap-4 p-4 sm:p-6">
             <div className="flex-shrink-0">
               <Calculator className="w-6 h-6 sm:w-8 sm:h-8 text-[#2B3A67]" />
             </div>
             <div className="flex-1">
               <h3
-                className="text-lg sm:text-xl font-semibold mb-1"
+                className="text-xl sm:text-2xl font-semibold mb-1"
                 style={{ color: "rgba(29, 45, 88, 0.75)" }}
               >
                 Especialista em Multiplicação
@@ -112,10 +112,10 @@ export default function HomePage() {
         <div className="flex justify-center mt-auto">
           <Button
             onClick={() => router.push("/question")} // Adicionado onClick
-            className="w-full max-w-[690px] h-[60px] sm:h-[80px] rounded-full"
+            className="w-full max-w-[690px] h-[50px] sm:h-[70px] rounded-full"
           >
             <Gamepad2 size={90}></Gamepad2>
-            <span className="text-4xl">Jogar</span>
+            <span className="text-3xl">Jogar</span>
           </Button>
         </div>
       </main>
