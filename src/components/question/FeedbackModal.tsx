@@ -1,74 +1,80 @@
-"use client"
-import { Button } from "@/components/ui/button"
+import React, { useEffect, useState } from 'react';
 
 interface FeedbackModalProps {
-  isOpen: boolean
-  type: "correct" | "incorrect" | "timeout"
-  points?: number
-  multiplier?: number
-  onClose: () => void
+  isOpen: boolean;
+  type: 'correct' | 'incorrect' | 'timeout';
+  points?: number;
+  multiplier?: number;
+  onClose: () => void;
 }
 
-export default function FeedbackModal({ isOpen, type, points, multiplier, onClose }: FeedbackModalProps) {
-  if (!isOpen) return null
+export default function FeedbackModal({ 
+  isOpen, 
+  type, 
+  points, 
+  multiplier, 
+  onClose 
+}: FeedbackModalProps): JSX.Element {
+  const [isVisible, setIsVisible] = useState(false);
 
-  const getTitle = () => {
-    switch (type) {
-      case "correct":
-        return "🎉 Correto!"
-      case "incorrect":
-        return "❌ Incorreto"
-      case "timeout":
-        return "⏰ Tempo Esgotado!"
-      default:
-        return ""
+  useEffect(() => {
+    if (isOpen) {
+      setIsVisible(true);
+      const timer = setTimeout(() => {
+        setIsVisible(false);
+        setTimeout(onClose, 300); // Wait for animation to complete
+      }, 1500);
+      return () => clearTimeout(timer);
     }
-  }
+  }, [isOpen, onClose]);
 
-  const getMessage = () => {
-    switch (type) {
-      case "correct":
-        return `Você ganhou ${points} pontos com multiplicador ${multiplier}x!`
-      case "incorrect":
-        return "Tente novamente na próxima questão!"
-      case "timeout":
-        return "O tempo acabou! Vamos para a próxima questão."
-      default:
-        return ""
-    }
-  }
+  if (!isOpen) return <></>;
 
-  const getBgColor = () => {
+  const getContent = () => {
     switch (type) {
-      case "correct":
-        return "bg-emerald-500"
-      case "incorrect":
-        return "bg-rose-500"
-      case "timeout":
-        return "bg-amber-500"
-      default:
-        return "bg-slate-500"
+      case 'correct':
+        return {
+          title: 'Correto!',
+          message: `+${points} pontos (${multiplier}x multiplicador)`,
+          bgColor: 'bg-green-500',
+          textColor: 'text-white',
+          icon: '✓'
+        };
+      case 'incorrect':
+        return {
+          title: 'Incorreto!',
+          message: 'Tente novamente.',
+          bgColor: 'bg-red-500',
+          textColor: 'text-white',
+          icon: '✗'
+        };
+      case 'timeout':
+        return {
+          title: 'Tempo Esgotado!',
+          message: 'Próxima questão...',
+          bgColor: 'bg-orange-500',
+          textColor: 'text-white',
+          icon: '⏰'
+        };
     }
-  }
+  };
+
+  const content = getContent();
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl p-6 max-w-sm w-full mx-4 text-center shadow-2xl">
-        <div className={`w-16 h-16 ${getBgColor()} rounded-full flex items-center justify-center mx-auto mb-4`}>
-          <span className="text-2xl text-white">{type === "correct" ? "✓" : type === "incorrect" ? "✗" : "⏰"}</span>
+    <div className={`fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 ${
+      isVisible ? 'opacity-100' : 'opacity-0'
+    }`}>
+      <div className="absolute inset-0 bg-black/50" />
+      <div className={`relative ${content.bgColor} ${content.textColor} px-8 py-6 rounded-2xl shadow-2xl transform transition-all duration-300 ${
+        isVisible ? 'scale-100' : 'scale-75'
+      }`}>
+        <div className="text-center">
+          <div className="text-6xl mb-4">{content.icon}</div>
+          <h2 className="text-2xl font-bold mb-2">{content.title}</h2>
+          <p className="text-lg">{content.message}</p>
         </div>
-
-        <h2 className="text-2xl font-bold text-slate-900 mb-2">{getTitle()}</h2>
-
-        <p className="text-slate-600 mb-6">{getMessage()}</p>
-
-        <Button
-          onClick={onClose}
-          className={`w-full ${getBgColor()} hover:opacity-90 text-white font-bold py-3 px-6 rounded-full text-lg transition-all duration-200`}
-        >
-          Continuar
-        </Button>
       </div>
     </div>
-  )
+  );
 }
