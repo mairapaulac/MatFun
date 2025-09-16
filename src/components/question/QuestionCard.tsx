@@ -10,19 +10,19 @@ export default function QuestionCard({
   isTablet = false,
 }: QuestionCardProps & { isTablet?: boolean }): React.JSX.Element {
   return (
-    <div className={`w-full mx-auto space-y-4 ${isDesktop ? "max-w-2xl" : isTablet ? "max-w-lg" : "max-w-md"}`}>
+    <div className={`w-full mx-auto space-y-4 ${isDesktop ? "max-w-2xl" : isTablet ? "max-w-2xl" : "max-w-md"}`}>
       {/* Question Header */}
       <div className="text-center space-y-2">
         <h1
           className={`font-bold text-white leading-tight ${
-            isDesktop ? "text-6xl xl:text-7xl" : isTablet ? "text-5xl" : "text-4xl sm:text-5xl"
+            isDesktop ? "text-6xl xl:text-7xl" : isTablet ? "text-6xl" : "text-4xl sm:text-5xl"
           }`}
         >
           Questão {questionNumber}
         </h1>
         <p
           className={`font-semibold text-white/90 ${
-            isDesktop ? "text-3xl xl:text-4xl" : isTablet ? "text-2xl" : "text-xl sm:text-2xl"
+            isDesktop ? "text-3xl xl:text-4xl" : isTablet ? "text-3xl" : "text-xl sm:text-2xl"
           }`}
         >
           {moduleLabel}
@@ -34,12 +34,12 @@ export default function QuestionCard({
         {/* Help button */}
         <button
           className={`absolute -top-2 -right-2 z-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-50 transition-colors ${
-            isDesktop ? "w-12 h-12" : isTablet ? "w-10 h-10" : "w-8 h-8"
+            isDesktop ? "w-12 h-12" : isTablet ? "w-12 h-12" : "w-8 h-8"
           }`}
           aria-label="Ajuda"
           type="button"
         >
-          <HelpCircle className={`text-slate-600 ${isDesktop ? "w-7 h-7" : isTablet ? "w-6 h-6" : "w-5 h-5"}`} />
+          <HelpCircle className={`text-slate-600 ${isDesktop ? "w-7 h-7" : isTablet ? "w-7 h-7" : "w-5 h-5"}`} />
         </button>
 
         {/* White card container */}
@@ -48,7 +48,7 @@ export default function QuestionCard({
             isDesktop
               ? "p-8 min-h-[400px] xl:min-h-[500px]"
               : isTablet
-                ? "p-7 min-h-[320px]"
+                ? "p-10 min-h-[400px]"
                 : "p-6 min-h-[200px] sm:min-h-[260px]"
           }`}
         >

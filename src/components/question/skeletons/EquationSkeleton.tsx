@@ -137,13 +137,13 @@ export default function EquationSkeleton({
   const renderField = (value: string, onChange: (value: string) => void, isEditable: boolean) => {
     if (isEditable) {
       return (
-        <div className="w-16 h-12 sm:w-20 sm:h-16 md:w-22 md:h-18 lg:w-24 lg:h-20 text-center text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold border-2 border-slate-300 rounded-lg flex items-center justify-center bg-white">
+        <div className="w-16 h-12 sm:w-20 sm:h-16 md:w-28 md:h-24 lg:w-24 lg:h-20 text-center text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold border-2 border-slate-300 rounded-lg flex items-center justify-center bg-white">
           {value || ""}
         </div>
       )
     } else {
       return (
-        <div className="w-16 h-12 sm:w-20 sm:h-16 md:w-22 md:h-18 lg:w-24 lg:h-20 text-center text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold border-2 border-slate-400 rounded-lg flex items-center justify-center bg-slate-100 text-slate-600">
+        <div className="w-16 h-12 sm:w-20 sm:h-16 md:w-28 md:h-24 lg:w-24 lg:h-20 text-center text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold border-2 border-slate-400 rounded-lg flex items-center justify-center bg-slate-100 text-slate-600">
           {value}
         </div>
       )
@@ -151,30 +151,30 @@ export default function EquationSkeleton({
   }
 
   return (
-    <div className="text-center space-y-4">
+    <div className="text-center space-y-4 md:space-y-6">
       {/* Background symbols */}
       <div className="absolute inset-0 flex items-center justify-center opacity-10">
-        <div className="text-6xl sm:text-8xl md:text-8xl lg:text-9xl text-slate-300 space-x-8">
+        <div className="text-6xl sm:text-8xl md:text-9xl lg:text-9xl text-slate-300 space-x-8 md:space-x-12">
           <span>+</span>
           <span>×</span>
         </div>
       </div>
 
       {/* Main equation */}
-      <div className="relative flex items-center justify-center space-x-2 sm:space-x-4 md:space-x-4 text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-slate-900">
+      <div className="relative flex items-center justify-center space-x-2 sm:space-x-4 md:space-x-6 text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-slate-900">
         {/* Primeiro número */}
         {problem.type === "first_filled" || problem.type === "result_empty"
           ? renderField(problem.firstNumber.toString(), () => {}, false)
           : renderField(firstValue, handleFirstChange, true)}
 
-        <span className="text-2xl font-bold text-slate-700">×</span>
+        <span className="text-2xl md:text-3xl font-bold text-slate-700">×</span>
 
         {/* Segundo número */}
         {problem.type === "second_filled" || problem.type === "result_empty"
           ? renderField(problem.secondNumber.toString(), () => {}, false)
           : renderField(secondValue, handleSecondChange, true)}
 
-        <span className="text-2xl font-bold text-slate-700">=</span>
+        <span className="text-2xl md:text-3xl font-bold text-slate-700">=</span>
 
         {/* Resultado */}
         {problem.type === "result_empty"

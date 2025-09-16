@@ -37,8 +37,8 @@ export default function Keypad({
 
   return (
     <div
-      className={`grid grid-cols-4 gap-3 md:gap-4 w-full mx-auto ${
-        isDesktop ? "max-w-lg gap-4" : "max-w-sm md:max-w-md"
+      className={`grid grid-cols-4 gap-3 md:gap-6 w-full mx-auto ${
+        isDesktop ? "max-w-lg gap-4" : "max-w-sm md:max-w-xl"
       }`}
     >
       {keys.map((key, index) => {
@@ -56,7 +56,7 @@ export default function Keypad({
               rounded-xl font-bold transition-all duration-150 ease-in-out
               focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2
               disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center
-              ${isDesktop ? "w-24 h-24 text-[56px]" : "w-20 h-20 md:w-22 md:h-22 text-[48px] md:text-[52px]"}
+              ${isDesktop ? "w-24 h-24 text-[56px]" : "w-20 h-20 md:w-28 md:h-28 text-[48px] md:text-[64px]"}
               ${
                 isEmpty
                   ? "invisible"
@@ -72,7 +72,7 @@ export default function Keypad({
             tabIndex={disabled || isEmpty ? -1 : 0}
           >
             {isBackspace ? (
-              <DeleteIcon size={isDesktop ? 60 : 50} className="md:w-[55px] md:h-[55px]"></DeleteIcon>
+              <DeleteIcon size={isDesktop ? 60 : 50} className="md:w-[70px] md:h-[70px]"></DeleteIcon>
             ) : (
               key
             )}

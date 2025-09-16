@@ -110,11 +110,11 @@ export default function QuestionScreen({
       </div>
 
       {/* Tablet Layout */}
-      <div className="hidden md:flex md:min-h-screen md:px-6 md:py-4 lg:hidden">
-        <div className="flex-1 flex flex-col items-center justify-center space-y-6">
+      <div className="hidden md:flex md:min-h-screen md:px-8 md:py-6 lg:hidden">
+        <div className="flex-1 flex flex-col items-center justify-center space-y-8">
           {/* Score Display */}
           <div className="text-center">
-            <h2 className="text-5xl font-bold text-rose-500 leading-tight drop-shadow-lg" style={{ color: "#FF3366" }}>
+            <h2 className="text-6xl font-bold text-rose-500 leading-tight drop-shadow-lg" style={{ color: "#FF3366" }}>
               Pontuação: {score}
             </h2>
           </div>
@@ -125,21 +125,21 @@ export default function QuestionScreen({
           </QuestionCard>
 
           {/* Time Bar */}
-          <div className="w-full max-w-lg">
+          <div className="w-full max-w-2xl">
             <TimeBar progress={timer.progress} totalMs={totalMs} showLabels={true} />
           </div>
 
           {/* Keypad */}
-          <div className="w-full max-w-md">
+          <div className="w-full max-w-xl">
             <Keypad value={answer} onChange={handleAnswerChange} disabled={isDisabled} />
           </div>
 
           {/* Submit Button */}
-          <div className="w-full max-w-md">
+          <div className="w-full max-w-xl">
             <Button
               onClick={handleSubmit}
               disabled={isDisabled || answer.trim() === ""}
-              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-6 rounded-full text-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-5 px-8 rounded-full text-2xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitted ? "Respondido!" : "Responder!"}
             </Button>

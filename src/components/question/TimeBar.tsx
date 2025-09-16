@@ -40,17 +40,17 @@ export default function TimeBar({ progress, totalMs = 60000, showLabels = true }
   const remainingSeconds = Math.ceil((1 - progress) * (totalMs / 1000))
 
   return (
-    <div className="w-full space-y-2">
+    <div className="w-full space-y-2 md:space-y-3">
       {/* Time remaining and current multiplier */}
       <div className="flex justify-between items-center text-sm text-white">
-        <span className="font-normal text-xl">Tempo: {remainingSeconds}s</span>
-        <span className="font-normal text-lg text-emerald-400">{currentMultiplier}x Multiplicador</span>
+        <span className="font-normal text-xl md:text-2xl">Tempo: {remainingSeconds}s</span>
+        <span className="font-normal text-lg md:text-xl text-emerald-400">{currentMultiplier}x Multiplicador</span>
       </div>
 
       {/* Progress bar container */}
       <div className="relative">
         {/* Background bar */}
-        <div className="h-4 rounded-full bg-slate-200 overflow-hidden">
+        <div className="h-4 md:h-6 rounded-full bg-slate-200 overflow-hidden">
           {/* Progress fill */}
           <div
             className="h-full bg-emerald-500"
@@ -63,7 +63,7 @@ export default function TimeBar({ progress, totalMs = 60000, showLabels = true }
 
         {/* Zone labels - inverted order for right-to-left depletion */}
         {showLabels && (
-          <div className="absolute top-0 left-0 w-full h-4 flex justify-between items-center pointer-events-none">
+          <div className="absolute top-0 left-0 w-full h-4 md:h-6 flex justify-between items-center pointer-events-none">
             {[1, 2, 4, 8].map((multiplier, index) => {
               const position = (index + 0.5) * 25 // 12.5%, 37.5%, 62.5%, 87.5%
               const isActive = currentMultiplier === multiplier
@@ -71,7 +71,7 @@ export default function TimeBar({ progress, totalMs = 60000, showLabels = true }
               return (
                 <div key={multiplier} className="absolute transform -translate-x-1/2" style={{ left: `${position}%` }}>
                   <span
-                    className={`text-xs font-bold px-1 py-0.5 rounded ${
+                    className={`text-xs md:text-sm font-bold px-1 py-0.5 md:px-2 md:py-1 rounded ${
                       isActive ? "bg-emerald-600 text-white" : "text-slate-600"
                     }`}
                   >
