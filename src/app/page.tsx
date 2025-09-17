@@ -16,13 +16,7 @@ export default function Home() {
         >
           Entrar
         </Button>
-        <Button 
-          variant="outline" 
-          className="w-48 bg-transparent border-white text-white hover:bg-white hover:text-slate-900" 
-          onClick={() => router.push('/question')}
-        >
-          Testar Questão
-        </Button>
+        
       </div>
     </div>
   );

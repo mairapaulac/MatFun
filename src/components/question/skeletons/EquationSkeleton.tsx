@@ -143,7 +143,7 @@ export default function EquationSkeleton({
       )
     } else {
       return (
-        <div className="w-16 h-12 sm:w-20 sm:h-16 md:w-28 md:h-24 lg:w-24 lg:h-20 text-center text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold border-2 border-slate-400 rounded-lg flex items-center justify-center bg-slate-100 text-slate-600">
+        <div className="w-16 h-12 sm:w-20 sm:h-16 md:w-28 md:h-24 lg:w-24 lg:h-20 text-center text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-normal border-2 border-slate-400 rounded-lg flex items-center justify-center bg-slate-100 text-slate-600">
           {value}
         </div>
       )
@@ -174,7 +174,7 @@ export default function EquationSkeleton({
           ? renderField(problem.secondNumber.toString(), () => {}, false)
           : renderField(secondValue, handleSecondChange, true)}
 
-        <span className="text-2xl md:text-3xl font-bold text-slate-700">=</span>
+        <span className="text-3xl md:text-4xl font-bold text-slate-700">=</span>
 
         {/* Resultado */}
         {problem.type === "result_empty"
