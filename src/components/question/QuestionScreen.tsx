@@ -75,8 +75,8 @@ export default function QuestionScreen({
         {/* Score Display */}
         <div className="text-center">
           <h2
-            className="text-4xl sm:text-5xl font-bold text-rose-500 leading-tight drop-shadow-lg"
-            style={{ color: "#FF3366" }}
+            className="text-4xl sm:text-5xl font-bold text-green-400 leading-tight drop-shadow-lg"
+            
           >
             Pontuação: {score}
           </h2>
@@ -100,21 +100,22 @@ export default function QuestionScreen({
         {/* Submit Button */}
         <div className="w-full max-w-sm">
           <Button
-            onClick={handleSubmit}
-            disabled={isDisabled || answer.trim() === ""}
-            className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-full text-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isSubmitted ? "Respondido!" : "Responder!"}
-          </Button>
+              variant={"default"}
+              onClick={handleSubmit}
+              disabled={isDisabled || answer.trim() === ""}
+              className="w-full text-[#24366B]  font-bold py-4 px-8 rounded-full text-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitted ? "Respondido!" : "Responder!"}
+            </Button>
         </div>
       </div>
 
       {/* Tablet Layout */}
-      <div className="hidden md:flex md:min-h-screen md:px-8 md:py-6 lg:hidden">
+      <div className="hidden md:flex md:min-h-screen md:px-8 md:py-0 lg:hidden">
         <div className="flex-1 flex flex-col items-center justify-center space-y-8">
           {/* Score Display */}
           <div className="text-center">
-            <h2 className="text-6xl font-bold text-rose-500 leading-tight drop-shadow-lg" style={{ color: "#FF3366" }}>
+            <h2 className="text-6xl font-bold text-green-500 leading-tight drop-shadow-lg" >
               Pontuação: {score}
             </h2>
           </div>
@@ -135,11 +136,12 @@ export default function QuestionScreen({
           </div>
 
           {/* Submit Button */}
-          <div className="w-full max-w-xl">
+          <div className="w-full max-w-2xl">
             <Button
+              variant={"default"}
               onClick={handleSubmit}
               disabled={isDisabled || answer.trim() === ""}
-              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-5 px-8 rounded-full text-2xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full text-[#24366B] md:h-16  font-bold  px-8 rounded-full text-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitted ? "Respondido!" : "Responder!"}
             </Button>
@@ -154,8 +156,7 @@ export default function QuestionScreen({
           {/* Score Display */}
           <div className="text-center">
             <h2
-              className="text-5xl xl:text-6xl font-bold text-rose-500 leading-tight drop-shadow-lg"
-              style={{ color: "#FF3366" }}
+              className="text-5xl xl:text-6xl font-bold text-green-500 leading-tight drop-shadow-lg"
             >
               Pontuação: {score}
             </h2>
@@ -182,9 +183,10 @@ export default function QuestionScreen({
           {/* Submit Button */}
           <div className="w-full max-w-md">
             <Button
+              variant={"default"}
               onClick={handleSubmit}
               disabled={isDisabled || answer.trim() === ""}
-              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-8 rounded-full text-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full text-[#24366B]  font-bold py-4 px-8 rounded-full text-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitted ? "Respondido!" : "Responder!"}
             </Button>

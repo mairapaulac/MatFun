@@ -37,7 +37,7 @@ export default function Keypad({
 
   return (
     <div
-      className={`grid grid-cols-4 gap-3 md:gap-6 w-full mx-auto ${
+      className={`grid grid-cols-4 gap-2 md:gap-4 w-full mx-auto ${
         isDesktop ? "max-w-lg gap-4" : "max-w-sm md:max-w-xl"
       }`}
     >
@@ -62,7 +62,7 @@ export default function Keypad({
                   ? "invisible"
                   : isBackspace
                     ? "bg-rose-500 hover:bg-rose-600 active:bg-rose-700 text-white"
-                    : "bg-slate-800 hover:bg-slate-700 active:bg-slate-900 text-white"
+                    : "bg-[#111932]/50 hover:bg-[#111932]/90 active:bg-slate-900 text-white"
               }
               active:scale-95 disabled:active:scale-100
               shadow-lg hover:shadow-xl

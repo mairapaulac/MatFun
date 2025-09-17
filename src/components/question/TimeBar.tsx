@@ -48,7 +48,7 @@ export default function TimeBar({ progress, totalMs = 60000, showLabels = true }
       </div>
 
       {/* Progress bar container */}
-      <div className="relative">
+      <div className="relative border-4 border-slate-400/60 rounded-full">
         {/* Background bar */}
         <div className="h-4 md:h-6 rounded-full bg-slate-200 overflow-hidden">
           {/* Progress fill */}
@@ -59,6 +59,16 @@ export default function TimeBar({ progress, totalMs = 60000, showLabels = true }
               transition: "width 0.1s linear",
             }}
           />
+        </div>
+
+        <div className="absolute top-0 left-0 w-full h-4 md:h-6 pointer-events-none">
+          {[25, 50, 75].map((breakpoint) => (
+            <div
+              key={breakpoint}
+              className="absolute top-0 w-1 h-full bg-slate-600 opacity-70"
+              style={{ left: `${breakpoint}%` }}
+            />
+          ))}
         </div>
 
         {/* Zone labels - inverted order for right-to-left depletion */}
