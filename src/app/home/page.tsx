@@ -111,10 +111,10 @@ export default function HomePage() {
 
         <div className="flex justify-center mt-auto">
           <Button
-            onClick={() => router.push("/question")} // Adicionado onClick
+            onClick={() => router.push("/game")} // Adicionado onClick
             className="w-full max-w-[690px] h-[50px] sm:h-[70px] rounded-full"
           >
-            <Gamepad2 size={90}></Gamepad2>
+            <Gamepad2></Gamepad2>
             <span className="text-3xl">Jogar</span>
           </Button>
         </div>
