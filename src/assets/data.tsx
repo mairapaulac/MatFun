@@ -10,20 +10,28 @@ export const registrationMock = {
 };
 
 export const geralRankingData = [
-  { rank: 1, name: "Leandro ", points: 1250, trophy: "gold" },
-  { rank: 2, name: "Beatriz ", points: 1190, trophy: "silver" },
-  { rank: 3, name: "Ricardo '", points: 1080, trophy: "bronze" },
-  { rank: 4, name: "Mariana ", points: 950, trophy: null },
-  { rank: 5, name: "Felipe", points: 890, trophy: null },
-];
+  { rank: 1, name: "João Silva", points: 2850, trophy: true },
+  { rank: 2, name: "Maria Santos", points: 2720, trophy: false },
+  { rank: 3, name: "Pedro Costa", points: 2650, trophy: false },
+  { rank: 4, name: "Ana Oliveira", points: 2580, trophy: false },
+  { rank: 5, name: "Carlos Lima", points: 2450, trophy: false },
+  { rank: 6, name: "Lucia Ferreira", points: 2380, trophy: false },
+  { rank: 7, name: "Roberto Alves", points: 2320, trophy: false },
+  { rank: 8, name: "Fernanda Rocha", points: 2280, trophy: false },
+  { rank: 9, name: "Marcos Pereira", points: 2150, trophy: false },
+  { rank: 10, name: "Juliana Souza", points: 2080, trophy: false },
+]
 
 export const turmaRankingData = [
-  { rank: 1, name: "Beatriz ", points: 1190, trophy: "gold" },
-  { rank: 2, name: "João Pedro", points: 820, trophy: "silver" },
-  { rank: 3, name: "Carlos", points: 750, trophy: "bronze" },
-  { rank: 4, name: "Ana", points: 680, trophy: null },
-  { rank: 5, name: "Dante", points: 520, trophy: null },
-];
+  { rank: 1, name: "Ana Oliveira", points: 2580, trophy: true },
+  { rank: 2, name: "Carlos Lima", points: 2450, trophy: false },
+  { rank: 3, name: "Lucia Ferreira", points: 2380, trophy: false },
+  { rank: 4, name: "Roberto Alves", points: 2320, trophy: false },
+  { rank: 5, name: "Fernanda Rocha", points: 2280, trophy: false },
+  { rank: 6, name: "Marcos Pereira", points: 2150, trophy: false },
+  { rank: 7, name: "Juliana Souza", points: 2080, trophy: false },
+  { rank: 8, name: "Ricardo Santos", points: 1950, trophy: false },
+]
 
 export const userData = {
   rank: 32,

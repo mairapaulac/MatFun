@@ -1,6 +1,6 @@
 import React from "react";
 import { LucideIcon } from "lucide-react";
-import Card from "./Card";
+import Card from "../../../components/ui/Card";
 
 interface StatCardProps {
   icon: LucideIcon;
@@ -10,12 +10,12 @@ interface StatCardProps {
   className?: string;
 }
 
-export default function StatCard({ 
-  icon: Icon, 
-  title, 
-  subtitle, 
+export default function StatCard({
+  icon: Icon,
+  title,
+  subtitle,
   iconColor = "#2B3A67",
-  className 
+  className,
 }: StatCardProps) {
   return (
     <Card className={cn("flex items-center gap-4", className)}>
@@ -23,7 +23,12 @@ export default function StatCard({
         <Icon className="w-8 h-8" style={{ color: iconColor }} />
       </div>
       <div className="flex-1">
-        <h3 className="text-lg font-semibold" style={{ color: 'rgba(29, 45, 88, 0.75)' }}>{title}</h3>
+        <h3
+          className="text-xl font-normal"
+          style={{ color: "rgba(29, 45, 88, 0.75)" }}
+        >
+          {title}
+        </h3>
         <p className="text-sm text-black font-medium">{subtitle}</p>
       </div>
     </Card>

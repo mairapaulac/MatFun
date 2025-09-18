@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import Navbar from "./components/Navbar";
-import { Card, StatCard } from "@/components/dashboard";
+import { Card, StatCard } from "@/app/home/components";
 import {
   Trophy,
   Sword,
@@ -23,9 +23,9 @@ export default function HomePage() {
         <div className="mb-4 sm:mb-6 flex items-center w-full">
           <Button
             onClick={() => router.push("/ranking")}
-            className="w-full h-[50px] max-w-[420px] mx-auto rounded-4xl "
-          > 
-             <Trophy className="h-8 w-8"></Trophy> 
+            className="w-full h-[50px] max-w-[420px] mx-auto rounded-4xl cursor-pointer"
+          >
+            <Trophy className="h-8 w-8"></Trophy>
             <span className="text-3xl">Ranking</span>
           </Button>
         </div>
@@ -37,7 +37,7 @@ export default function HomePage() {
             </div>
             <div className="flex-1">
               <h3
-                className="text-xl sm:text-2xl font-semibold mb-1"
+                className="text-xl sm:text-2xl font-normal mb-1"
                 style={{ color: "rgba(29, 45, 88, 0.75)" }}
               >
                 Guerreiro da Matemática
@@ -57,7 +57,7 @@ export default function HomePage() {
             </div>
             <div className="flex-1">
               <h3
-                className="text-xl sm:text-2xl font-semibold mb-1"
+                className="text-xl sm:text-2xl font-normal mb-1"
                 style={{ color: "rgba(29, 45, 88, 0.75)" }}
               >
                 Ninja das Frações
@@ -77,7 +77,7 @@ export default function HomePage() {
             </div>
             <div className="flex-1">
               <h3
-                className="text-xl sm:text-2xl font-semibold mb-1"
+                className="text-xl sm:text-2xl font-normal mb-1"
                 style={{ color: "rgba(29, 45, 88, 0.75)" }}
               >
                 Especialista em Multiplicação
@@ -112,7 +112,7 @@ export default function HomePage() {
         <div className="flex justify-center mt-auto">
           <Button
             onClick={() => router.push("/game")} // Adicionado onClick
-            className="w-full max-w-[690px] h-[50px] sm:h-[70px] rounded-full"
+            className="w-full max-w-[690px] h-[50px] sm:h-[70px] rounded-full cursor-pointer"
           >
             <Gamepad2></Gamepad2>
             <span className="text-3xl">Jogar</span>

@@ -230,7 +230,7 @@ export function RegisterForm() {
           <div className="flex justify-center items-center">
             <Button
               type="submit"
-              className=" w-[60%]"
+              className=" w-[60%] cursor-pointer"
               onClick={() => {
                 setOpen(true);
               }}

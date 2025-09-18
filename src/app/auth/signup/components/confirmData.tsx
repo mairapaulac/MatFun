@@ -6,10 +6,11 @@ import { confirmDataProps } from "@/types/types"
 import { Button } from "@/components/ui/button"
 import { UserDataCard } from "@/components/ui/user-data-card"
 import { CheckCircle } from "lucide-react"
+import { useRouter } from "next/navigation"
 //eslint-disable-next-line
 export function ConfirmData({ open, onOpenChange, data }: confirmDataProps) {
   const dataMock = registrationMock
-
+  const router = useRouter()
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-lg border-[#3A55A3] border-4 rounded-[28px] bg-[#182a5c] p-8 pb-6   ">
@@ -24,10 +25,10 @@ export function ConfirmData({ open, onOpenChange, data }: confirmDataProps) {
         </DialogHeader>
         <UserDataCard data={dataMock} />
         <div className=" flex w-full justify-between gap-10">
-          <Button variant="secondary" className="bg-[#182a5c] flex-1 text-white border-white" onClick={()=>onOpenChange(false)}>
+          <Button variant="secondary" className="bg-[#182a5c] flex-1 text-white border-white cursor-pointer" onClick={()=>onOpenChange(false)}>
             Editar
           </Button>
-          <Button type="submit" className="flex-1" >
+          <Button onClick={()=>{router.push('http://localhost:3000/home')}} type="submit" className="flex-1 cursor-pointer" >
             Cadastrar
           </Button>
         </div>

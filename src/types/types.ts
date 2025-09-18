@@ -24,6 +24,6 @@ export interface IPlayerCard {
   rank: number;
   name: string;
   points: number;
-  trophy?: string | null;
+  trophy?: boolean | null;
   isUser?:boolean
 }

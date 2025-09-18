@@ -74,11 +74,11 @@ export default function SignInForm() {
           </div>
         </div>
         <div className="pt-10 flex-row flex justify-center">
-          <Button type="submit" onClick={()=>{router.push('http://localhost:3000/home')}} className="w-[40%]">
+          <Button type="submit" onClick={()=>{router.push('http://localhost:3000/home')}} className="w-[40%] cursor-pointer">
             Entrar
           </Button>
           <Link href={'/auth/signup'}></Link>
-          <Button onClick={()=>{router.push('http://localhost:3000/auth/signup')}} type="submit" className="w-[40%] " variant={"secondary"}>
+          <Button onClick={()=>{router.push('http://localhost:3000/auth/signup')}} type="submit" className="w-[40%] cursor-pointer" variant={"secondary"}>
             Cadastro
           </Button>
         </div>
