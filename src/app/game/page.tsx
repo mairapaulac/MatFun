@@ -132,7 +132,7 @@ export default function QuestionPage() {
   // Don't render until question is initialized
   if (!isReady || !currentQuestion) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen bg-background bg-pattern flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl font-bold text-green-500 mb-4">Carregando...</div>
           <div className="text-xl text-slate-600">Preparando sua questão</div>

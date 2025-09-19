@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 export default function HomePage() {
   const router = useRouter();
   return (
-    <div className="flex flex-col w-full min-h-screen bg-[#24366b] overflow-x-hidden">
+    <div className="flex flex-col w-full min-h-screen bg-[#24366b] bg-pattern overflow-x-hidden">
       <Navbar />
 
       <main className="flex-1 px-4 py-6 max-w-[780px] mx-auto w-full flex flex-col min-h-0 overflow-x-hidden">

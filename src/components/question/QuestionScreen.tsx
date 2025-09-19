@@ -69,7 +69,7 @@ export default function QuestionScreen({
   const isDisabled = isSubmitted || timer.elapsedMs >= totalMs
 
   return (
-    <div className="min-h-screen bg-background ">
+    <div className="min-h-screen bg-background bg-pattern">
       {/* Mobile Layout (default) */}
       <div className="flex flex-col items-center px-6 py-4 space-y-8 md:hidden">
         {/* Score Display */}

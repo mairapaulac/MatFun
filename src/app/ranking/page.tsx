@@ -7,7 +7,7 @@ import { Trophy, Users, Globe, TrendingUp } from "lucide-react"
 
 export default function RankingScreen() {
   return (
-    <div className="flex flex-col items-center min-h-screen max-h-[1280px] max-w-[800px] mx-auto px-6 py-8 text-white relative overflow-hidden">
+    <div className="flex flex-col items-center min-h-screen max-h-[1280px] max-w-[800px] mx-auto px-6 py-8 text-white relative overflow-hidden bg-pattern">
       <header className="relative flex flex-col items-center mb-8 w-full z-10">
         <div className="flex items-center gap-4 mb-2">
           <Trophy className="size-12 text-yellow-400" fill="currentColor" />

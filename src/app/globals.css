@@ -121,6 +121,11 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-paytone), sans-serif;
+    background-image: url('/bg-pattern.svg');
+    background-repeat: repeat;
+    background-size: 400px 130px;
+    background-attachment: fixed;
+    background-position: 0 0;
   }
 }
 
@@ -170,4 +175,13 @@
 
 .text-shadow {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Background pattern class for specific pages */
+.bg-pattern {
+  background-image: url('/bg-pattern.svg');
+  background-repeat: repeat;
+  background-size: 400px 130px;
+  background-attachment: fixed;
+  background-position: 0 0;
 }
