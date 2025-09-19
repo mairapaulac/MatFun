@@ -120,8 +120,8 @@ const RectangleSVG: React.FC<{ width: number; height: number }> = ({ width, heig
     <rect
       x="10"
       y="10"
-      width="320"
-      height="160"
+      width="180"
+      height="80"
       fill="none"
       stroke="#374151"
       strokeWidth="3"

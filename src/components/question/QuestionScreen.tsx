@@ -17,7 +17,7 @@ export default function QuestionScreen({
   initialAnswer = "",
   currentAnswer = "",
   onAnswerChange,
-  totalMs = 60000,
+  totalMs = 9999999999,//60000,
   onSubmit,
   onTimeout,
 }: QuestionScreenProps): React.JSX.Element {
