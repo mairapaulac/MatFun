@@ -16,7 +16,7 @@ export interface TimerActions {
 }
 
 export interface QuestionSkeletonContext {
-  questionDescriptor?: any; // ProblemDescriptor from backend
+  questionDescriptor?: Record<string, unknown>; // ProblemDescriptor from backend
   playerDifficulty?: number;
   onFocus?: () => void;
 }
