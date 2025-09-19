@@ -7,6 +7,10 @@ export { default as Keypad } from './Keypad';
 // Question Skeletons
 export { default as EquationSkeleton } from './skeletons/EquationSkeleton';
 export { ExampleEquationSkeleton } from './skeletons/EquationSkeleton';
+export { default as GeometryAreaSkeleton } from './skeletons/GeometryAreaSkeleton';
+export { ExampleGeometryAreaSkeleton } from './skeletons/GeometryAreaSkeleton';
+export { default as CircleFromCircumference } from './skeletons/CircleFromCircumference';
+export { ExampleCircleFromCircumference } from './skeletons/CircleFromCircumference';
 
 // Hooks
 export { useTimer } from '@/hooks/useTimer';

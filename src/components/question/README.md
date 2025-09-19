@@ -80,6 +80,20 @@ const timer = useTimer(60000, true);
 ### EquationSkeleton
 Componente especializado para problemas de multiplicação com diferentes tipos de preenchimento.
 
+### GeometryAreaSkeleton
+Componente especializado para problemas de cálculo de área de figuras geométricas.
+
+**Nota sobre π = 3**: Para garantir que todas as áreas resultem em números inteiros, utilizamos π ≈ 3 em vez de π ≈ 3.14159. Esta aproximação é intencional e documentada para:
+- Garantir respostas inteiras em todos os cálculos
+- Simplificar a validação e correção automática
+- Manter consistência entre servidor e cliente
+- Facilitar a experiência do jogador com números inteiros
+
+**Fórmulas com π = 3**:
+- Circunferência: C = 2 × π × r = 6 × r
+- Área do círculo: A = π × r² = 3 × r²
+- Raio a partir da circunferência: r = C ÷ 6
+
 ```tsx
 import { EquationSkeleton, generateRandomProblem, GeneratedProblem } from '@/components/question/skeletons/EquationSkeleton';
 
@@ -138,6 +152,53 @@ O sistema gera automaticamente 4 tipos diferentes de problemas:
 ```
 - Jogador preenche apenas o resultado
 - Aceita formato: "15" (vai para o campo de resultado)
+
+### Tipos de Problemas Geométricos
+
+O sistema gera automaticamente 6 tipos diferentes de problemas geométricos:
+
+#### 1. `triangle` - Triângulo
+```
+( ) × ( ) = 36
+```
+- Jogador preenche base e altura
+- Fórmula: A = (base × altura) ÷ 2
+
+#### 2. `rectangle` - Retângulo
+```
+5 × ( ) = 15
+```
+- Jogador preenche largura e altura
+- Fórmula: A = largura × altura
+
+#### 3. `parallelogram` - Paralelogramo
+```
+( ) × 5 = 15
+```
+- Jogador preenche base e altura
+- Fórmula: A = base × altura
+
+#### 4. `trapezoid` - Trapézio
+```
+3 × 5 = ( )
+```
+- Jogador preenche base maior, base menor e altura
+- Fórmula: A = ((baseMaior + baseMenor) ÷ 2) × altura
+
+#### 5. `circle` - Círculo (raio)
+```
+3 × 5 = ( )
+```
+- Jogador vê o raio e calcula a área
+- Fórmula: A = π × r² (com π = 3)
+
+#### 6. `circle_from_circumference` - Círculo (circunferência)
+```
+Circunferência: 18 cm
+Área = ?
+```
+- Jogador vê a circunferência e calcula a área
+- Fórmula: A = π × r² onde r = C ÷ 6 (com π = 3)
 
 ### Geração de Problemas
 

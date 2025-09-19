@@ -1,15 +1,15 @@
 "use client"
 
-import { QuestionScreen, ExampleEquationSkeleton } from "@/components/question"
+import { QuestionScreen, ExampleEquationSkeleton, ExampleGeometryAreaSkeleton } from "@/components/question"
 import FeedbackModal from "@/components/question/FeedbackModal"
 import { generateRandomProblem, type GeneratedProblem } from "@/components/question/skeletons/EquationSkeleton"
+import { generateRandomGeometryProblem, type GeneratedGeometryProblem } from "@/components/question/skeletons/GeometryAreaSkeleton"
+import { useQuestionRotation, type QuestionData } from "@/hooks/useQuestionRotation"
 import { useState } from "react"
 
 export default function QuestionPage() {
   const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(1)
   const [currentAnswer, setCurrentAnswer] = useState("")
-  const [currentProblem, setCurrentProblem] = useState<GeneratedProblem>(() => generateRandomProblem())
   const [feedback, setFeedback] = useState<{
     isOpen: boolean
     type: "correct" | "incorrect" | "timeout"
@@ -19,6 +19,8 @@ export default function QuestionPage() {
     isOpen: false,
     type: "incorrect",
   })
+
+  const { currentQuestion, questionNumber, nextQuestion, isReady } = useQuestionRotation()
 
   const handleAnswerChange = (answer: string) => {
     setCurrentAnswer(answer)
@@ -48,51 +50,65 @@ export default function QuestionPage() {
 
     // Move to next question after showing result
     setTimeout(() => {
-      setQuestionNumber((prev) => prev + 1)
       setCurrentAnswer("")
-      setCurrentProblem(generateRandomProblem())
+      nextQuestion()
     }, 1800) // 1.8 second delay to show the result
   }
 
   const checkAnswer = (answer: string): boolean => {
-    // Clean the answer string
+    if (!currentQuestion) return false
+
     const cleanAnswer = answer.trim()
-
-    // Parse different answer formats based on problem type
-    if (cleanAnswer.includes("×") || cleanAnswer.includes("x") || cleanAnswer.includes("*")) {
-      const parts = cleanAnswer.split(/[×x*]/)
-      if (parts.length === 2) {
-        const num1 = Number.parseInt(parts[0].trim())
-        const num2 = Number.parseInt(parts[1].trim())
-        return !isNaN(num1) && !isNaN(num2) && num1 * num2 === currentProblem.result
-      }
-    }
-
-    // Baseado no tipo do problema, validar de forma diferente
-    if (currentProblem.type === "both_empty") {
-      // Se ambos estão vazios, aceitar formato "12" ou "1×2"
-      if (cleanAnswer.length === 2 && /^\d{2}$/.test(cleanAnswer)) {
-        const num1 = Number.parseInt(cleanAnswer[0])
-        const num2 = Number.parseInt(cleanAnswer[1])
-        return num1 * num2 === currentProblem.result
-      }
-    } else if (currentProblem.type === "first_filled") {
-      // Se primeiro está preenchido, aceitar apenas o segundo número
-      const num = Number.parseInt(cleanAnswer)
-      return !isNaN(num) && currentProblem.firstNumber * num === currentProblem.result
-    } else if (currentProblem.type === "second_filled") {
-      // Se segundo está preenchido, aceitar apenas o primeiro número
-      const num = Number.parseInt(cleanAnswer)
-      return !isNaN(num) && num * currentProblem.secondNumber === currentProblem.result
-    } else if (currentProblem.type === "result_empty") {
-      // Se resultado está vazio, aceitar apenas o resultado
-      const num = Number.parseInt(cleanAnswer)
-      return !isNaN(num) && num === currentProblem.result
-    }
-
-    // Fallback: se é um número único, verificar se é o resultado
     const num = Number.parseInt(cleanAnswer)
-    return !isNaN(num) && num === currentProblem.result
+    
+    if (isNaN(num)) return false
+
+    if (currentQuestion.type === "equation" && currentQuestion.equationProblem) {
+      const problem = currentQuestion.equationProblem
+      
+      // Parse different answer formats based on problem type
+      if (cleanAnswer.includes("×") || cleanAnswer.includes("x") || cleanAnswer.includes("*")) {
+        const parts = cleanAnswer.split(/[×x*]/)
+        if (parts.length === 2) {
+          const num1 = Number.parseInt(parts[0].trim())
+          const num2 = Number.parseInt(parts[1].trim())
+          return !isNaN(num1) && !isNaN(num2) && num1 * num2 === problem.result
+        }
+      }
+
+      // Baseado no tipo do problema, validar de forma diferente
+      if (problem.type === "both_empty") {
+        // Se ambos estão vazios, aceitar formato "12" ou "1×2"
+        if (cleanAnswer.length === 2 && /^\d{2}$/.test(cleanAnswer)) {
+          const num1 = Number.parseInt(cleanAnswer[0])
+          const num2 = Number.parseInt(cleanAnswer[1])
+          return num1 * num2 === problem.result
+        }
+      } else if (problem.type === "first_filled") {
+        // Se primeiro está preenchido, aceitar apenas o segundo número
+        return problem.firstNumber * num === problem.result
+      } else if (problem.type === "second_filled") {
+        // Se segundo está preenchido, aceitar apenas o primeiro número
+        return num * problem.secondNumber === problem.result
+      } else if (problem.type === "result_empty") {
+        // Se resultado está vazio, aceitar apenas o resultado
+        return num === problem.result
+      }
+
+      // Fallback: se é um número único, verificar se é o resultado
+      return num === problem.result
+    } else if (currentQuestion.type === "geometry" && currentQuestion.geometryProblem) {
+      // Para questões geométricas, comparar diretamente com a área
+      if (currentQuestion.geometryProblem.shape === "circle_from_circumference") {
+        // Para círculo baseado em circunferência, validar usando π = 3
+        const circumference = currentQuestion.geometryProblem.measurements.circumference
+        const expectedArea = 3 * Math.pow(circumference / 6, 2)
+        return num === expectedArea
+      }
+      return num === currentQuestion.geometryProblem.area
+    }
+
+    return false
   }
 
   const handleTimeout = () => {
@@ -104,9 +120,8 @@ export default function QuestionPage() {
 
     // Move to next question after timeout
     setTimeout(() => {
-      setQuestionNumber((prev) => prev + 1)
       setCurrentAnswer("")
-      setCurrentProblem(generateRandomProblem())
+      nextQuestion()
     }, 1800) // 1.8 second delay to show the timeout message
   }
 
@@ -114,13 +129,52 @@ export default function QuestionPage() {
     setFeedback((prev) => ({ ...prev, isOpen: false }))
   }
 
+  // Don't render until question is initialized
+  if (!isReady || !currentQuestion) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-6xl font-bold text-green-500 mb-4">Carregando...</div>
+          <div className="text-xl text-slate-600">Preparando sua questão</div>
+        </div>
+      </div>
+    )
+  }
+
+  const getModuleLabel = () => {
+    if (currentQuestion.type === "equation") {
+      return "Operações Algébricas"
+    } else {
+      return "Geometria - Áreas"
+    }
+  }
+
+  const getQuestionSkeleton = () => {
+    if (currentQuestion.type === "equation" && currentQuestion.equationProblem) {
+      return (
+        <ExampleEquationSkeleton 
+          externalAnswer={currentAnswer} 
+          problem={currentQuestion.equationProblem} 
+        />
+      )
+    } else if (currentQuestion.type === "geometry" && currentQuestion.geometryProblem) {
+      return (
+        <ExampleGeometryAreaSkeleton 
+          externalAnswer={currentAnswer} 
+          problem={currentQuestion.geometryProblem} 
+        />
+      )
+    }
+    return null
+  }
+
   return (
     <>
       <QuestionScreen
         score={score}
         questionNumber={questionNumber}
-        moduleLabel="Operações Algébricas"
-        questionSkeleton={<ExampleEquationSkeleton externalAnswer={currentAnswer} problem={currentProblem} />}
+        moduleLabel={getModuleLabel()}
+        questionSkeleton={getQuestionSkeleton()}
         currentAnswer={currentAnswer}
         onAnswerChange={handleAnswerChange}
         totalMs={60000}

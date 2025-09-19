@@ -43,13 +43,24 @@ export default function EquationSkeleton({
   externalAnswer = "",
   problem: externalProblem,
 }: EquationSkeletonProps): React.JSX.Element {
-  const [problem, setProblem] = useState<GeneratedProblem>(() => externalProblem || generateRandomProblem())
+  const [problem, setProblem] = useState<GeneratedProblem | null>(null)
   const [firstValue, setFirstValue] = useState(values["first"] || "")
   const [secondValue, setSecondValue] = useState(values["second"] || "")
   const [resultValue, setResultValue] = useState("")
 
+  // Initialize problem after component mounts to avoid hydration mismatch
+  useEffect(() => {
+    if (externalProblem) {
+      setProblem(externalProblem)
+    } else if (!problem) {
+      setProblem(generateRandomProblem())
+    }
+  }, [externalProblem, problem])
+
   // Parse external answer baseado no tipo do problema
   useEffect(() => {
+    if (!problem) return
+
     if (externalAnswer) {
       // Try to split by multiplication symbols first
       const parts = externalAnswer.split(/[×x*]/)
@@ -87,20 +98,20 @@ export default function EquationSkeleton({
       setSecondValue("")
       setResultValue("")
     }
-  }, [externalAnswer, problem.type])
+  }, [externalAnswer, problem?.type])
 
-  // Atualizar problema quando prop externa mudar
+  // Reset values when problem changes
   useEffect(() => {
-    if (externalProblem) {
-      setProblem(externalProblem)
-      // Reset values when problem changes
+    if (problem) {
       setFirstValue("")
       setSecondValue("")
       setResultValue("")
     }
-  }, [externalProblem])
+  }, [problem])
 
   const handleFirstChange = (value: string) => {
+    if (!problem) return
+
     setFirstValue(value)
     onVariableChange?.("first", value)
 
@@ -115,6 +126,8 @@ export default function EquationSkeleton({
   }
 
   const handleSecondChange = (value: string) => {
+    if (!problem) return
+
     setSecondValue(value)
     onVariableChange?.("second", value)
 
@@ -148,6 +161,27 @@ export default function EquationSkeleton({
         </div>
       )
     }
+  }
+
+  // Show loading state while problem is being initialized
+  if (!problem) {
+    return (
+      <div className="text-center space-y-4 md:space-y-6">
+        <div className="flex items-center justify-center space-x-2 sm:space-x-4 md:space-x-6 text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-slate-900">
+          <div className="w-16 h-12 sm:w-20 sm:h-16 md:w-28 md:h-24 lg:w-24 lg:h-20 text-center text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-normal border-2 border-slate-400 rounded-lg flex items-center justify-center bg-slate-100 text-slate-600 animate-pulse">
+            ...
+          </div>
+          <span className="text-2xl md:text-3xl font-bold text-slate-700">×</span>
+          <div className="w-16 h-12 sm:w-20 sm:h-16 md:w-28 md:h-24 lg:w-24 lg:h-20 text-center text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-normal border-2 border-slate-400 rounded-lg flex items-center justify-center bg-slate-100 text-slate-600 animate-pulse">
+            ...
+          </div>
+          <span className="text-3xl md:text-4xl font-bold text-slate-700">=</span>
+          <div className="w-16 h-12 sm:w-20 sm:h-16 md:w-28 md:h-24 lg:w-24 lg:h-20 text-center text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-normal border-2 border-slate-400 rounded-lg flex items-center justify-center bg-slate-100 text-slate-600 animate-pulse">
+            ...
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import type { JSX } from 'react';
 
 interface FeedbackModalProps {
   isOpen: boolean;
