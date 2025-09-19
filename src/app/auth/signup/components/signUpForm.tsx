@@ -26,7 +26,7 @@ import { signUpSchema, /*signUpType*/ } from "@/lib/schemas";
 import { ConfirmData } from "./confirmData";
 
 export function RegisterForm() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   const form = useForm({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -39,29 +39,29 @@ export function RegisterForm() {
       senha: "",
       confirmarSenha: "",
     },
-  });
- 
+  })
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const isValid = await form.trigger()
+    if (isValid) {
+      setOpen(true)
+    }
+  }
+
   return (
     <>
       <Form {...form}>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (form.formState.isValid) {
-              setOpen(true);
-            }
-          }}
-          className="space-y-4 w-full max-w-md mx-auto p-4"
-        >
+        <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-md md:max-w-lg mx-auto p-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-1 m-0">
             <FormField
               control={form.control}
               name="nome"
               render={({ field }) => (
                 <FormItem className="col-span-full">
-                  <FormLabel>Nome Completo</FormLabel>
+                  <FormLabel className="text-white text-sm md:text-base">Nome Completo</FormLabel>
                   <FormControl>
-                    <Input placeholder="Seu nome" {...field} />
+                    <Input placeholder="Seu nome" className="h-10 md:h-12 text-sm md:text-base" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -73,11 +73,12 @@ export function RegisterForm() {
               name="email"
               render={({ field }) => (
                 <FormItem className="col-span-full">
-                  <FormLabel>E-mail</FormLabel>
+                  <FormLabel className="text-white text-sm md:text-base">E-mail</FormLabel>
                   <FormControl>
                     <Input
                       type="email"
                       placeholder="exemplo@email.com"
+                      className="h-10 md:h-12 text-sm md:text-base"
                       {...field}
                     />
                   </FormControl>
@@ -90,24 +91,25 @@ export function RegisterForm() {
               control={form.control}
               name="dataNascimento"
               render={({ field }) => {
-                const today = new Date();
-                const minDate = new Date(today.getFullYear() - 120, 0, 1).toISOString().split('T')[0];
-                const maxDate = new Date(today.getFullYear() - 5, 11, 31).toISOString().split('T')[0];
-                
+                const today = new Date()
+                const minDate = new Date(today.getFullYear() - 120, 0, 1).toISOString().split("T")[0]
+                const maxDate = new Date(today.getFullYear() - 5, 11, 31).toISOString().split("T")[0]
+
                 return (
                   <FormItem className="col-span-full">
-                    <FormLabel>Data de Nascimento</FormLabel>
+                    <FormLabel className="text-white text-sm md:text-base">Data de Nascimento</FormLabel>
                     <FormControl>
-                      <Input 
-                        type="date" 
+                      <Input
+                        type="date"
                         min={minDate}
                         max={maxDate}
-                        {...field} 
+                        className="h-10 md:h-12 text-sm md:text-base"
+                        {...field}
                       />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
-                );
+                )
               }}
             />
           </div>
@@ -118,13 +120,10 @@ export function RegisterForm() {
               name="escola"
               render={({ field }) => (
                 <FormItem className="col-span-full">
-                  <FormLabel>Escola</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <FormLabel className="text-white text-sm md:text-base">Escola</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger className="w-full">
+                      <SelectTrigger className="w-full h-10 md:h-12 text-sm md:text-base">
                         <SelectValue placeholder="Selecione sua escola" />
                       </SelectTrigger>
                     </FormControl>
@@ -146,13 +145,10 @@ export function RegisterForm() {
               name="serie"
               render={({ field }) => (
                 <FormItem className="col-span-full md:col-span-1">
-                  <FormLabel>Ano</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <FormLabel className="text-white text-sm md:text-base">Ano</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger className="w-full">
+                      <SelectTrigger className="w-full h-10 md:h-12 text-sm md:text-base">
                         <SelectValue placeholder="Selecione seu ano" />
                       </SelectTrigger>
                     </FormControl>
@@ -172,13 +168,10 @@ export function RegisterForm() {
               name="turma"
               render={({ field }) => (
                 <FormItem className="col-span-full md:col-span-1">
-                  <FormLabel>Turma</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <FormLabel className="text-white text-sm md:text-base">Turma</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger className="w-full">
+                      <SelectTrigger className="w-full h-10 md:h-12 text-sm md:text-base">
                         <SelectValue placeholder="Selecione sua turma" />
                       </SelectTrigger>
                     </FormControl>
@@ -200,9 +193,14 @@ export function RegisterForm() {
               name="senha"
               render={({ field }) => (
                 <FormItem className="col-span-full md:col-span-1">
-                  <FormLabel>Senha</FormLabel>
+                  <FormLabel className="text-white text-sm md:text-base">Senha</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="Sua senha" {...field} />
+                    <Input
+                      type="password"
+                      placeholder="Sua senha"
+                      className="h-10 md:h-12 text-sm md:text-base"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -214,11 +212,12 @@ export function RegisterForm() {
               name="confirmarSenha"
               render={({ field }) => (
                 <FormItem className="col-span-full md:col-span-1">
-                  <FormLabel>Confirmar Senha</FormLabel>
+                  <FormLabel className="text-white text-sm md:text-base">Confirmar Senha</FormLabel>
                   <FormControl>
                     <Input
                       type="password"
                       placeholder="Confirme sua senha"
+                      className="h-10 md:h-12 text-sm md:text-base"
                       {...field}
                     />
                   </FormControl>
@@ -228,13 +227,7 @@ export function RegisterForm() {
             />
           </div>
           <div className="flex justify-center items-center">
-            <Button
-              type="submit"
-              className=" w-[60%] cursor-pointer"
-              onClick={() => {
-                setOpen(true);
-              }}
-            >
+            <Button type="submit" className="w-[60%] md:w-[50%] h-10 md:h-12 text-sm md:text-base cursor-pointer">
               Cadastrar
             </Button>
           </div>
@@ -254,5 +247,5 @@ export function RegisterForm() {
         }}
       />
     </>
-  );
+  )
 }
