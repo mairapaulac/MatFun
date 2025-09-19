@@ -99,9 +99,9 @@ export function generateRandomGeometryProblem(): GeneratedGeometryProblem {
 
 // Componentes SVG para cada figura
 const TriangleSVG: React.FC<{ base: number; height: number }> = ({ base, height }) => (
-  <svg viewBox="0 0 200 120" className="w-full h-32">
+  <svg viewBox="0 -10 200 130" className="w-full h-64">
     <polygon
-      points="20,100 180,100 100,20"
+      points="00,100 200,100 100,00"
       fill="none"
       stroke="#374151"
       strokeWidth="3"
@@ -116,7 +116,7 @@ const TriangleSVG: React.FC<{ base: number; height: number }> = ({ base, height 
 )
 
 const RectangleSVG: React.FC<{ width: number; height: number }> = ({ width, height }) => (
-  <svg viewBox="0 0 200 120" className="w-full h-32">
+  <svg viewBox="0 0 200 120" className="w-full h-64">
     <rect
       x="10"
       y="10"
@@ -129,14 +129,14 @@ const RectangleSVG: React.FC<{ width: number; height: number }> = ({ width, heig
     <text x="100" y="110" textAnchor="middle" className="text-sm font-semibold fill-slate-700">
       {width} cm
     </text>
-    <text x="10" y="60" textAnchor="middle" className="text-sm font-semibold fill-slate-700" transform="rotate(-90 10 60)">
+    <text x="15" y="50" textAnchor="middle" className="text-sm font-semibold fill-slate-700" transform="rotate(-90 10 60)">
       {height} cm
     </text>
   </svg>
 )
 
 const ParallelogramSVG: React.FC<{ base: number; height: number }> = ({ base, height }) => (
-  <svg viewBox="0 0 200 120" className="w-full h-32">
+  <svg viewBox="0 0 200 120" className="w-full h-64">
     <polygon
       points="20,100 180,100 160,20 0,20"
       fill="none"
@@ -146,7 +146,7 @@ const ParallelogramSVG: React.FC<{ base: number; height: number }> = ({ base, he
     <text x="100" y="115" textAnchor="middle" className="text-sm font-semibold fill-slate-700">
       {base} cm
     </text>
-    <text x="10" y="60" textAnchor="middle" className="text-sm font-semibold fill-slate-700" transform="rotate(-90 10 60)">
+    <text x="10" y="50" textAnchor="middle" className="text-sm font-semibold fill-slate-700" transform="rotate(-90 10 60)">
       {height} cm
     </text>
   </svg>
@@ -157,11 +157,19 @@ const TrapezoidSVG: React.FC<{ baseMaior: number; baseMenor: number; height: num
   baseMenor, 
   height 
 }) => (
-  <svg viewBox="0 0 200 120" className="w-full h-32">
+  <svg viewBox="0 0 200 120" className="w-full h-64">
     <polygon
       points="40,100 160,100 180,20 20,20"
       fill="none"
       stroke="#374151"
+      strokeWidth="3"
+    /><line
+      x1="60"
+      y1="100"
+      x2="60"
+      y2="20"
+      stroke="#374151"
+      strokeDasharray="5,5"
       strokeWidth="3"
     />
     <text x="100" y="115" textAnchor="middle" className="text-sm font-semibold fill-slate-700">
@@ -170,14 +178,14 @@ const TrapezoidSVG: React.FC<{ baseMaior: number; baseMenor: number; height: num
     <text x="100" y="15" textAnchor="middle" className="text-sm font-semibold fill-slate-700">
       {baseMenor} cm
     </text>
-    <text x="10" y="60" textAnchor="middle" className="text-sm font-semibold fill-slate-700" transform="rotate(-90 10 60)">
+    <text x="80" y="60" textAnchor="middle" className="text-sm font-semibold fill-slate-700" >
       {height} cm
     </text>
   </svg>
 )
 
 const CircleSVG: React.FC<{ radius: number }> = ({ radius }) => (
-  <svg viewBox="0 0 200 120" className="w-full h-32">
+  <svg viewBox="0 0 200 120" className="w-full h-64">
     <circle
       cx="100"
       cy="60"
@@ -194,14 +202,17 @@ const CircleSVG: React.FC<{ radius: number }> = ({ radius }) => (
       stroke="#374151"
       strokeWidth="2"
     />
-    <text x="120" y="55" className="text-sm font-semibold fill-slate-700">
+    <text x="100" y="55" className="text-sm font-semibold fill-slate-700">
       {radius} cm
+    </text>
+    <text x="90" y="115" className="text-sm font-semibold fill-slate-700">
+      𝝿 = 3
     </text>
   </svg>
 )
 
 const CircleFromCircumferenceSVG: React.FC<{ circumference: number }> = () => (
-  <svg viewBox="0 0 200 120" className="w-full h-32">
+  <svg viewBox="0 -10 200 120" className="w-full h-64">
     <circle
       cx="100"
       cy="60"
@@ -228,6 +239,7 @@ const CircleFromCircumferenceSVG: React.FC<{ circumference: number }> = () => (
     <text x="100" y="8" textAnchor="middle" className="text-sm font-semibold fill-red-600">
       C
     </text>
+    
   </svg>
 )
 
@@ -313,7 +325,10 @@ export default function GeometryAreaSkeleton({
       {problem.shape === "circle_from_circumference" && (
         <div className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-700">
           Circunferência: {problem.measurements.circumference} cm
+          <br />
+          𝝿 = 3
         </div>
+        
       )}
 
       {/* Area prompt with answer field */}

@@ -150,7 +150,7 @@ export default function EquationSkeleton({
   const renderField = (value: string, onChange: (value: string) => void, isEditable: boolean) => {
     if (isEditable) {
       return (
-        <div className="w-16 h-12 sm:w-20 sm:h-16 md:w-28 md:h-24 lg:w-24 lg:h-20 text-center text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold border-2 border-slate-300 rounded-lg flex items-center justify-center bg-white">
+        <div className="w-16 h-12 sm:w-20 sm:h-16 md:w-28 md:h-24 lg:w-24 lg:h-20 text-center text-3xl sm:text-6xl md:text-6xl lg:text-6xl font-normal border-2 border-slate-300 rounded-lg flex items-center justify-center bg-white">
           {value || ""}
         </div>
       )
