@@ -22,7 +22,7 @@ export default function SignUpPage() {
       <RegisterForm />
       <span className="text-white text-sm md:text-base mt-4 text-center">
         Já possui uma conta?{" "}
-        <Link className="text-[#22C55E] underline" href="/signin">
+        <Link className="text-[#22C55E] underline" href="http://localhost:3000/auth/signin">
           Autentique-se
         </Link>
       </span>

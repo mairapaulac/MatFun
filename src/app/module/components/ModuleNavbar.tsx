@@ -1,19 +1,19 @@
 "use client";
 
-import { Settings, LogOut, User } from "lucide-react";
+import { ArrowLeft, LogOut, User } from "lucide-react";
 import Link from "next/link";
 
-export default function Navbar() {
+export default function ModuleNavbar() {
   return (
     <nav className="w-full h-[120px] sm:h-[120px] bg-[#314991] px-4 py-4 sm:py-6 drop-shadow-xl">
       <div className="w-full max-w-[800px] mx-auto h-full flex justify-between items-center">
-        {/* configs */}
+        {/* back button */}
         <div className="flex items-center justify-center w-[50px] h-[50px] sm:w-[60px] sm:h-[60px]">
-          <Link href={"/settings"}>
-            <Settings className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] text-white hover:text-gray-300 transition-colors" />
+          <Link href={"/home"}>
+            <ArrowLeft className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] text-white hover:text-gray-300 transition-colors" />
           </Link>
         </div>
-        
+
         {/* user info*/}
         <div className="flex-grow flex justify-center items-center gap-2 sm:gap-4">
           <div className="flex items-center gap-2 sm:gap-4">
@@ -22,11 +22,13 @@ export default function Navbar() {
             </div>
             <div className="text-white text-center">
               <h2 className="text-lg sm:text-4xl font-normal">João Silva</h2>
-              <p className="text-sm sm:text-lg text-gray-300">8º Ano, Turma A</p>
+              <p className="text-sm sm:text-lg text-gray-300">
+                8º Ano, Turma A
+              </p>
             </div>
           </div>
         </div>
-        
+
         {/* logout */}
         <div className="flex items-center justify-center w-[50px] h-[50px] sm:w-[60px] sm:h-[60px]">
           <Link href={"/auth/signin"}>
