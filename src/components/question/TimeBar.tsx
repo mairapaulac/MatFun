@@ -11,7 +11,7 @@ export default function TimeBar({ progress, totalMs = 60000, showLabels = true }
   useEffect(() => {
     const newWidth = Math.max(0, Math.min(100, (1 - progress) * 100))
     setWidthPercentage(newWidth)
-    console.log("TimeBar - Progress:", progress, "Width:", newWidth)
+    //console.log("TimeBar - Progress:", progress, "Width:", newWidth)
   }, [progress])
 
   // Force update every 100ms to ensure smooth animation

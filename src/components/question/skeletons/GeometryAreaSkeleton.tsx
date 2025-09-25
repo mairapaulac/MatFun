@@ -106,10 +106,19 @@ const TriangleSVG: React.FC<{ base: number; height: number }> = ({ base, height 
       stroke="#374151"
       strokeWidth="3"
     />
+    <line
+      x1="100"
+      y1="100"
+      x2="100"
+      y2="0"
+      stroke="#374151"
+      strokeDasharray="5,5"
+      strokeWidth="3"
+    />
     <text x="100" y="115" textAnchor="middle" className="text-sm font-semibold fill-slate-700">
       {base} cm
     </text>
-    <text x="15" y="60" textAnchor="middle" className="text-sm font-semibold fill-slate-700" transform="rotate(-90 15 60)">
+    <text x="120" y="50" textAnchor="middle" className="text-sm font-semibold fill-slate-700" >
       {height} cm
     </text>
   </svg>
@@ -173,10 +182,10 @@ const TrapezoidSVG: React.FC<{ baseMaior: number; baseMenor: number; height: num
       strokeWidth="3"
     />
     <text x="100" y="115" textAnchor="middle" className="text-sm font-semibold fill-slate-700">
-      {baseMaior} cm
+      {baseMenor} cm
     </text>
     <text x="100" y="15" textAnchor="middle" className="text-sm font-semibold fill-slate-700">
-      {baseMenor} cm
+      {baseMaior} cm
     </text>
     <text x="80" y="60" textAnchor="middle" className="text-sm font-semibold fill-slate-700" >
       {height} cm
@@ -222,12 +231,15 @@ const CircleFromCircumferenceSVG: React.FC<{ circumference: number }> = () => (
       strokeWidth="3"
     />
     {/* Circumference indicator - curved line around the circle */}
-    <path
-      d="M 60 60 A 40 40 0 1 1 140 60"
+    <circle
+      cx="100"
+      cy="60"
+      r="40"
       fill="none"
-      stroke="#ef4444"
-      strokeWidth="2"
-      strokeDasharray="5,5"
+      stroke="#ef4444dd"
+      strokeWidth="3"
+      strokeDasharray="4,5"
+      
     />
     {/* Arrow pointing to circumference */}
     <path
