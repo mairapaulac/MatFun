@@ -2,7 +2,7 @@ import type React from "react"
 import { useState } from "react"
 import type { QuestionCardProps } from "@/types/question"
 import { HelpCircle } from "lucide-react"
-import HintModal from "@/components/ui/HintModal"
+import HintModal from "@/app/game/components/HintModal"
 
 export default function QuestionCard({
   questionNumber,

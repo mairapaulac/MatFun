@@ -1,63 +1,74 @@
-import { useState, useEffect } from "react"
-import { generateRandomProblem, type GeneratedProblem } from "@/components/question/skeletons/EquationSkeleton"
-import { generateRandomGeometryProblem, type GeneratedGeometryProblem } from "@/components/question/skeletons/GeometryAreaSkeleton"
+import { useState, useEffect } from "react";
+import {
+  generateRandomProblem,
+  type GeneratedProblem,
+} from "@/app/game/components/EquationSkeleton";
+import {
+  generateRandomGeometryProblem,
+  type GeneratedGeometryProblem,
+} from "@/app/game/components/GeometryAreaSkeleton";
 
-export type QuestionType = "equation" | "geometry"
+export type QuestionType = "equation" | "geometry";
 
 export interface QuestionData {
-  type: QuestionType
-  equationProblem?: GeneratedProblem
-  geometryProblem?: GeneratedGeometryProblem
+  type: QuestionType;
+  equationProblem?: GeneratedProblem;
+  geometryProblem?: GeneratedGeometryProblem;
 }
 
-export function useQuestionRotation(customQuestionGenerator?: () => QuestionData) {
-  const [currentQuestion, setCurrentQuestion] = useState<QuestionData | null>(null)
-  const [questionNumber, setQuestionNumber] = useState(1)
+export function useQuestionRotation(
+  customQuestionGenerator?: () => QuestionData
+) {
+  const [currentQuestion, setCurrentQuestion] = useState<QuestionData | null>(
+    null
+  );
+  const [questionNumber, setQuestionNumber] = useState(1);
 
   const generateNewQuestion = (): QuestionData => {
     // Use custom generator if provided, otherwise use default logic
     if (customQuestionGenerator) {
-      return customQuestionGenerator()
+      return customQuestionGenerator();
     }
-    
+
     // Default logic: Alternar entre tipos de questão (50% cada)
-    const questionType: QuestionType = Math.random() < 0.5 ? "equation" : "geometry"
-    
+    const questionType: QuestionType =
+      Math.random() < 0.5 ? "equation" : "geometry";
+
     if (questionType === "equation") {
       return {
         type: "equation",
-        equationProblem: generateRandomProblem()
-      }
+        equationProblem: generateRandomProblem(),
+      };
     } else {
       return {
         type: "geometry",
-        geometryProblem: generateRandomGeometryProblem()
-      }
+        geometryProblem: generateRandomGeometryProblem(),
+      };
     }
-  }
+  };
 
   // Initialize first question after component mounts
   useEffect(() => {
     if (!currentQuestion) {
-      setCurrentQuestion(generateNewQuestion())
+      setCurrentQuestion(generateNewQuestion());
     }
-  }, [currentQuestion])
+  }, [currentQuestion]);
 
   const nextQuestion = () => {
-    setQuestionNumber(prev => prev + 1)
-    setCurrentQuestion(generateNewQuestion())
-  }
+    setQuestionNumber((prev) => prev + 1);
+    setCurrentQuestion(generateNewQuestion());
+  };
 
   const resetQuestions = () => {
-    setQuestionNumber(1)
-    setCurrentQuestion(generateNewQuestion())
-  }
+    setQuestionNumber(1);
+    setCurrentQuestion(generateNewQuestion());
+  };
 
   return {
     currentQuestion,
     questionNumber,
     nextQuestion,
     resetQuestions,
-    isReady: currentQuestion !== null
-  }
+    isReady: currentQuestion !== null,
+  };
 }
