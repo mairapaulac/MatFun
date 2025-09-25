@@ -49,14 +49,14 @@ export function useTimer(totalMs = 60000, running = true, resetTrigger = 0): Tim
   useEffect(() => {
     if (!isRunning) return;
 
-    let intervalId: NodeJS.Timeout;
+    
     
     // Start timer
     if (!startRef.current) {
       startRef.current = performance.now();
     }
 
-    intervalId = setInterval(() => {
+   const intervalId = setInterval(() => {
       if (startRef.current) {
         const now = performance.now();
         const elapsed = now - startRef.current;
