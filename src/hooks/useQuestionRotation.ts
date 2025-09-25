@@ -10,12 +10,17 @@ export interface QuestionData {
   geometryProblem?: GeneratedGeometryProblem
 }
 
-export function useQuestionRotation() {
+export function useQuestionRotation(customQuestionGenerator?: () => QuestionData) {
   const [currentQuestion, setCurrentQuestion] = useState<QuestionData | null>(null)
   const [questionNumber, setQuestionNumber] = useState(1)
 
   const generateNewQuestion = (): QuestionData => {
-    // Alternar entre tipos de questão (50% cada)
+    // Use custom generator if provided, otherwise use default logic
+    if (customQuestionGenerator) {
+      return customQuestionGenerator()
+    }
+    
+    // Default logic: Alternar entre tipos de questão (50% cada)
     const questionType: QuestionType = Math.random() < 0.5 ? "equation" : "geometry"
     
     if (questionType === "equation") {

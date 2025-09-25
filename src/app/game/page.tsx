@@ -5,7 +5,8 @@ import FeedbackModal from "@/components/question/FeedbackModal"
 import { generateRandomProblem, type GeneratedProblem } from "@/components/question/skeletons/EquationSkeleton"
 import { generateRandomGeometryProblem, type GeneratedGeometryProblem } from "@/components/question/skeletons/GeometryAreaSkeleton"
 import { useQuestionRotation, type QuestionData } from "@/hooks/useQuestionRotation"
-import { useState } from "react"
+import { useModuleStore } from "@/stores/moduleStore"
+import { useState, useMemo } from "react"
 
 export default function QuestionPage() {
   const [score, setScore] = useState(0)
@@ -20,7 +21,46 @@ export default function QuestionPage() {
     type: "incorrect",
   })
 
-  const { currentQuestion, questionNumber, nextQuestion, isReady } = useQuestionRotation()
+  const { selectedModules } = useModuleStore()
+  
+  // Function to generate a question based on selected modules
+  const generateFilteredQuestion = (): QuestionData => {
+    // If no modules selected or "geral" is selected, use all question types
+    if (selectedModules.length === 0 || selectedModules.includes("geral")) {
+      return Math.random() < 0.5 
+        ? { type: "equation", equationProblem: generateRandomProblem() }
+        : { type: "geometry", geometryProblem: generateRandomGeometryProblem() }
+    }
+
+    // Filter available question types based on selected modules
+    const availableTypes: string[] = []
+    
+    if (selectedModules.includes("algebraic_multiplication")) {
+      availableTypes.push("equation")
+    }
+    
+    if (selectedModules.includes("area_geometry")) {
+      availableTypes.push("geometry")
+    }
+
+    // If no valid modules selected, default to all
+    if (availableTypes.length === 0) {
+      return Math.random() < 0.5 
+        ? { type: "equation", equationProblem: generateRandomProblem() }
+        : { type: "geometry", geometryProblem: generateRandomGeometryProblem() }
+    }
+
+    // Randomly select from available types
+    const selectedType = availableTypes[Math.floor(Math.random() * availableTypes.length)]
+    
+    if (selectedType === "equation") {
+      return { type: "equation", equationProblem: generateRandomProblem() }
+    } else {
+      return { type: "geometry", geometryProblem: generateRandomGeometryProblem() }
+    }
+  }
+
+  const { currentQuestion, questionNumber, nextQuestion, isReady } = useQuestionRotation(generateFilteredQuestion)
 
   const handleAnswerChange = (answer: string) => {
     setCurrentAnswer(answer)
@@ -149,6 +189,30 @@ export default function QuestionPage() {
     }
   }
 
+  const getQuestionType = () => {
+    if (currentQuestion.type === "equation") {
+      return "algebraic_multiplication"
+    } else if (currentQuestion.type === "geometry" && currentQuestion.geometryProblem) {
+      // Map geometry shapes to hint types
+      switch (currentQuestion.geometryProblem.shape) {
+        case "trapezoid":
+          return "area_trapezio"
+        case "circle":
+        case "circle_from_circumference":
+          return "area_circulo"
+        case "rectangle":
+          return "area_retangulo"
+        case "triangle":
+          return "area_triangulo"
+        case "parallelogram":
+          return "area_paralelogramo"
+        default:
+          return "geometry"
+      }
+    }
+    return "default"
+  }
+
   const getQuestionSkeleton = () => {
     if (currentQuestion.type === "equation" && currentQuestion.equationProblem) {
       return (
@@ -175,6 +239,7 @@ export default function QuestionPage() {
         questionNumber={questionNumber}
         moduleLabel={getModuleLabel()}
         questionSkeleton={getQuestionSkeleton()}
+        questionType={getQuestionType()}
         currentAnswer={currentAnswer}
         onAnswerChange={handleAnswerChange}
         totalMs={60000}

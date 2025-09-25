@@ -14,6 +14,7 @@ export default function QuestionScreen({
   questionNumber,
   moduleLabel,
   questionSkeleton,
+  questionType = "default",
   initialAnswer = "",
   currentAnswer = "",
   onAnswerChange,
@@ -83,7 +84,7 @@ export default function QuestionScreen({
         </div>
 
         {/* Question Card */}
-        <QuestionCard questionNumber={questionNumber} moduleLabel={moduleLabel}>
+        <QuestionCard questionNumber={questionNumber} moduleLabel={moduleLabel} questionType={questionType}>
           {questionSkeleton}
         </QuestionCard>
 
@@ -121,7 +122,7 @@ export default function QuestionScreen({
           </div>
 
           {/* Question Card */}
-          <QuestionCard questionNumber={questionNumber} moduleLabel={moduleLabel} isTablet={true}>
+          <QuestionCard questionNumber={questionNumber} moduleLabel={moduleLabel} isTablet={true} questionType={questionType}>
             {questionSkeleton}
           </QuestionCard>
 
@@ -163,7 +164,7 @@ export default function QuestionScreen({
           </div>
 
           {/* Question Card */}
-          <QuestionCard questionNumber={questionNumber} moduleLabel={moduleLabel} isDesktop={true}>
+          <QuestionCard questionNumber={questionNumber} moduleLabel={moduleLabel} isDesktop={true} questionType={questionType}>
             {questionSkeleton}
           </QuestionCard>
 

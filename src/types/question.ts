@@ -48,6 +48,7 @@ export interface QuestionScreenProps {
   questionNumber: number;
   moduleLabel: string;
   questionSkeleton: React.ReactNode;
+  questionType?: string;
   initialAnswer?: string;
   currentAnswer?: string;
   onAnswerChange?: (answer: string) => void;

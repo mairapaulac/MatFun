@@ -5,13 +5,12 @@ import { useRouter } from "next/navigation";
 import ModuleNavbar from "./components/ModuleNavbar";
 import ModuleCard from "./components/ModuleCard";
 import { Button } from "@/components/ui/button";
+import { useModuleStore } from "@/stores/moduleStore";
 import {
   Gamepad2,
   BookOpen,
   Calculator,
-  PieChart,
   Square,
-  Ruler,
 } from "lucide-react";
 
 interface Module {
@@ -32,50 +31,37 @@ const modules: Module[] = [
     iconColor: "#3B82F6", 
   },
   {
-    id: "algebraic",
+    id: "algebraic_multiplication",
     title: "Operações Algébricas",
-    subtitle: "Adição, subtração, multiplicação e divisão",
+    subtitle: "Multiplicação e operações básicas",
     icon: Calculator,
     iconColor: "#10B981", 
   },
   {
-    id: "fractions",
-    title: "Frações",
-    subtitle: "Operações com frações e números decimais",
-    icon: PieChart,
-    iconColor: "#F59E0B", 
-  },
-  {
-    id: "area",
-    title: "Área",
+    id: "area_geometry",
+    title: "Áreas Geométricas",
     subtitle: "Cálculo de áreas de figuras geométricas",
     icon: Square,
     iconColor: "#8B5CF6", 
-  },
-  {
-    id: "perimeter",
-    title: "Perímetro",
-    subtitle: "Cálculo de perímetros de figuras geométricas",
-    icon: Ruler,
-    iconColor: "#EF4444", 
   },
 ];
 
 export default function ModulePage() {
   const router = useRouter();
-  const [selectedModules, setSelectedModules] = useState<string[]>([]);
+  const { setSelectedModules } = useModuleStore();
+  const [selectedModules, setLocalSelectedModules] = useState<string[]>([]);
 
   const handleModuleToggle = (moduleId: string) => {
     if (moduleId === "geral") {
       if (selectedModules.includes("geral")) {
-        setSelectedModules([]);
+        setLocalSelectedModules([]);
       } else {
-        setSelectedModules(modules.map((m) => m.id));
+        setLocalSelectedModules(modules.map((m) => m.id));
       }
     } else {
-      setSelectedModules((prev) => {
+      setLocalSelectedModules((prev) => {
         const newSelection = prev.includes(moduleId)
-          ? prev.filter((id) => id !== moduleId)
+          ? prev.filter((id: string) => id !== moduleId)
           : [...prev, moduleId];
 
         const specificModules = modules.filter((m) => m.id !== "geral");
@@ -86,7 +72,7 @@ export default function ModulePage() {
         if (allSpecificSelected && newSelection.length === specificModules.length) {
           return [...newSelection, "geral"];
         } else {
-          return newSelection.filter((id) => id !== "geral");
+          return newSelection.filter((id: string) => id !== "geral");
         }
       });
     }
@@ -102,7 +88,8 @@ export default function ModulePage() {
   };
 
   const handleStartGame = () => {
-    // TODO: passar modulos selecionados para /game
+    // Save selected modules to the store before navigating
+    setSelectedModules(selectedModules);
     router.push("/game");
   };
 
