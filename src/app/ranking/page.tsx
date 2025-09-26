@@ -1,19 +1,21 @@
-
-import PlayerCard from "./components/PlayerCard"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
-import { userData, geralRankingData, turmaRankingData } from "@/assets/data"
-import { Trophy, Users, Globe, TrendingUp } from "lucide-react"
+import PlayerCard from "./components/PlayerCard";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { userData, geralRankingData, turmaRankingData } from "@/assets/data";
+import { Trophy, Users, Globe, TrendingUp, ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 export default function RankingScreen() {
   return (
     <div className="flex flex-col items-center min-h-screen max-h-[1280px] max-w-[800px] mx-auto px-6 py-8 text-white relative overflow-hidden bg-pattern">
       <header className="relative flex flex-col items-center mb-8 w-full z-10">
+        <Link href={"/home"} className="absolute left-0 top-2">
+          <ArrowLeft className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] text-white hover:text-gray-300 transition-colors" />
+        </Link>
         <div className="flex items-center gap-4 mb-2">
           <Trophy className="size-12 text-yellow-400" fill="currentColor" />
           <h1 className="text-5xl md:text-6xl font-light text-center bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
             Ranking
           </h1>
-          
         </div>
         <div className="flex items-center gap-2 text-gray-300">
           <TrendingUp className="size-5" />
@@ -82,15 +84,11 @@ export default function RankingScreen() {
         </TabsContent>
       </Tabs>
 
-      
-
       <div className="w-full z-10 mt-2">
         <div className="glass-effect rounded-2xl p-4 shadow-xl border-2 border-green-500/30">
           <PlayerCard {...userData} isUser={true} />
         </div>
       </div>
-
-      
     </div>
   )
 }
