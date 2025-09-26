@@ -88,7 +88,7 @@ export default function SignInForm() {
           <Button
             type="submit"
             onClick={() => {
-              router.push("http://localhost:3000/home")
+              router.push("/home")
             }}
             className="w-full sm:w-[40%] cursor-pointer order-1 h-10 sm:h-12 md:h-14 lg:h-10 text-sm sm:text-base md:text-lg lg:text-base"
           >
@@ -97,7 +97,7 @@ export default function SignInForm() {
           <Link href={"/auth/signup"}></Link>
           <Button
             onClick={() => {
-              router.push("http://localhost:3000/auth/signup")
+              router.push("/auth/signup")
             }}
             type="submit"
             className="w-full sm:w-[40%] cursor-pointer order-2 h-10 sm:h-12 md:h-14 lg:h-10 text-sm sm:text-base md:text-lg lg:text-base"
