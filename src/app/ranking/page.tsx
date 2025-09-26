@@ -1,4 +1,3 @@
-"use client"
 
 import PlayerCard from "./components/PlayerCard"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
@@ -49,7 +48,7 @@ export default function RankingScreen() {
               <h2 className="text-xl font-semibold">Ranking da Turma</h2>
             </div>
             <div className="flex flex-col gap-3 h-[450px] overflow-y-auto pr-2 custom-scrollbar">
-              {turmaRankingData.map((player, index) => (
+              {turmaRankingData.map((player) => (
                 <PlayerCard
                   key={`turma-${player.rank}`}
                   rank={player.rank}
@@ -69,7 +68,7 @@ export default function RankingScreen() {
               <h2 className="text-xl font-normal">Ranking Geral</h2>
             </div>
             <div className="flex flex-col gap-3 h-[450px] overflow-y-auto pr-2 custom-scrollbar">
-              {geralRankingData.map((player, index) => (
+              {geralRankingData.map((player) => (
                 <PlayerCard
                   key={`geral-${player.rank}`}
                   rank={player.rank}
