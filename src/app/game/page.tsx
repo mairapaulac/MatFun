@@ -96,7 +96,7 @@ export default function QuestionPage() {
   ) => {
     console.log("Answer submitted:", { answer, metadata });
 
-    // Parse answer to check if it equals 36
+    // Parse answer to check if it is correct
     const isCorrect = checkAnswer(answer);
 
     if (isCorrect) {

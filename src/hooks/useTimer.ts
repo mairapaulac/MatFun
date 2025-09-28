@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { TimerState, TimerActions, Multiplier } from '@/types/question';
+import { TimerState, TimerActions, Multiplier, SubmitMetadata } from '@/types/question';
 
-export function useTimer(totalMs = 60000, running = true, resetTrigger = 0): TimerState & TimerActions {
+export function useTimer(totalMs = 60000, running = true, resetTrigger = 0, onTimeout?: () => void): TimerState & TimerActions {
   const [elapsed, setElapsed] = useState(0);
   const [isRunning, setIsRunning] = useState(running);
   const startRef = useRef<number | null>(null);
   const rafRef = useRef<number | null>(null);
+  const timeoutHandledRef = useRef(false);
 
   // Calculate multiplier based on elapsed time
   const getMultiplier = useCallback((elapsedMs: number): Multiplier => {
@@ -21,6 +22,7 @@ export function useTimer(totalMs = 60000, running = true, resetTrigger = 0): Tim
     setElapsed(0);
     setIsRunning(false);
     startRef.current = null;
+    timeoutHandledRef.current = false;
     if (rafRef.current) {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
@@ -63,9 +65,12 @@ export function useTimer(totalMs = 60000, running = true, resetTrigger = 0): Tim
         const clampedElapsed = Math.min(elapsed, totalMs);
         setElapsed(clampedElapsed);
         
-        // Stop when time is up
-        if (elapsed >= totalMs) {
+        // Stop when time is up and handle timeout
+        if (elapsed >= totalMs && !timeoutHandledRef.current) {
+          timeoutHandledRef.current = true;
           setIsRunning(false);
+          // Only call onTimeout, not onSubmit, to avoid double question advancement
+          onTimeout?.();
         }
       }
     }, 50); // Update every 50ms for smooth animation
@@ -77,14 +82,14 @@ export function useTimer(totalMs = 60000, running = true, resetTrigger = 0): Tim
     };
   }, [isRunning, totalMs]);
 
-  // Sync with running prop
+  // Sync with running prop - but don't restart if timer has expired
   useEffect(() => {
-    if (running && !isRunning) {
+    if (running && !isRunning && elapsed < totalMs) {
       setIsRunning(true);
     } else if (!running && isRunning) {
       setIsRunning(false);
     }
-  }, [running, isRunning]);
+  }, [running, isRunning, elapsed, totalMs]);
 
   const progress = elapsed / totalMs;
   const multiplier = getMultiplier(elapsed);
