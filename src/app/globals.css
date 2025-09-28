@@ -121,9 +121,9 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-paytone), sans-serif;
-    background-image: url('/Bg-pattern1.svg');
+    background-image: url('/bg-2.svg');
     background-repeat: repeat;
-    background-size: 400px 130px;
+    background-size: 1000px 320px;
     background-attachment: fixed;
     background-position: 0 0;
   }
@@ -179,9 +179,9 @@
 
 /* Background pattern class for specific pages */
 .bg-pattern {
-  background-image: url('/Bg-pattern1.svg');
+  background-image: url('/bg-2.svg');
   background-repeat: repeat;
-  background-size: 400px 130px;
+  background-size: 1000px 330px;
   background-attachment: fixed;
   background-position: 0 0;
 }
