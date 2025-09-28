@@ -63,17 +63,32 @@ Teclado numérico touch-friendly.
 
 ## Hook useTimer
 
-Controla o timer com lógica de multiplicador baseada no tempo decorrido.
+Controla o timer com lógica de multiplicador baseada no tempo decorrido e gerencia automaticamente o timeout.
 
 ```tsx
-const timer = useTimer(60000, true);
+const timer = useTimer(60000, true, resetTrigger, onTimeout);
 
 // Multiplicadores:
 // 0-15s: 8x
 // 15-30s: 4x  
 // 30-45s: 2x
 // 45-60s: 1x
+
+// Parâmetros:
+// - totalMs: Duração total do timer em milissegundos (padrão: 60000)
+// - running: Se o timer deve estar rodando (padrão: true)
+// - resetTrigger: Chave para resetar o timer (padrão: 0)
+// - onTimeout: Callback chamado quando o tempo acaba (opcional)
 ```
+
+### Comportamento do Timeout
+
+O `useTimer` gerencia automaticamente o timeout para evitar múltiplas execuções:
+
+- **Detecção única**: O timeout é detectado apenas uma vez por ciclo
+- **Callback único**: Apenas `onTimeout` é chamado quando o tempo acaba
+- **Reset automático**: O controle de timeout é resetado quando o timer é reiniciado
+- **Sem duplicação**: Evita chamadas múltiplas que causariam avanço de várias questões
 
 ## Sistema de Equações Dinâmicas
 
@@ -352,6 +367,15 @@ export default function QuestionPage() {
     }, 1800);
   };
 
+  const handleTimeout = () => {
+    // Gerar novo problema após timeout
+    setTimeout(() => {
+      setQuestionNumber(prev => prev + 1);
+      setCurrentAnswer('');
+      setCurrentProblem(generateRandomProblem());
+    }, 1800);
+  };
+
   return (
     <QuestionScreen
       score={score}
@@ -367,6 +391,7 @@ export default function QuestionPage() {
       onAnswerChange={handleAnswerChange}
       totalMs={60000}
       onSubmit={handleSubmit}
+      onTimeout={handleTimeout}
     />
   );
 }
@@ -381,6 +406,17 @@ export default function QuestionPage() {
 5. **Validação**: Verifica se resposta está correta para o tipo de problema
 6. **Feedback**: Mostra resultado (correto/incorreto)
 7. **Novo Problema**: Gera automaticamente novo problema após 1.8s
+
+### Fluxo de Timeout
+
+Quando o tempo acaba:
+
+1. **Detecção**: `useTimer` detecta que `elapsedMs >= totalMs`
+2. **Controle**: Verifica se timeout já foi processado (`timeoutHandledRef.current`)
+3. **Callback único**: Chama apenas `onTimeout()` (não `onSubmit`)
+4. **Feedback**: Mostra "Tempo Esgotado!" no `FeedbackModal`
+5. **Avanço**: Move para próxima questão após 1.8s
+6. **Reset**: Timer é resetado para nova questão
 
 ## Integração
 
@@ -465,3 +501,29 @@ Componente de exemplo que usa EquationSkeleton internamente.
 
 ### Problema: Novo problema não é gerado
 **Solução**: Verifique se `setCurrentProblem(generateRandomProblem())` está sendo chamado após a resposta.
+
+### Problema: Timeout avança múltiplas questões
+**Solução**: Verifique se apenas `onTimeout` está sendo chamado no `useTimer`. Não chame `onSubmit` quando o tempo acaba.
+
+### Problema: Timeout não é detectado
+**Solução**: Certifique-se de que o `onTimeout` está sendo passado para o `useTimer` e que o `resetTrigger` está sendo atualizado corretamente.
+
+### Problema: Timer não reseta entre questões
+**Solução**: Verifique se o `timerKey` está sendo incrementado quando a questão muda no `QuestionScreen`.
+
+## Correções Implementadas
+
+### Problema de Timeout Múltiplo (Resolvido)
+
+**Problema**: O timeout estava causando avanço de múltiplas questões (2-4 questões) em vez de apenas 1.
+
+**Causa**: O timeout estava sendo detectado em dois lugares:
+1. No `useTimer` (chamando `onTimeout`)
+2. No `QuestionScreen` (chamando `onSubmit` com resposta vazia)
+
+**Solução**: Centralizou toda a lógica de timeout no `useTimer`:
+- Apenas `onTimeout` é chamado quando o tempo acaba
+- Removida a detecção duplicada no `QuestionScreen`
+- Controle robusto com `useRef` para evitar múltiplas execuções
+
+**Resultado**: Timeout agora avança apenas 1 questão, mantendo consistência com acertos/erros.
