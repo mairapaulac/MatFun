@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import type { QuestionScreenProps, SubmitMetadata } from "@/types/question"
 import { useTimer } from "@/hooks/useTimer"
 import QuestionCard from "./QuestionCard"
@@ -25,8 +25,10 @@ export default function QuestionScreen({
   const [answer, setAnswer] = useState(initialAnswer)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [timerKey, setTimerKey] = useState(0)
+  const [hasTimedOut, setHasTimedOut] = useState(false)
+  const timeoutHandledRef = useRef(false)
 
-  const timer = useTimer(totalMs, true, timerKey)
+  const timer = useTimer(totalMs, true, timerKey, onTimeout)
 
   // Update answer when currentAnswer prop changes
   useEffect(() => {
@@ -37,6 +39,8 @@ export default function QuestionScreen({
   useEffect(() => {
     setAnswer(initialAnswer)
     setIsSubmitted(false)
+    setHasTimedOut(false)
+    timeoutHandledRef.current = false
     // Force timer reset by changing the key
     setTimerKey((prev) => prev + 1)
   }, [questionNumber, initialAnswer])
@@ -46,14 +50,7 @@ export default function QuestionScreen({
     onAnswerChange?.(newAnswer)
   }
 
-  // Handle timeout
-  useEffect(() => {
-    if (timer.elapsedMs >= totalMs && !isSubmitted) {
-      setIsSubmitted(true)
-      onSubmit("", { elapsedMs: totalMs, multiplier: 1 })
-      onTimeout?.()
-    }
-  }, [timer.elapsedMs, totalMs, isSubmitted, onSubmit, onTimeout])
+  // Timeout is now handled entirely by useTimer
 
   const handleSubmit = () => {
     if (isSubmitted || answer.trim() === "") return
