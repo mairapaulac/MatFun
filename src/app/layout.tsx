@@ -9,7 +9,7 @@ const paytone = Paytone_One({
 });
 export const metadata: Metadata = {
   title: "MatFun",
-  description: "Plataforma gameficada de matemática para crianças com 10 a 14 anos de idade.",
+  description: "Plataforma gameficada de matemática para estudantes do 8º e 9º ano do ensino fundamental.",
 };
 
 export default function RootLayout({
