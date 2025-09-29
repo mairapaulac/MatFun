@@ -15,7 +15,7 @@ export default function QuestionCard({
   const [isHintModalOpen, setIsHintModalOpen] = useState(false);
   return (
     <div
-      className={`w-full mx-auto space-y-4 ${
+      className={`w-full mx-auto  ${
         isDesktop ? "max-w-2xl" : isTablet ? "max-w-2xl" : "max-w-md"
       }`}
     >

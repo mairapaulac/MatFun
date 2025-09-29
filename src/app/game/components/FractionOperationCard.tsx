@@ -32,9 +32,9 @@ export default function FractionOperationCard({
   //   componente p renderizar uma fraçao
   const FractionDisplay = ({ numerator, denominator }: { numerator: number; denominator: number }) => (
     <div className="flex flex-col items-center">
-      <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">{numerator}</span>
-      <div className="w-12 sm:w-14 md:w-16 border-t-2 sm:border-t-3 md:border-t-4 border-black my-1"></div>
-      <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">{denominator}</span>
+      <span className="text-5xl sm:text-4xl md:text-8xl font-normal text-black">{numerator}</span>
+      <div className="w-10 sm:w-14 md:w-16 border-t-2 sm:border-t-[3px] md:border-t-4 border-black my-1"></div>
+      <span className="text-5xl sm:text-4xl md:text-8xl font-normal text-black">{denominator}</span>
     </div>
   );
 
@@ -44,7 +44,7 @@ export default function FractionOperationCard({
       {/* num */}
       <div className="relative">
         <div
-          className={`w-12 h-8 sm:w-14 sm:h-10 md:w-16 md:h-12 text-lg sm:text-xl md:text-2xl font-bold text-center bg-white/20 border-2 rounded-lg flex items-center justify-center ${
+          className={`w-16 h-12 sm:w-24 sm:h-20 md:w-28 md:h-24 text-5xl sm:text-3xl md:text-8xl font-normal text-center bg-white/20 border-2 rounded-lg flex items-center justify-center ${
             activeInput === 'numerator' ? 'border-yellow-400 bg-yellow-400/20' : 'border-white/50'
           } text-black`}
         >
@@ -64,7 +64,7 @@ export default function FractionOperationCard({
       {/* den */}
       <div className="relative">
         <div
-          className={`w-12 h-8 sm:w-14 sm:h-10 md:w-16 md:h-12 text-lg sm:text-xl md:text-2xl font-bold text-center bg-white/20 border-2 rounded-lg flex items-center justify-center ${
+          className={`w-16 h-12 sm:w-24 sm:h-20 md:w-28 md:h-24 text-5xl sm:text-3xl md:text-8xl font-normal text-center bg-white/20 border-2 rounded-lg flex items-center justify-center ${
             activeInput === 'denominator' ? 'border-yellow-400 bg-yellow-400/20' : 'border-white/50'
           } text-black`}
         >
