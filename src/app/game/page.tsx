@@ -20,7 +20,7 @@ import {
 } from "@/hooks/useQuestionRotation";
 import { useModuleStore } from "@/stores/moduleStore";
 import { useState, useMemo, useRef } from "react";
-import FractionOperationCard from "@/components/question/FractionOperationCard";
+import FractionOperationCard from "@/app/game/components/FractionOperationCard";
 import { generateFractionQuestion, validateFractionAnswer } from "@/lib/fractionUtils";
 import { type FractionQuestion } from "@/types/types";
 

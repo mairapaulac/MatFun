@@ -32,9 +32,9 @@ export default function FractionOperationCard({
   //   componente p renderizar uma fraçao
   const FractionDisplay = ({ numerator, denominator }: { numerator: number; denominator: number }) => (
     <div className="flex flex-col items-center">
-      <span className="text-4xl font-bold text-black">{numerator}</span>
-      <div className="w-16 border-t-4 border-black my-1"></div>
-      <span className="text-4xl font-bold text-black">{denominator}</span>
+      <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">{numerator}</span>
+      <div className="w-12 sm:w-14 md:w-16 border-t-2 sm:border-t-3 md:border-t-4 border-black my-1"></div>
+      <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">{denominator}</span>
     </div>
   );
 
@@ -44,7 +44,7 @@ export default function FractionOperationCard({
       {/* num */}
       <div className="relative">
         <div
-          className={`w-16 h-12 text-2xl font-bold text-center bg-white/20 border-2 rounded-lg flex items-center justify-center ${
+          className={`w-12 h-8 sm:w-14 sm:h-10 md:w-16 md:h-12 text-lg sm:text-xl md:text-2xl font-bold text-center bg-white/20 border-2 rounded-lg flex items-center justify-center ${
             activeInput === 'numerator' ? 'border-yellow-400 bg-yellow-400/20' : 'border-white/50'
           } text-black`}
         >
@@ -59,12 +59,12 @@ export default function FractionOperationCard({
         />
       </div>
       
-      <div className="w-16 border-t-4 border-black my-1"></div>
+      <div className="w-12 sm:w-14 md:w-16 border-t-2 sm:border-t-3 md:border-t-4 border-black my-1"></div>
       
       {/* den */}
       <div className="relative">
         <div
-          className={`w-16 h-12 text-2xl font-bold text-center bg-white/20 border-2 rounded-lg flex items-center justify-center ${
+          className={`w-12 h-8 sm:w-14 sm:h-10 md:w-16 md:h-12 text-lg sm:text-xl md:text-2xl font-bold text-center bg-white/20 border-2 rounded-lg flex items-center justify-center ${
             activeInput === 'denominator' ? 'border-yellow-400 bg-yellow-400/20' : 'border-white/50'
           } text-black`}
         >
@@ -82,37 +82,37 @@ export default function FractionOperationCard({
   );
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6">
+    <div className="w-full max-w-4xl mx-auto p-4 sm:p-6">
       {/* Botão de dica */}
-      <div className="flex justify-end mb-4">
+      <div className="flex justify-end mb-4 sm:mb-6">
         <Button
           onClick={() => setIsHintModalOpen(true)}
           variant="outline"
           size="sm"
-          className="bg-white/20 border-white/50 text-white hover:bg-white/30"
+          className="bg-white/20 border-white/50 text-white hover:bg-white/30 text-sm sm:text-base"
         >
-          <Lightbulb className="w-4 h-4 mr-2" />
+          <Lightbulb className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
           Dica
         </Button>
       </div>
 
       
-      <div className="flex items-center justify-center space-x-8">
-        {/* primeira fracoeo */}
-        <FractionDisplay numerator={num1} denominator={den1} />
-        
-        {/* op */}
-        <span className="text-5xl font-bold text-black">{operator}</span>
-        
-        {/* segunda fraçaoo */}
-        <FractionDisplay numerator={num2} denominator={den2} />
-        
-        {/*  igual */}
-        <span className="text-5xl font-bold text-black">=</span>
-        
-        {/*resultado */}
-        <ResultInput />
-      </div>
+        <div className="flex items-center justify-center space-x-4 sm:space-x-6 md:space-x-8 flex-wrap gap-y-4">
+          {/* primeira fracoeo */}
+          <FractionDisplay numerator={num1} denominator={den1} />
+          
+          {/* op */}
+          <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-black">{operator}</span>
+          
+          {/* segunda fraçaoo */}
+          <FractionDisplay numerator={num2} denominator={den2} />
+          
+          {/*  igual */}
+          <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-black">=</span>
+          
+          {/*resultado */}
+          <ResultInput />
+        </div>
 
       
 
