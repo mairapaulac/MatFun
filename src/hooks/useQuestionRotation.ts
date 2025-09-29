@@ -7,13 +7,15 @@ import {
   generateRandomGeometryProblem,
   type GeneratedGeometryProblem,
 } from "@/app/game/components/GeometryAreaSkeleton";
+import { type FractionQuestion } from "@/lib/fractionUtils";
 
-export type QuestionType = "equation" | "geometry";
+export type QuestionType = "equation" | "geometry" | "fraction";
 
 export interface QuestionData {
   type: QuestionType;
   equationProblem?: GeneratedProblem;
   geometryProblem?: GeneratedGeometryProblem;
+  fractionProblem?: FractionQuestion;
 }
 
 export function useQuestionRotation(

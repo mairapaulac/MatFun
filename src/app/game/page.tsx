@@ -19,11 +19,17 @@ import {
   type QuestionData,
 } from "@/hooks/useQuestionRotation";
 import { useModuleStore } from "@/stores/moduleStore";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
+import FractionOperationCard from "@/components/question/FractionOperationCard";
+import { generateFractionQuestion, validateFractionAnswer } from "@/lib/fractionUtils";
+import { type FractionQuestion } from "@/types/types";
 
 export default function QuestionPage() {
   const [score, setScore] = useState(0);
   const [currentAnswer, setCurrentAnswer] = useState("");
+  const [fractionAnswer, setFractionAnswer] = useState({ numerator: "", denominator: "" });
+  const [fractionActiveInput, setFractionActiveInput] = useState<'numerator' | 'denominator'>('numerator');
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [feedback, setFeedback] = useState<{
     isOpen: boolean;
     type: "correct" | "incorrect" | "timeout";
@@ -40,12 +46,14 @@ export default function QuestionPage() {
   const generateFilteredQuestion = (): QuestionData => {
     // If no modules selected or "geral" is selected, use all question types
     if (selectedModules.length === 0 || selectedModules.includes("geral")) {
-      return Math.random() < 0.5
-        ? { type: "equation", equationProblem: generateRandomProblem() }
-        : {
-            type: "geometry",
-            geometryProblem: generateRandomGeometryProblem(),
-          };
+      const random = Math.random();
+      if (random < 0.33) {
+        return { type: "equation", equationProblem: generateRandomProblem() };
+      } else if (random < 0.66) {
+        return { type: "geometry", geometryProblem: generateRandomGeometryProblem() };
+      } else {
+        return { type: "fraction", fractionProblem: generateFractionQuestion() };
+      }
     }
 
     // Filter available question types based on selected modules
@@ -59,14 +67,20 @@ export default function QuestionPage() {
       availableTypes.push("geometry");
     }
 
+    if (selectedModules.includes("fraction")) {
+      availableTypes.push("fraction");
+    }
+
     // If no valid modules selected, default to all
     if (availableTypes.length === 0) {
-      return Math.random() < 0.5
-        ? { type: "equation", equationProblem: generateRandomProblem() }
-        : {
-            type: "geometry",
-            geometryProblem: generateRandomGeometryProblem(),
-          };
+      const random = Math.random();
+      if (random < 0.33) {
+        return { type: "equation", equationProblem: generateRandomProblem() };
+      } else if (random < 0.66) {
+        return { type: "geometry", geometryProblem: generateRandomGeometryProblem() };
+      } else {
+        return { type: "fraction", fractionProblem: generateFractionQuestion() };
+      }
     }
 
     // Randomly select from available types
@@ -75,11 +89,13 @@ export default function QuestionPage() {
 
     if (selectedType === "equation") {
       return { type: "equation", equationProblem: generateRandomProblem() };
-    } else {
+    } else if (selectedType === "geometry") {
       return {
         type: "geometry",
         geometryProblem: generateRandomGeometryProblem(),
       };
+    } else {
+      return { type: "fraction", fractionProblem: generateFractionQuestion() };
     }
   };
 
@@ -90,14 +106,66 @@ export default function QuestionPage() {
     setCurrentAnswer(answer);
   };
 
+  // funcao master para lidar com input do keypad
+  const handleKeypadPress = (key: string) => {
+    if (currentQuestion?.type === "fraction") {
+      if (key === "⌫") {
+        const target = fractionActiveInput === 'numerator' ? 'numerator' : 'denominator';
+        setFractionAnswer(prev => ({ 
+          ...prev, 
+          [target]: prev[target].slice(0, -1) 
+        }));
+      } else if (key === "toggle_focus") {
+        setFractionActiveInput(prev => 
+          prev === 'numerator' ? 'denominator' : 'numerator'
+        );
+      } else { 
+        const target = fractionActiveInput === 'numerator' ? 'numerator' : 'denominator';
+        setFractionAnswer(prev => ({ 
+          ...prev, 
+          [target]: prev[target] + key 
+        }));
+      }
+    } else {
+      if (key === "⌫") {
+        setCurrentAnswer(currentAnswer.slice(0, -1));
+      } else {
+        setCurrentAnswer(currentAnswer + key);
+      }
+    }
+  };
+
   const handleSubmit = (
-    answer: string,
     metadata: { elapsedMs: number; multiplier: 8 | 4 | 2 | 1 }
   ) => {
-    console.log("Answer submitted:", { answer, metadata });
+    if (isSubmitted) return;
+    
+    const isAnswerEmpty = currentQuestion?.type === "fraction"
+      ? fractionAnswer.numerator.trim() === "" || fractionAnswer.denominator.trim() === ""
+      : currentAnswer.trim() === "";
+    
+    if (isAnswerEmpty) return;
+    
+    setIsSubmitted(true);
+    
+    const answerToCheck = currentQuestion?.type === "fraction" 
+      ? `${fractionAnswer.numerator}/${fractionAnswer.denominator}` 
+      : currentAnswer;
+    
+    console.log("Answer submitted:", { answerToCheck, metadata });
 
-    // Parse answer to check if it is correct
-    const isCorrect = checkAnswer(answer);
+    let isCorrect = false;
+    if (currentQuestion?.type === "fraction") {
+      const numerator = parseInt(fractionAnswer.numerator) || 0;
+      const denominator = parseInt(fractionAnswer.denominator) || 0;
+      isCorrect = validateFractionAnswer(
+        currentQuestion.fractionProblem!,
+        numerator,
+        denominator
+      );
+    } else {
+      isCorrect = checkAnswer(currentAnswer);
+    }
 
     if (isCorrect) {
       const points = 10 * metadata.multiplier;
@@ -115,11 +183,13 @@ export default function QuestionPage() {
       });
     }
 
-    // Move to next question after showing result
     setTimeout(() => {
       setCurrentAnswer("");
+      setFractionAnswer({ numerator: "", denominator: "" });
+      setFractionActiveInput('numerator');
+      setIsSubmitted(false);
       nextQuestion();
-    }, 1800); // 1.8 second delay to show the result
+    }, 1800); 
   };
 
   const checkAnswer = (answer: string): boolean => {
@@ -186,6 +256,18 @@ export default function QuestionPage() {
         return num === expectedArea;
       }
       return num === currentQuestion.geometryProblem.area;
+    } else if (
+      currentQuestion.type === "fraction" &&
+      currentQuestion.fractionProblem
+    ) {
+      // Para questões de fração, validar usando a função de validação
+      const numerator = parseInt(fractionAnswer.numerator) || 0;
+      const denominator = parseInt(fractionAnswer.denominator) || 0;
+      return validateFractionAnswer(
+        currentQuestion.fractionProblem,
+        numerator,
+        denominator
+      );
     }
 
     return false;
@@ -201,6 +283,9 @@ export default function QuestionPage() {
     // Move to next question after timeout
     setTimeout(() => {
       setCurrentAnswer("");
+      setFractionAnswer({ numerator: "", denominator: "" });
+      setFractionActiveInput('numerator');
+      setIsSubmitted(false);
       nextQuestion();
     }, 1800); // 1.8 second delay to show the timeout message
   };
@@ -226,8 +311,10 @@ export default function QuestionPage() {
   const getModuleLabel = () => {
     if (currentQuestion.type === "equation") {
       return "Operações Algébricas";
-    } else {
+    } else if (currentQuestion.type === "geometry") {
       return "Geometria - Áreas";
+    } else {
+      return "Operações com Frações";
     }
   };
 
@@ -254,6 +341,8 @@ export default function QuestionPage() {
         default:
           return "geometry";
       }
+    } else if (currentQuestion.type === "fraction") {
+      return "fraction_operation";
     }
     return "default";
   };
@@ -279,6 +368,22 @@ export default function QuestionPage() {
           problem={currentQuestion.geometryProblem}
         />
       );
+    } else if (
+      currentQuestion.type === "fraction" &&
+      currentQuestion.fractionProblem
+    ) {
+      return (
+        <FractionOperationCard
+          num1={currentQuestion.fractionProblem.num1}
+          den1={currentQuestion.fractionProblem.den1}
+          operator={currentQuestion.fractionProblem.operator}
+          num2={currentQuestion.fractionProblem.num2}
+          den2={currentQuestion.fractionProblem.den2}
+          currentAnswer={fractionAnswer}
+          activeInput={fractionActiveInput}
+          onActiveInputChange={setFractionActiveInput}
+        />
+      );
     }
     return null;
   };
@@ -296,6 +401,9 @@ export default function QuestionPage() {
         totalMs={60000}
         onSubmit={handleSubmit}
         onTimeout={handleTimeout}
+        onKeypadPress={handleKeypadPress}
+        fractionAnswer={fractionAnswer}
+        isSubmitted={isSubmitted}
       />
 
       <FeedbackModal

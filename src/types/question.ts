@@ -35,12 +35,10 @@ export interface TimeBarProps {
 }
 
 export interface KeypadProps {
-  value: string;
-  onChange: (newValue: string) => void;
-  onSubmit?: () => void;
-  keys?: string[]; // default digits + '/', '.', '⌫'
+  onKeyPress: (key: string) => void; // Reports '0'-'9', '⌫', or 'toggle_focus'
   disabled?: boolean;
   isDesktop?: boolean;
+  showToggleFocus?: boolean;
 }
 
 export interface QuestionScreenProps {
@@ -53,8 +51,11 @@ export interface QuestionScreenProps {
   currentAnswer?: string;
   onAnswerChange?: (answer: string) => void;
   totalMs?: number;
-  onSubmit: (answer: string, metadata: { elapsedMs: number; multiplier: Multiplier }) => void;
+  onSubmit: (metadata: { elapsedMs: number; multiplier: Multiplier }) => void;
   onTimeout?: () => void;
+  onKeypadPress?: (key: string) => void;
+  fractionAnswer?: { numerator: string; denominator: string };
+  isSubmitted: boolean;
 }
 
 export interface SubmitMetadata {

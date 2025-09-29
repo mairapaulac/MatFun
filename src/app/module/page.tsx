@@ -11,6 +11,7 @@ import {
   BookOpen,
   Calculator,
   Square,
+  Divide,
 } from "lucide-react";
 
 interface Module {
@@ -43,6 +44,13 @@ const modules: Module[] = [
     subtitle: "Cálculo de áreas de figuras geométricas",
     icon: Square,
     iconColor: "#8B5CF6", 
+  },
+  {
+    id: "fraction",
+    title: "Operações com Frações",
+    subtitle: "Soma, subtração e multiplicação de frações",
+    icon: Divide,
+    iconColor: "#F59E0B", 
   },
 ];
 

@@ -21,47 +21,38 @@ export default function QuestionScreen({
   totalMs = 60000,
   onSubmit,
   onTimeout,
+  onKeypadPress,
+  fractionAnswer = { numerator: "", denominator: "" },
+  isSubmitted,
 }: QuestionScreenProps): React.JSX.Element {
-  const [answer, setAnswer] = useState(initialAnswer)
-  const [isSubmitted, setIsSubmitted] = useState(false)
   const [timerKey, setTimerKey] = useState(0)
   const [hasTimedOut, setHasTimedOut] = useState(false)
   const timeoutHandledRef = useRef(false)
 
-  const timer = useTimer(totalMs, true, timerKey, onTimeout)
+  // verificando se a resposta esta vazia em questoes de fraçao
+  const isAnswerEmpty = questionType === 'fraction_operation'
+    ? fractionAnswer.numerator.trim() === '' || fractionAnswer.denominator.trim() === ''
+    : currentAnswer.trim() === '';
 
-  // Update answer when currentAnswer prop changes
-  useEffect(() => {
-    setAnswer(currentAnswer)
-  }, [currentAnswer])
+  const timer = useTimer(totalMs, true, timerKey, onTimeout)
 
   // Reset timer when question changes
   useEffect(() => {
-    setAnswer(initialAnswer)
-    setIsSubmitted(false)
     setHasTimedOut(false)
     timeoutHandledRef.current = false
     // Force timer reset by changing the key
     setTimerKey((prev) => prev + 1)
   }, [questionNumber, initialAnswer])
 
-  const handleAnswerChange = (newAnswer: string) => {
-    setAnswer(newAnswer)
-    onAnswerChange?.(newAnswer)
-  }
-
   // Timeout is now handled entirely by useTimer
 
   const handleSubmit = () => {
-    if (isSubmitted || answer.trim() === "") return
-
-    setIsSubmitted(true)
     const metadata: SubmitMetadata = {
       elapsedMs: timer.elapsedMs,
       multiplier: timer.multiplier,
     }
 
-    onSubmit(answer, metadata)
+    onSubmit(metadata)
   }
 
   const isDisabled = isSubmitted || timer.elapsedMs >= totalMs
@@ -92,7 +83,11 @@ export default function QuestionScreen({
 
         {/* Keypad */}
         <div className="w-full max-w-sm">
-          <Keypad value={answer} onChange={handleAnswerChange} disabled={isDisabled} />
+          <Keypad 
+            onKeyPress={onKeypadPress || (() => {})}
+            disabled={isDisabled}
+            showToggleFocus={questionType === "fraction_operation"}
+          />
         </div>
 
         {/* Submit Button */}
@@ -100,7 +95,7 @@ export default function QuestionScreen({
           <Button
               variant={"default"}
               onClick={handleSubmit}
-              disabled={isDisabled || answer.trim() === ""}
+              disabled={isDisabled || isAnswerEmpty}
               className="w-full text-[#24366B]  font-bold py-4 px-8 rounded-full text-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitted ? "Respondido!" : "Responder!"}
@@ -130,7 +125,11 @@ export default function QuestionScreen({
 
           {/* Keypad */}
           <div className="w-full max-w-xl">
-            <Keypad value={answer} onChange={handleAnswerChange} disabled={isDisabled} />
+            <Keypad 
+              onKeyPress={onKeypadPress || (() => {})}
+              disabled={isDisabled}
+              showToggleFocus={questionType === "fraction_operation"}
+            />
           </div>
 
           {/* Submit Button */}
@@ -138,7 +137,7 @@ export default function QuestionScreen({
             <Button
               variant={"default"}
               onClick={handleSubmit}
-              disabled={isDisabled || answer.trim() === ""}
+              disabled={isDisabled || isAnswerEmpty}
               className="w-full text-[#24366B] md:h-16  font-bold  px-8 rounded-full text-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitted ? "Respondido!" : "Responder!"}
@@ -175,7 +174,12 @@ export default function QuestionScreen({
         <div className="flex-1 flex flex-col items-center justify-center space-y-8 pl-8">
           {/* Keypad */}
           <div className="w-full max-w-md">
-            <Keypad value={answer} onChange={handleAnswerChange} disabled={isDisabled} isDesktop={true} />
+            <Keypad 
+              onKeyPress={onKeypadPress || (() => {})}
+              disabled={isDisabled} 
+              isDesktop={true}
+              showToggleFocus={questionType === "fraction_operation"}
+            />
           </div>
 
           {/* Submit Button */}
@@ -183,7 +187,7 @@ export default function QuestionScreen({
             <Button
               variant={"default"}
               onClick={handleSubmit}
-              disabled={isDisabled || answer.trim() === ""}
+              disabled={isDisabled || isAnswerEmpty}
               className="w-full text-[#24366B]  font-bold py-4 px-8 rounded-full text-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitted ? "Respondido!" : "Responder!"}

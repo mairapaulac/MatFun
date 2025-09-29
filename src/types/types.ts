@@ -27,3 +27,16 @@ export interface IPlayerCard {
   trophy?: boolean | null;
   isUser?:boolean
 }
+
+// operações com frações
+export interface FractionQuestion {
+  id: string;
+  module: 'fraction';
+  type: 'fraction_operation';
+  num1: number;
+  den1: number;
+  operator: '+'  | '×';
+  num2: number;
+  den2: number;
+  // Note: We don't store the result here; it will be calculated for validation.
+}
