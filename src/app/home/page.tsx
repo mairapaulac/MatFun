@@ -16,10 +16,10 @@ import { Button } from "@/components/ui/button";
 export default function HomePage() {
   const router = useRouter();
   return (
-    <div className="flex flex-col w-full min-h-screen bg-[#24366b] bg-pattern overflow-x-hidden">
+    <div className="flex flex-col w-full min-h-screen bg-[#24366b] bg-pattern overflow-x-hidden overflow-y-auto">
       <Navbar />
 
-      <main className="flex-1 px-2 py-3 max-w-[700px] mx-auto w-full flex flex-col">
+      <main className="flex-1 px-2 py-3 max-w-[740px] mx-auto w-full flex flex-col">
         <div className="mb-8 flex items-center w-full animate-slide-in-up">
           <Button
             onClick={() => router.push("/ranking")}
@@ -30,10 +30,9 @@ export default function HomePage() {
           </Button>
         </div>
 
-        <div className="mb-8 space-y-5 flex-1">
+        <div className="mb-8 space-y-5 flex-1" style={{ animationDelay: "0.3s" }}>
           <Card
             className="w-full h-auto min-h-[110px] flex items-center gap-2 p-2 sm:p-6 animate-slide-in-up"
-            style={{ animationDelay: "0.1s" }}
           >
             <div className="flex-shrink-0 bg-gradient-to-br from-[#314991] to-[#24366b] p-3 rounded-xl">
               <Sword className="w-8 h-8 text-white" />
@@ -61,7 +60,6 @@ export default function HomePage() {
 
           <Card
             className="w-full h-auto min-h-[110px] flex items-center gap-4 p-2 sm:p-6 animate-slide-in-up"
-            style={{ animationDelay: "0.2s" }}
           >
             <div className="flex-shrink-0 bg-gradient-to-br from-[#F43F5E] to-[#E11D48] p-3 rounded-xl">
               <Target className="w-8 h-8 text-white" />
@@ -89,7 +87,7 @@ export default function HomePage() {
 
           <Card
             className="w-full h-auto min-h-[110px] flex items-center gap-4 p-2 sm:p-6 animate-slide-in-up"
-            style={{ animationDelay: "0.3s" }}
+            
           >
             <div className="flex-shrink-0 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] p-3 rounded-xl">
               <Calculator className="w-8 h-8 text-white" />
@@ -122,14 +120,14 @@ export default function HomePage() {
             title="7 dias"
             subtitle="seguidos jogados"
             iconColor="#10B981"
-            className="h-[80px] sm:h-[100px] md:h-[120px]"
+            className="h-[80px] sm:h-[100px] md:h-[110px]"
           />
           <StatCard
             icon={BookMarked}
             title="156"
             subtitle="questões acertadas"
             iconColor="#3B82F6"
-            className="h-[80px] sm:h-[100px] md:h-[120px]"
+            className="h-[80px] sm:h-[100px] md:h-[110px]"
           />
         </div>
 
