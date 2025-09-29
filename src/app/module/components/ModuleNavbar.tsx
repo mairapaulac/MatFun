@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function ModuleNavbar() {
   return (
-    <nav className="w-full h-[120px] sm:h-[120px] bg-[#314991] px-4 py-4 sm:py-6 drop-shadow-xl">
+    <nav className="w-full h-[120px] sm:h-[120px]  bg-[#314991] px-4 py-4 sm:py-6 drop-shadow-xl">
       <div className="w-full max-w-[800px] mx-auto h-full flex justify-between items-center">
         {/* back button */}
         <div className="flex items-center justify-center w-[50px] h-[50px] sm:w-[60px] sm:h-[60px]">

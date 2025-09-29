@@ -132,12 +132,12 @@ export default function HomePage() {
         </div>
 
         <div
-          className="flex justify-center animate-slide-in-up"
+          className="flex justify-center animate-slide-in-up mt-auto "
           style={{ animationDelay: "0.5s" }}
         >
           <Button
             onClick={() => router.push("/module")} // Redirect to module selection
-            className="w-full max-w-[690px] h-[50px] sm:h-[70px] rounded-full cursor-pointer"
+            className="w-full max-w-[690px] h-[50px] sm:h-[70px] md:h-[70px] rounded-full cursor-pointer "
           >
              <Gamepad2></Gamepad2>
             <span className="text-3xl">Jogar</span>
