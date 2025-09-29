@@ -53,7 +53,7 @@ export default function HomePage() {
                   132/200
                 </span>
               </div>
-              <p className="text-sm font-medium text-[#F43F5E]">
+              <p className="text-md font-medium text-[#F43F5E]">
                 Acerte 200 questões para desbloquear
               </p>
             </div>
@@ -81,7 +81,7 @@ export default function HomePage() {
                   47/100
                 </span>
               </div>
-              <p className="text-sm font-medium text-[#F43F5E]">
+              <p className="text-md font-medium text-[#F43F5E]">
                 Acerte 100 questões de frações
               </p>
             </div>
@@ -96,7 +96,7 @@ export default function HomePage() {
             </div>
             <div className="flex-1">
               <h3 className="text-2xl md:text-3xl font-normal mb-2 text-[#2B3A67]">
-                Especialista em Multiplicação
+                Mago da Multiplicação
               </h3>
               <div className="flex items-center gap-3 mb-2">
                 <div className="flex-1 bg-gray-200 rounded-full h-3 overflow-hidden">
@@ -109,7 +109,7 @@ export default function HomePage() {
                   89/100
                 </span>
               </div>
-              <p className="text-sm font-medium text-[#F43F5E]">
+              <p className="text-md font-medium text-[#F43F5E]">
                 Acerte 100 questões de multiplicação
               </p>
             </div>
@@ -122,14 +122,14 @@ export default function HomePage() {
             title="7 dias"
             subtitle="seguidos jogados"
             iconColor="#10B981"
-            className="h-[80px] sm:h-[100px] md:h-[140px]"
+            className="h-[80px] sm:h-[100px] md:h-[120px]"
           />
           <StatCard
             icon={BookMarked}
             title="156"
             subtitle="questões acertadas"
             iconColor="#3B82F6"
-            className="h-[80px] sm:h-[100px] md:h-[140px]"
+            className="h-[80px] sm:h-[100px] md:h-[120px]"
           />
         </div>
 
