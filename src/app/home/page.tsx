@@ -19,8 +19,8 @@ export default function HomePage() {
     <div className="flex flex-col w-full min-h-screen bg-[#24366b] bg-pattern overflow-x-hidden">
       <Navbar />
 
-      <main className="flex-1 px-4 py-6 max-w-[780px] mx-auto w-full flex flex-col min-h-0 overflow-x-hidden">
-        <div className="mb-4 sm:mb-6 flex items-center w-full">
+      <main className="flex-1 px-2 py-3 max-w-[700px] mx-auto w-full flex flex-col">
+        <div className="mb-8 flex items-center w-full animate-slide-in-up">
           <Button
             onClick={() => router.push("/ranking")}
             className="w-full h-[50px] max-w-[420px] mx-auto rounded-4xl cursor-pointer"
@@ -30,62 +30,86 @@ export default function HomePage() {
           </Button>
         </div>
 
-        <div className="mb-4 sm:mb-6 space-y-5 sm:space-y-4 flex-1 min-h-0">
-          <Card className="w-full h-[90px] sm:h-[130px] flex items-center gap-3 sm:gap-4 p-4 sm:p-6">
-            <div className="flex-shrink-0">
-              <Sword className="w-6 h-6 sm:w-8 sm:h-8 text-[#2B3A67]" />
+        <div className="mb-8 space-y-5 flex-1">
+          <Card
+            className="w-full h-auto min-h-[110px] flex items-center gap-2 p-2 sm:p-6 animate-slide-in-up"
+            style={{ animationDelay: "0.1s" }}
+          >
+            <div className="flex-shrink-0 bg-gradient-to-br from-[#314991] to-[#24366b] p-3 rounded-xl">
+              <Sword className="w-8 h-8 text-white" />
             </div>
             <div className="flex-1">
-              <h3
-                className="text-xl sm:text-2xl font-normal mb-1"
-                style={{ color: "rgba(29, 45, 88, 0.75)" }}
-              >
+              <h3 className="text-2xl md:text-3xl font-normal mb-2 text-[#2B3A67]">
                 Guerreiro da Matemática
               </h3>
-              <p className="text-sm sm:text-base font-medium text-black mb-1">
-                132 de 200
-              </p>
-              <p className="text-xs sm:text-sm" style={{ color: "#F43F5E" }}>
-                Acerte 200 questões
+              <div className="flex items-center gap-3 mb-2">
+                <div className="flex-1 bg-gray-200 rounded-full h-3 overflow-hidden">
+                  <div
+                    className="bg-gradient-to-r from-[#22C55E] to-[#16A34A] h-full rounded-full transition-all duration-500"
+                    style={{ width: "66%" }}
+                  />
+                </div>
+                <span className="text-base font-normal text-[#2B3A67] whitespace-nowrap">
+                  132/200
+                </span>
+              </div>
+              <p className="text-sm font-medium text-[#F43F5E]">
+                Acerte 200 questões para desbloquear
               </p>
             </div>
           </Card>
 
-          <Card className="w-full h-[90px] sm:h-[130px] flex items-center gap-3 sm:gap-4 p-4 sm:p-6">
-            <div className="flex-shrink-0">
-              <Target className="w-6 h-6 sm:w-8 sm:h-8 text-[#2B3A67]" />
+          <Card
+            className="w-full h-auto min-h-[110px] flex items-center gap-4 p-2 sm:p-6 animate-slide-in-up"
+            style={{ animationDelay: "0.2s" }}
+          >
+            <div className="flex-shrink-0 bg-gradient-to-br from-[#F43F5E] to-[#E11D48] p-3 rounded-xl">
+              <Target className="w-8 h-8 text-white" />
             </div>
             <div className="flex-1">
-              <h3
-                className="text-xl sm:text-2xl font-normal mb-1"
-                style={{ color: "rgba(29, 45, 88, 0.75)" }}
-              >
+              <h3 className="text-2xl md:text-3xl font-normal mb-2 text-[#2B3A67]">
                 Ninja das Frações
               </h3>
-              <p className="text-sm sm:text-base font-medium text-black mb-1">
-                47 de 100
-              </p>
-              <p className="text-xs sm:text-sm" style={{ color: "#F43F5E" }}>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="flex-1 bg-gray-200 rounded-full h-3 overflow-hidden">
+                  <div
+                    className="bg-gradient-to-r from-[#F43F5E] to-[#E11D48] h-full rounded-full transition-all duration-500"
+                    style={{ width: "47%" }}
+                  />
+                </div>
+                <span className="text-base font-normal text-[#2B3A67] whitespace-nowrap">
+                  47/100
+                </span>
+              </div>
+              <p className="text-sm font-medium text-[#F43F5E]">
                 Acerte 100 questões de frações
               </p>
             </div>
           </Card>
 
-          <Card className="w-full h-[90px] sm:h-[130px] flex items-center gap-3 sm:gap-4 p-4 sm:p-6">
-            <div className="flex-shrink-0">
-              <Calculator className="w-6 h-6 sm:w-8 sm:h-8 text-[#2B3A67]" />
+          <Card
+            className="w-full h-auto min-h-[110px] flex items-center gap-4 p-2 sm:p-6 animate-slide-in-up"
+            style={{ animationDelay: "0.3s" }}
+          >
+            <div className="flex-shrink-0 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] p-3 rounded-xl">
+              <Calculator className="w-8 h-8 text-white" />
             </div>
             <div className="flex-1">
-              <h3
-                className="text-xl sm:text-2xl font-normal mb-1"
-                style={{ color: "rgba(29, 45, 88, 0.75)" }}
-              >
+              <h3 className="text-2xl md:text-3xl font-normal mb-2 text-[#2B3A67]">
                 Especialista em Multiplicação
               </h3>
-              <p className="text-sm sm:text-base font-medium text-black mb-1">
-                89 de 100
-              </p>
-              <p className="text-xs sm:text-sm" style={{ color: "#F43F5E" }}>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="flex-1 bg-gray-200 rounded-full h-3 overflow-hidden">
+                  <div
+                    className="bg-gradient-to-r from-[#3B82F6] to-[#2563EB] h-full rounded-full transition-all duration-500"
+                    style={{ width: "89%" }}
+                  />
+                </div>
+                <span className="text-base font-normal text-[#2B3A67] whitespace-nowrap">
+                  89/100
+                </span>
+              </div>
+              <p className="text-sm font-medium text-[#F43F5E]">
                 Acerte 100 questões de multiplicação
               </p>
             </div>
@@ -98,23 +122,26 @@ export default function HomePage() {
             title="7 dias"
             subtitle="seguidos jogados"
             iconColor="#10B981"
-            className="h-[80px] sm:h-[90px]"
+            className="h-[80px] sm:h-[100px] md:h-[140px]"
           />
           <StatCard
             icon={BookMarked}
             title="156"
             subtitle="questões acertadas"
             iconColor="#3B82F6"
-            className="h-[80px] sm:h-[90px]"
+            className="h-[80px] sm:h-[100px] md:h-[140px]"
           />
         </div>
 
-        <div className="flex justify-center mt-auto">
+        <div
+          className="flex justify-center animate-slide-in-up"
+          style={{ animationDelay: "0.5s" }}
+        >
           <Button
             onClick={() => router.push("/module")} // Redirect to module selection
             className="w-full max-w-[690px] h-[50px] sm:h-[70px] rounded-full cursor-pointer"
           >
-            <Gamepad2></Gamepad2>
+             <Gamepad2></Gamepad2>
             <span className="text-3xl">Jogar</span>
           </Button>
         </div>

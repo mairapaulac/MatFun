@@ -21,8 +21,8 @@ export default function Navbar() {
               <User className="w-6 h-6 sm:w-8 sm:h-8 text-[#2B3A67]" />
             </div>
             <div className="text-white text-center">
-              <h2 className="text-lg sm:text-4xl font-normal">João Silva</h2>
-              <p className="text-sm sm:text-lg text-gray-300">8º Ano, Turma A</p>
+              <h2 className="text-2xl sm:text-4xl font-normal">João Silva</h2>
+              <p className="text-lg sm:text-lg text-gray-300">8º Ano, Turma A</p>
             </div>
           </div>
         </div>
