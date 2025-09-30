@@ -115,7 +115,7 @@ export default function ModulePage() {
           </p>
         </div>
 
-        <div className="flex-1 space-y-4 sm:space-y-5 mb-6 items-center flex-col flex">
+        <div className="flex-1 space-y-4 sm:space-y-5 mb-6 items-center flex-col flex animate-slide-in-up">
           {modules.map((module) => (
             <ModuleCard
               key={module.id}

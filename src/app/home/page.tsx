@@ -114,7 +114,7 @@ export default function HomePage() {
           </Card>
         </div>
 
-        <div className="mb-6 sm:mb-8 grid grid-cols-2 gap-3 sm:gap-4">
+        <div className="mb-6 sm:mb-8 grid grid-cols-2 gap-3 sm:gap-4 animate-slide-in-up">
           <StatCard
             icon={BrainCircuit}
             title="7 dias"
@@ -132,7 +132,7 @@ export default function HomePage() {
         </div>
 
         <div
-          className="flex justify-center animate-slide-in-up mt-auto "
+          className="flex justify-center  mt-auto "
           style={{ animationDelay: "0.5s" }}
         >
           <Button

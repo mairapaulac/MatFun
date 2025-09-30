@@ -99,7 +99,7 @@ export function generateRandomGeometryProblem(): GeneratedGeometryProblem {
 
 // Componentes SVG para cada figura
 const TriangleSVG: React.FC<{ base: number; height: number }> = ({ base, height }) => (
-  <svg viewBox="0 -10 200 130" className="w-full h-64">
+  <svg viewBox="0 -10 200 130" className="w-full h-36 md:h-64">
     <polygon
       points="00,100 200,100 100,00"
       fill="none"
@@ -125,7 +125,7 @@ const TriangleSVG: React.FC<{ base: number; height: number }> = ({ base, height 
 )
 
 const RectangleSVG: React.FC<{ width: number; height: number }> = ({ width, height }) => (
-  <svg viewBox="0 0 200 120" className="w-full h-64">
+  <svg viewBox="0 0 200 120" className="w-full h-36 md:h-64">
     <rect
       x="10"
       y="10"
@@ -145,7 +145,7 @@ const RectangleSVG: React.FC<{ width: number; height: number }> = ({ width, heig
 )
 
 const ParallelogramSVG: React.FC<{ base: number; height: number }> = ({ base, height }) => (
-  <svg viewBox="0 0 200 120" className="w-full h-64">
+  <svg viewBox="0 0 200 120" className=" w-full h-36 md:h-64">
     <polygon
       points="20,100 180,100 160,20 0,20"
       fill="none"
@@ -155,7 +155,7 @@ const ParallelogramSVG: React.FC<{ base: number; height: number }> = ({ base, he
     <text x="100" y="115" textAnchor="middle" className="text-sm font-semibold fill-slate-700">
       {base} cm
     </text>
-    <text x="10" y="50" textAnchor="middle" className="text-sm font-semibold fill-slate-700" transform="rotate(-90 10 60)">
+    <text x="10" y="54" textAnchor="middle" className="text-sm font-semibold fill-slate-700" transform="rotate(-90 10 60)">
       {height} cm
     </text>
   </svg>
@@ -166,7 +166,7 @@ const TrapezoidSVG: React.FC<{ baseMaior: number; baseMenor: number; height: num
   baseMenor, 
   height 
 }) => (
-  <svg viewBox="0 0 200 120" className="w-full h-64">
+  <svg viewBox="0 0 200 120" className="w-full h-36 md:h-64">
     <polygon
       points="40,100 160,100 180,20 20,20"
       fill="none"
@@ -194,7 +194,7 @@ const TrapezoidSVG: React.FC<{ baseMaior: number; baseMenor: number; height: num
 )
 
 const CircleSVG: React.FC<{ radius: number }> = ({ radius }) => (
-  <svg viewBox="0 0 200 120" className="w-full h-64">
+  <svg viewBox="0 0 200 120" className="w-full h-36 md:h-64">
     <circle
       cx="100"
       cy="60"
@@ -221,7 +221,7 @@ const CircleSVG: React.FC<{ radius: number }> = ({ radius }) => (
 )
 
 const CircleFromCircumferenceSVG: React.FC<{ circumference: number }> = () => (
-  <svg viewBox="0 -10 200 120" className="w-full h-64">
+  <svg viewBox="0 0 200 120" className="w-full h-36 md:h-64">
     <circle
       cx="100"
       cy="60"
@@ -248,7 +248,7 @@ const CircleFromCircumferenceSVG: React.FC<{ circumference: number }> = () => (
       strokeWidth="2"
       fill="none"
     />
-    <text x="100" y="8" textAnchor="middle" className="text-sm font-semibold fill-red-600">
+    <text x="100" y="10" textAnchor="middle" className="text-sm font-semibold fill-red-600">
       C
     </text>
     
@@ -329,7 +329,7 @@ export default function GeometryAreaSkeleton({
       </div>
 
       {/* Shape display */}
-      <div className="relative flex items-center justify-center">
+      <div className=" relative flex items-center justify-center">
         {renderShape()}
       </div>
 
@@ -346,7 +346,7 @@ export default function GeometryAreaSkeleton({
       {/* Area prompt with answer field */}
       <div className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 flex items-center justify-center space-x-2">
         <span>Área =</span>
-        <div className="w-20 h-12 sm:w-24 sm:h-14 md:w-32 md:h-16 lg:w-28 lg:h-14 text-center text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold border-2 border-slate-300 rounded-lg flex items-center justify-center bg-white text-slate-900">
+        <div className="w-20 h-12  sm:w-24 sm:h-14 md:w-32 md:h-16 lg:w-28 lg:h-14 text-center text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold border-2 border-slate-300 rounded-lg flex items-center justify-center bg-white text-slate-900">
           {currentAnswer || ""}
         </div>
         <span>{problem.unit}</span>

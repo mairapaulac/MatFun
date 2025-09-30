@@ -64,13 +64,13 @@ export default function QuestionCard({
         <div
           className={`bg-white text-slate-900 rounded-2xl shadow-lg flex items-center justify-center ${
             isDesktop
-              ? "p-8 min-h-[400px] xl:min-h-[500px]"
+              ? "p-4 min-h-[400px] xl:min-h-[500px]"
               : isTablet
-                ? "p-10 min-h-[400px]"
-                : "p-6 min-h-[200px] sm:min-h-[260px]"
+                ? "p-0 min-h-[400px]"
+                : "p-1 sm:p-2 min-h-[200px] sm:min-h-[260px]"
           }`}
         >
-          <div className="w-full">{children}</div>
+          <div className="w-full ">{children}</div>
         </div>
       </div>
 

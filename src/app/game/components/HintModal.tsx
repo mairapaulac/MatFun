@@ -216,7 +216,7 @@ const renderHintContent = (type: string): ReactNode => {
     case 'area_circulo':
     case 'circle':
     case 'circle_from_circumference':
-      return <AreaCirculoHint />;
+      return <AreaCirculoHint /> ;
     case 'area_retangulo':
     case 'rectangle':
       return <AreaRetanguloHint />;

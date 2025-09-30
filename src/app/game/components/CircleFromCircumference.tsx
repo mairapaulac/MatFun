@@ -17,7 +17,7 @@ interface CircleFromCircumferenceProps {
 
 // SVG component for circle with circumference indicator
 const CircleWithCircumferenceSVG: React.FC<{ circumference: number }> = () => (
-  <svg viewBox="0 0 200 120" className="w-full h-32">
+  <svg viewBox="0 0 200 120" className="w-full h-36">
     <circle
       cx="100"
       cy="60"
@@ -31,14 +31,14 @@ const CircleWithCircumferenceSVG: React.FC<{ circumference: number }> = () => (
       d="M 60 60 A 40 40 0 1 1 140 60"
       fill="none"
       stroke="#ef4444"
-      strokeWidth="2"
+      strokeWidth="1"
       strokeDasharray="5,5"
     />
     {/* Arrow pointing to circumference */}
     <path
       d="M 100 20 L 100 10 M 95 15 L 100 10 L 105 15"
       stroke="#ef4444"
-      strokeWidth="2"
+      strokeWidth="1"
       fill="none"
     />
     <text x="100" y="8" textAnchor="middle" className="text-sm font-semibold fill-red-600">
@@ -106,13 +106,7 @@ export default function CircleFromCircumference({
   }
 
   return (
-    <div className="text-center space-y-4 md:space-y-6">
-      {/* Background symbols */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-2">
-        <div className="text-6xl sm:text-8xl md:text-9xl lg:text-9xl text-slate-300">
-          <span>⭕</span>
-        </div>
-      </div>
+    <div className="text-center space-y-4 md:space-y-6">      
 
       {/* Circumference display */}
       <div className="relative">
@@ -121,7 +115,7 @@ export default function CircleFromCircumference({
         </div>
         
         {/* Circle SVG */}
-        <div className="flex items-center justify-center">
+        <div className="flex  items-center justify-center ">
           <CircleWithCircumferenceSVG circumference={problem.circumference} />
         </div>
       </div>
@@ -129,7 +123,7 @@ export default function CircleFromCircumference({
       {/* Area prompt with answer field */}
       <div className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 flex items-center justify-center space-x-2">
         <span>Área =</span>
-        <div className="w-20 h-12 sm:w-24 sm:h-14 md:w-32 md:h-16 lg:w-28 lg:h-14 text-center text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold border-2 border-slate-300 rounded-lg flex items-center justify-center bg-white text-slate-900">
+        <div className="w-20 h-10  sm:w-24 sm:h-14 md:w-32 md:h-16 lg:w-28 lg:h-14 text-center text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold border-2 border-slate-300 rounded-lg flex items-center justify-center bg-white text-slate-900">
           {currentAnswer || ""}
         </div>
         <span>{problem.unit}</span>
