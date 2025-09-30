@@ -24,6 +24,7 @@
 .DS_Store
 *.pem
 *.tmp
+GEMINI.md
 
 # debug
 npm-debug.log*

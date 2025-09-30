@@ -115,10 +115,10 @@ const TriangleSVG: React.FC<{ base: number; height: number }> = ({ base, height 
       strokeDasharray="5,5"
       strokeWidth="3"
     />
-    <text x="100" y="115" textAnchor="middle" className="text-sm font-semibold fill-slate-700">
+    <text x="100" y="115" textAnchor="middle" className="text-[16px] sm:text-sm font-semibold fill-slate-700">
       {base} cm
     </text>
-    <text x="120" y="50" textAnchor="middle" className="text-sm font-semibold fill-slate-700" >
+    <text x="120" y="50" textAnchor="middle" className="text-[16px] sm:text-sm font-semibold fill-slate-700" >
       {height} cm
     </text>
   </svg>
@@ -135,10 +135,10 @@ const RectangleSVG: React.FC<{ width: number; height: number }> = ({ width, heig
       stroke="#374151"
       strokeWidth="3"
     />
-    <text x="100" y="110" textAnchor="middle" className="text-sm font-semibold fill-slate-700">
+    <text x="100" y="110" textAnchor="middle" className="text-[16px] sm:text-sm font-semibold fill-slate-700">
       {width} cm
     </text>
-    <text x="15" y="50" textAnchor="middle" className="text-sm font-semibold fill-slate-700" transform="rotate(-90 10 60)">
+    <text x="15" y="50" textAnchor="middle" className="text-[16px] sm:text-sm font-semibold fill-slate-700" transform="rotate(-90 10 60)">
       {height} cm
     </text>
   </svg>
@@ -152,10 +152,10 @@ const ParallelogramSVG: React.FC<{ base: number; height: number }> = ({ base, he
       stroke="#374151"
       strokeWidth="3"
     />
-    <text x="100" y="115" textAnchor="middle" className="text-sm font-semibold fill-slate-700">
+    <text x="100" y="115" textAnchor="middle" className="text-[16px] sm:text-sm font-semibold fill-slate-700">
       {base} cm
     </text>
-    <text x="10" y="54" textAnchor="middle" className="text-sm font-semibold fill-slate-700" transform="rotate(-90 10 60)">
+    <text x="10" y="54" textAnchor="middle" className="text-[16px] sm:text-sm font-semibold fill-slate-700" transform="rotate(-90 10 60)">
       {height} cm
     </text>
   </svg>
@@ -181,13 +181,13 @@ const TrapezoidSVG: React.FC<{ baseMaior: number; baseMenor: number; height: num
       strokeDasharray="5,5"
       strokeWidth="3"
     />
-    <text x="100" y="115" textAnchor="middle" className="text-sm font-semibold fill-slate-700">
+    <text x="100" y="115" textAnchor="middle" className="text-[16px] sm:text-sm font-semibold fill-slate-700">
       {baseMenor} cm
     </text>
-    <text x="100" y="15" textAnchor="middle" className="text-sm font-semibold fill-slate-700">
+    <text x="100" y="15" textAnchor="middle" className="text-[16px] sm:text-sm font-semibold fill-slate-700">
       {baseMaior} cm
     </text>
-    <text x="80" y="60" textAnchor="middle" className="text-sm font-semibold fill-slate-700" >
+    <text x="80" y="60" textAnchor="middle" className="text-[16px] sm:text-sm font-semibold fill-slate-700" >
       {height} cm
     </text>
   </svg>
@@ -211,10 +211,10 @@ const CircleSVG: React.FC<{ radius: number }> = ({ radius }) => (
       stroke="#374151"
       strokeWidth="2"
     />
-    <text x="100" y="55" className="text-sm font-semibold fill-slate-700">
+    <text x="100" y="55" className="text-[16px] sm:text-sm font-semibold fill-slate-700">
       {radius} cm
     </text>
-    <text x="90" y="115" className="text-sm font-semibold fill-slate-700">
+    <text x="90" y="115" className="text-[16px] sm:text-sm font-semibold fill-slate-700">
       𝝿 = 3
     </text>
   </svg>
@@ -248,7 +248,7 @@ const CircleFromCircumferenceSVG: React.FC<{ circumference: number }> = () => (
       strokeWidth="2"
       fill="none"
     />
-    <text x="100" y="10" textAnchor="middle" className="text-sm font-semibold fill-red-600">
+    <text x="100" y="10" textAnchor="middle" className="text-[16px] sm:text-sm font-semibold fill-red-600">
       C
     </text>
     
