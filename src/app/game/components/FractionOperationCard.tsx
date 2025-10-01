@@ -83,20 +83,6 @@ export default function FractionOperationCard({
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4 sm:p-6">
-      {/* Botão de dica */}
-      <div className="flex justify-end mb-4 sm:mb-6">
-        <Button
-          onClick={() => setIsHintModalOpen(true)}
-          variant="outline"
-          size="sm"
-          className="bg-white/20 border-white/50 text-white hover:bg-white/30 text-sm sm:text-base"
-        >
-          <Lightbulb className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-          Dica
-        </Button>
-      </div>
-
-      
         <div className="flex items-center justify-center space-x-4 sm:space-x-6 md:space-x-8 flex-wrap gap-y-4">
           {/* primeira fracoeo */}
           <FractionDisplay numerator={num1} denominator={den1} />
