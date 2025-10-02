@@ -25,7 +25,7 @@ export default function RankingScreen() {
           <div className="glass-effect rounded-2xl p-4 shadow-xl">
             <div className="flex items-center gap-2 mb-4 text-gray-300">
               <Users className="size-5" />
-              <h2 className="text-xl font-semibold">Ranking da Turma</h2>
+              <h2 className="text-xl font-normal">Ranking da Turma</h2>
             </div>
             <div className="flex flex-col gap-3 h-[450px] overflow-y-auto pr-2 custom-scrollbar">
               {turmaRankingData.map((player) => (
