@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Lightbulb } from "lucide-react";
 import HintModal from "@/app/game/components/HintModal";
 
 interface FractionOperationCardProps {
