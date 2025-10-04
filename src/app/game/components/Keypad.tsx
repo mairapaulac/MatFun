@@ -56,10 +56,10 @@ export default function Keypad({
                   isEmpty
                     ? "invisible"
                     : isBackspace
-                      ? "bg-rose-500 hover:bg-rose-600 active:bg-rose-700 text-white"
+                      ? "bg-rose-500 hover:bg-rose-800 active:bg-rose-700 focus:ring-amber-600 text-white"
                       : isToggleFocus
                         ? "bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white"
-                        : "bg-[#111932]/50 hover:bg-[#111932]/90 active:bg-slate-900 text-white"
+                        : "bg-[#111932] hover:bg-[#52356d] active:bg-slate-900 text-white"
                 }
                 active:scale-95 disabled:active:scale-100
                 shadow-lg hover:shadow-xl
