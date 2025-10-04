@@ -32,11 +32,11 @@ function AreaCirculoHint(): ReactNode {
   return (
     <div className="space-y-4">
       <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">
-        Área da circunferência
+        Área do círculo
       </h3>
       <Image
         src="/circle.svg"
-        alt="Calculo de área da circunferencia"
+        alt="Calculo de área do círculo"
          width={250}
          height={100}
         className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"/>
