@@ -11,23 +11,6 @@ interface HintModalProps {
   questionType: string;
 }
 
-// Placeholder hint components
-function EquationHint(): ReactNode {
-  return (
-    <div className="space-y-4">
-      <h3 className="text-xl font-bold text-gray-800 mb-3">Operações Algébricas</h3>
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <p className="text-lg font-semibold text-gray-700 mb-2">Dicas:</p>
-        <ul className="text-sm text-gray-600 space-y-2">
-          <li>• Multiplicação: a × b = resultado</li>
-          <li>• Se dois números estão vazios, você pode inserir qualquer combinação que resulte no produto</li>
-          <li>• Se um número está preenchido, calcule o outro</li>
-          <li>• Se o resultado está vazio, calcule a multiplicação</li>
-        </ul>
-      </div>
-    </div>
-  );
-}
 
 function AreaTrapezioHint(): ReactNode {
   return (

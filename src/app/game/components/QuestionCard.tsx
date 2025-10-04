@@ -1,7 +1,7 @@
 import type React from "react"
 import { useState } from "react"
 import type { QuestionCardProps } from "@/types/question"
-import { HelpCircle } from "lucide-react"
+import { Lightbulb } from "lucide-react"
 import HintModal from "@/app/game/components/HintModal"
 
 export default function QuestionCard({
@@ -47,18 +47,23 @@ export default function QuestionCard({
       <div className="relative border-slate-400/70 border-8 rounded-3xl shadow-2xl drop-shadow-2xl">
         {/* Help Button */}
         <button
-          className={`absolute -top-2 -right-2 z-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-50 transition-colors ${
-            isDesktop ? "w-12 h-12" : isTablet ? "w-12 h-12" : "w-8 h-8"
-          }`}
-          aria-label="Ajuda"
+          className={`absolute -top-4 -right-4 z-10 rounded-full flex flex-col items-center justify-center transition-all duration-200
+                     focus:outline-none focus:ring-4 focus:ring-amber-500/80
+                     animate-pulse shadow-lg shadow-yellow-500/90
+                     bg-yellow-400 hover:bg-yellow-500 hover:scale-110 hover:animate-none
+                     ${
+                       isDesktop ? "w-14 h-14" : isTablet ? "w-14 h-14" : "w-12 h-12"
+                     }`}
           type="button"
           onClick={() => setIsHintModalOpen(true)}
         >
-          <HelpCircle
-            className={`text-slate-600 ${
-              isDesktop ? "w-7 h-7" : isTablet ? "w-7 h-7" : "w-5 h-5"
-            }`}
+          <Lightbulb
+            className={`text-yellow-900/80
+                       ${
+                         isDesktop ? "w-8 h-8" : isTablet ? "w-8 h-8" : "w-7 h-7"
+                       }`}
           />
+          <span className="text-xs text-rose-400">Dica</span>
         </button>
 
         <div
