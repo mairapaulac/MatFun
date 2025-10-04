@@ -28,8 +28,8 @@ export default function StatCard({ icon: Icon, title, subtitle, iconColor = "#2B
         <Icon className="w-8 h-8 sm:w-10 sm:h-10" style={{ color: iconColor }} />
       </div>
       <div className="flex-1">
-        <h3 className="text-2xl sm:text-3xl font-bold text-[#1D2D58]">{title}</h3>
-        <p className="text-sm sm:text-base text-[#2B3A67] font-semibold mt-1">{subtitle}</p>
+        <h3 className="text-2xl sm:text-3xl font-normal text-[#1D2D58]">{title}</h3>
+        <p className="text-sm sm:text-base text-[#2B3A67] font-normal mt-1">{subtitle}</p>
       </div>
     </Card>
   )

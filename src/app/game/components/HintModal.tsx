@@ -15,20 +15,15 @@ interface HintModalProps {
 function AreaTrapezioHint(): ReactNode {
   return (
     <div className="space-y-4">
-      <h3 className="text-xl font-bold text-gray-800 mb-3">Área do Trapézio</h3>
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <p className="text-lg font-semibold text-gray-700 mb-2">Fórmula:</p>
-        <div className="text-center bg-white p-3 rounded border-2 border-gray-300">
-          <span className="text-2xl font-bold text-blue-600">
-            A = (B + b) × h ÷ 2
-          </span>
-        </div>
-      </div>
-      <div className="text-sm text-gray-600 space-y-1">
-        <p><strong>B</strong> = base maior</p>
-        <p><strong>b</strong> = base menor</p>
-        <p><strong>h</strong> = altura</p>
-      </div>
+      <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">
+        Área do trapézio
+      </h3>
+      <Image
+        src="/trapezoid.svg"
+        alt="Calculo de área do trapezio"
+         width={250}
+         height={150}
+        className="mx-auto max-w-[90%] md:max-w-[80%] h-auto"/>
     </div>
   );
 }
@@ -36,20 +31,15 @@ function AreaTrapezioHint(): ReactNode {
 function AreaCirculoHint(): ReactNode {
   return (
     <div className="space-y-4">
-      <h3 className="text-xl font-bold text-gray-800 mb-3">Área do Círculo</h3>
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <p className="text-lg font-semibold text-gray-700 mb-2">Fórmula:</p>
-        <div className="text-center bg-white p-3 rounded border-2 border-gray-300">
-          <span className="text-2xl font-bold text-blue-600">
-            A = π × r²
-          </span>
-        </div>
-      </div>
-      <div className="text-sm text-gray-600 space-y-1">
-        <p><strong>π</strong> ≈ 3 (pi)</p>
-        <p><strong>r</strong> = raio do círculo</p>
-        <p><strong>r²</strong> = raio ao quadrado</p>
-      </div>
+      <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">
+        Área da circunferência
+      </h3>
+      <Image
+        src="/circle.svg"
+        alt="Calculo de área da circunferencia"
+         width={250}
+         height={100}
+        className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"/>
     </div>
   );
 }
@@ -77,20 +67,15 @@ function AreaRetanguloHint(): ReactNode {
 function AreaTrianguloHint(): ReactNode {
   return (
     <div className="space-y-4">
-      <h3 className="text-xl font-bold text-gray-800 mb-3">Área do Triângulo</h3>
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <p className="text-lg font-semibold text-gray-700 mb-2">Fórmula:</p>
-        <div className="text-center bg-white p-3 rounded border-2 border-gray-300">
-          <span className="text-2xl font-bold text-blue-600">
-            A = (b × h) ÷ 2
-          </span>
-        </div>
-      </div>
-      <div className="text-sm text-gray-600 space-y-1">
-        <p><strong>b</strong> = base</p>
-        <p><strong>h</strong> = altura</p>
-        <p><strong>÷ 2</strong> = dividir por 2</p>
-      </div>
+      <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">
+        Área do Triângulo
+      </h3>
+      <Image
+        src="/triangle.svg"
+        alt="Calculo de área do triângulo"
+         width={250}
+         height={100}
+        className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"/>
     </div>
   );
 }
@@ -98,19 +83,15 @@ function AreaTrianguloHint(): ReactNode {
 function AreaParalelogramoHint(): ReactNode {
   return (
     <div className="space-y-4">
-      <h3 className="text-xl font-bold text-gray-800 mb-3">Área do Paralelogramo</h3>
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <p className="text-lg font-semibold text-gray-700 mb-2">Fórmula:</p>
-        <div className="text-center bg-white p-3 rounded border-2 border-gray-300">
-          <span className="text-2xl font-bold text-blue-600">
-            A = b × h
-          </span>
-        </div>
-      </div>
-      <div className="text-sm text-gray-600 space-y-1">
-        <p><strong>b</strong> = base</p>
-        <p><strong>h</strong> = altura (perpendicular à base)</p>
-      </div>
+      <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">
+        Área do Paralelogramo
+      </h3>
+      <Image
+        src="/paralelogram.svg"
+        alt="Calculo de área do paralelogramo"
+         width={250}
+         height={100}
+        className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"/>
     </div>
   );
 }
@@ -279,7 +260,7 @@ export default function HintModal({ isOpen, onClose, questionType }: HintModalPr
         </div>
         
         {/* White Canvas - Content Area */}
-        <div className="bg-white rounded-3xl p-6 mt-4 border-[#6D93FF] border-4">
+        <div className="bg-white rounded-3xl p-6 mt-1 border-[#6D93FF] border-4">
           {renderHintContent(questionType)}
         </div>
       </DialogContent>

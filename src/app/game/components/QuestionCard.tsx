@@ -16,7 +16,7 @@ export default function QuestionCard({
   return (
     <div
       className={`w-full mx-auto  ${
-        isDesktop ? "max-w-2xl" : isTablet ? "max-w-2xl" : "max-w-md"
+        isDesktop ? "max-w-2xl" : isTablet ? "max-w-3xl" : "max-w-md"
       }`}
     >
       <div className="text-center space-y-2">
