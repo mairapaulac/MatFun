@@ -24,7 +24,7 @@ export default function FractionOperationCard({
   activeInput,
   onActiveInputChange
 }: FractionOperationCardProps) {
-  const [isHintModalOpen, setIsHintModalOpen] = useState(false);
+
 
 
   //   componente p renderizar uma fraçao
@@ -100,11 +100,7 @@ export default function FractionOperationCard({
 
       
 
-      <HintModal
-        isOpen={isHintModalOpen}
-        onClose={() => setIsHintModalOpen(false)}
-        questionType="fraction_operation"
-      />
+
     </div>
   );
 }

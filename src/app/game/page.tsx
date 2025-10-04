@@ -8,7 +8,6 @@ import {
 import FeedbackModal from "@/app/game/components/FeedbackModal";
 import {
   generateRandomProblem,
-  type GeneratedProblem,
 } from "@/app/game/components/EquationSkeleton";
 import {
   generateRandomGeometryProblem,
@@ -108,7 +107,7 @@ export default function QuestionPage() {
 
   // funcao master para lidar com input do keypad
   const handleKeypadPress = (key: string) => {
-    if (currentQuestion?.type === "fraction") {
+    if (currentQuestion?.type === "fraction" ) {
       if (key === "⌫") {
         const target = fractionActiveInput === 'numerator' ? 'numerator' : 'denominator';
         setFractionAnswer(prev => ({ 

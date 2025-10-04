@@ -3,7 +3,8 @@
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Lightbulb } from "lucide-react";
 import { ReactNode } from "react";
-
+import Image from "next/image";
+import { Carousel, CarouselContent,CarouselItem,CarouselNext,CarouselPrevious } from "@/components/ui/carousel";
 interface HintModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -172,34 +173,59 @@ function MultiplicacaoAlgebricaHint(): ReactNode {
 function FractionOperationHint(): ReactNode {
   return (
     <div className="space-y-4">
-      <h3 className="text-xl font-bold text-gray-800 mb-3">Operações com Frações</h3>
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <p className="text-lg font-semibold text-gray-700 mb-2">Fórmulas:</p>
-        <div className="space-y-3">
-          <div className="bg-white p-3 rounded border-2 border-gray-300">
-            <p className="text-sm font-semibold text-blue-600 mb-1">Soma:</p>
-            <span className="text-lg font-bold text-gray-800">
-              a/b + c/d = (a×d + c×b) / (b×d)
-            </span>
-          </div>
-          <div className="bg-white p-3 rounded border-2 border-gray-300">
-            <p className="text-sm font-semibold text-green-600 mb-1">Subtração:</p>
-            <span className="text-lg font-bold text-gray-800">
-              a/b - c/d = (a×d - c×b) / (b×d)
-            </span>
-          </div>
-          <div className="bg-white p-3 rounded border-2 border-gray-300">
-            <p className="text-sm font-semibold text-purple-600 mb-1">Multiplicação:</p>
-            <span className="text-lg font-bold text-gray-800">
-              a/b × c/d = (a×c) / (b×d)
-            </span>
-          </div>
-        </div>
-      </div>
-      <div className="text-sm text-gray-600 space-y-2">
-        <p><strong>Dica:</strong> Use o botão &quot;Alternar Foco&quot; para mudar entre numerador e denominador</p>
-        <p><strong>Importante:</strong> Sua resposta não precisa estar simplificada!</p>
-      </div>
+      <h3 className="text-lg font-normal text-gray-800 mb-1 text-center">
+        Operações com Frações (Soma)
+      </h3>
+      <Carousel className="w-full max-w-xs md:max-w-md mx-auto">
+        <CarouselContent>
+          <CarouselItem>
+            <div className="p-1 text-center">
+              <Image
+                src="/frac1.svg"
+                alt="Soma de frações com mesmo denominador"
+                width={200}
+                height={100}
+                className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"
+              />
+            </div>
+          </CarouselItem>
+          <CarouselItem>
+            <div className="p-1 text-center">
+              <Image
+                src="/frac2.svg"
+                alt="Soma de frações com denominador diferente"
+                width={250}
+                height={100}
+                className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"
+              />
+            </div>
+          </CarouselItem>
+          <CarouselItem>
+            <div className="p-1 text-center">
+              <Image
+                src="/frac3.svg"
+                alt="Soma de frações com denominador diferente"
+                width={250}
+                height={100}
+                className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"
+              />
+            </div>
+          </CarouselItem>
+          <CarouselItem>
+            <div className="p-1 text-center">
+              <Image
+                src="/frac4.svg"
+                alt="Soma de frações com denominador diferente"
+                width={250}
+                height={100}
+                className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"
+              />
+            </div>
+          </CarouselItem>
+        </CarouselContent>
+        <CarouselPrevious className="absolute -left-8 top-1/2 -translate-y-1/2" />
+        <CarouselNext className="absolute -right-8 top-1/2 -translate-y-1/2" />
+      </Carousel>
     </div>
   );
 }
