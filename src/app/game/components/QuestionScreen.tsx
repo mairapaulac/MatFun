@@ -30,7 +30,7 @@ export default function QuestionScreen({
   const timeoutHandledRef = useRef(false)
 
   // verificando se a resposta esta vazia em questoes de fraçao
-  const isAnswerEmpty = questionType === 'fraction_operation'
+  const isAnswerEmpty = questionType.startsWith('fraction_operation')
     ? fractionAnswer.numerator.trim() === '' || fractionAnswer.denominator.trim() === ''
     : currentAnswer.trim() === '';
 
@@ -86,7 +86,7 @@ export default function QuestionScreen({
           <Keypad 
             onKeyPress={onKeypadPress || (() => {})}
             disabled={isDisabled}
-            showToggleFocus={questionType === "fraction_operation"}
+            showToggleFocus={questionType.startsWith("fraction_operation")}
           />
         </div>
 
@@ -128,7 +128,7 @@ export default function QuestionScreen({
             <Keypad 
               onKeyPress={onKeypadPress || (() => {})}
               disabled={isDisabled}
-              showToggleFocus={questionType === "fraction_operation"}
+              showToggleFocus={questionType.startsWith("fraction_operation")}
             />
           </div>
 
@@ -178,7 +178,7 @@ export default function QuestionScreen({
               onKeyPress={onKeypadPress || (() => {})}
               disabled={isDisabled} 
               isDesktop={true}
-              showToggleFocus={questionType === "fraction_operation"}
+              showToggleFocus={questionType.startsWith("fraction_operation")}
             />
           </div>
 

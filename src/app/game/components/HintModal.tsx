@@ -229,6 +229,21 @@ function FractionOperationHint(): ReactNode {
     </div>
   );
 }
+function FractionMultiplicationHint(): ReactNode {
+  return (
+    <div className="space-y-4">
+      <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">
+        Operações com Frações (Multiplicação)
+      </h3>
+      <Image
+        src="/mult.svg"
+        alt="Soma de frações com denominador diferente"
+         width={250}
+         height={100}
+        className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"/>
+    </div>
+  );
+}
 
 // Function to render hint content based on question type
 const renderHintContent = (type: string): ReactNode => {
@@ -255,8 +270,10 @@ const renderHintContent = (type: string): ReactNode => {
     case 'perimetro_circulo':
     case 'circle_perimeter':
       return <PerimetroCirculoHint />;
-    case 'fraction_operation':
+    case 'fraction_operation_addition':
       return <FractionOperationHint />;
+    case 'fraction_operation_multiplication':
+      return <FractionMultiplicationHint />;
     default:
       return (
         <div className="text-center py-8">

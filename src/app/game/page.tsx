@@ -340,8 +340,13 @@ export default function QuestionPage() {
         default:
           return "geometry";
       }
-    } else if (currentQuestion.type === "fraction") {
-      return "fraction_operation";
+    } else if (
+      currentQuestion.type === "fraction" &&
+      currentQuestion.fractionProblem
+    ) {
+      return currentQuestion.fractionProblem.operator === '+'
+        ? 'fraction_operation_addition'
+        : 'fraction_operation_multiplication';
     }
     return "default";
   };
