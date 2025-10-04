@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import HintModal from "@/app/game/components/HintModal";
 
 interface FractionOperationCardProps {
   num1: number;

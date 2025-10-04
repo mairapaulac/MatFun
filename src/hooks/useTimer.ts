@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { TimerState, TimerActions, Multiplier, SubmitMetadata } from '@/types/question';
+import { TimerState, TimerActions, Multiplier } from '@/types/question';
 
 export function useTimer(totalMs = 60000, running = true, resetTrigger = 0, onTimeout?: () => void): TimerState & TimerActions {
   const [elapsed, setElapsed] = useState(0);

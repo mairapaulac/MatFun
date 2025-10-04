@@ -23,7 +23,7 @@ export default function RankingScreen() {
 
         <TabsContent value="turma" className="mt-0 max-w-[800px]">
           {/* cor do bg dos cards */}
-          <div className="bg-blue-700 rounded-2xl p-4 shadow-xl">
+          <div className="glass-effect rounded-2xl p-4 shadow-xl">
             <div className="flex items-center gap-2 mb-4 text-gray-300">
               <Users className="size-5" />
               <h2 className="text-xl font-normal">Ranking da Turma</h2>
