@@ -402,7 +402,7 @@ export default function QuestionPage() {
         questionType={getQuestionType()}
         currentAnswer={currentAnswer}
         onAnswerChange={handleAnswerChange}
-        totalMs={6220000}
+        totalMs={60000}
         onSubmit={handleSubmit}
         onTimeout={handleTimeout}
         onKeypadPress={handleKeypadPress}

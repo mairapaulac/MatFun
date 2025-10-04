@@ -23,7 +23,7 @@ function AreaTrapezioHint(): ReactNode {
         alt="Calculo de área do trapezio"
          width={250}
          height={150}
-        className="mx-auto max-w-[90%] md:max-w-[80%] h-auto"/>
+        className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"/>
     </div>
   );
 }
