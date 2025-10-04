@@ -13,7 +13,7 @@ const dialogVariants = cva(
     variants: {
       variant: {
         default: "bg-background p-6 rounded-lg",
-        hint: "bg-[#24366B] border-[#111F48]/70 border-[5px] p-8 pb-6 rounded-[38px]",
+        hint: "bg-[#24366B] border-[#111F48]/70 border-[3px] p-4 md:p-8 pb-6 rounded-[38px]",
       },
     },
     defaultVariants: {

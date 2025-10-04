@@ -8,7 +8,6 @@ import {
 import FeedbackModal from "@/app/game/components/FeedbackModal";
 import {
   generateRandomProblem,
-  type GeneratedProblem,
 } from "@/app/game/components/EquationSkeleton";
 import {
   generateRandomGeometryProblem,
@@ -108,7 +107,7 @@ export default function QuestionPage() {
 
   // funcao master para lidar com input do keypad
   const handleKeypadPress = (key: string) => {
-    if (currentQuestion?.type === "fraction") {
+    if (currentQuestion?.type === "fraction" ) {
       if (key === "⌫") {
         const target = fractionActiveInput === 'numerator' ? 'numerator' : 'denominator';
         setFractionAnswer(prev => ({ 
@@ -341,8 +340,13 @@ export default function QuestionPage() {
         default:
           return "geometry";
       }
-    } else if (currentQuestion.type === "fraction") {
-      return "fraction_operation";
+    } else if (
+      currentQuestion.type === "fraction" &&
+      currentQuestion.fractionProblem
+    ) {
+      return currentQuestion.fractionProblem.operator === '+'
+        ? 'fraction_operation_addition'
+        : 'fraction_operation_multiplication';
     }
     return "default";
   };
