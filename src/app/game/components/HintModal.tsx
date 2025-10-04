@@ -23,7 +23,7 @@ function AreaTrapezioHint(): ReactNode {
         alt="Calculo de área do trapezio"
          width={250}
          height={150}
-        className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"/>
+        className="mx-auto w-full h-auto"/>
     </div>
   );
 }
@@ -39,7 +39,7 @@ function AreaCirculoHint(): ReactNode {
         alt="Calculo de área do círculo"
          width={250}
          height={100}
-        className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"/>
+        className="mx-auto w-full h-auto"/>
     </div>
   );
 }
@@ -47,19 +47,15 @@ function AreaCirculoHint(): ReactNode {
 function AreaRetanguloHint(): ReactNode {
   return (
     <div className="space-y-4">
-      <h3 className="text-xl font-bold text-gray-800 mb-3">Área do Retângulo</h3>
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <p className="text-lg font-semibold text-gray-700 mb-2">Fórmula:</p>
-        <div className="text-center bg-white p-3 rounded border-2 border-gray-300">
-          <span className="text-2xl font-bold text-blue-600">
-            A = b × h
-          </span>
-        </div>
-      </div>
-      <div className="text-sm text-gray-600 space-y-1">
-        <p><strong>b</strong> = base (largura)</p>
-        <p><strong>h</strong> = altura</p>
-      </div>
+      <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">
+        Área do Retângulo
+      </h3>
+      <Image
+        src="/rect.svg"
+        alt="Calculo de área do retângulo"
+         width={250}
+         height={100}
+        className="mx-auto w-full h-auto"/>
     </div>
   );
 }
@@ -75,7 +71,7 @@ function AreaTrianguloHint(): ReactNode {
         alt="Calculo de área do triângulo"
          width={250}
          height={100}
-        className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"/>
+        className="mx-auto w-full h-auto"/>
     </div>
   );
 }
@@ -91,7 +87,7 @@ function AreaParalelogramoHint(): ReactNode {
         alt="Calculo de área do paralelogramo"
          width={250}
          height={100}
-        className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"/>
+        className="mx-auto w-full h-auto"/>
     </div>
   );
 }
@@ -149,7 +145,7 @@ function FractionOperationHint(): ReactNode {
                 alt="Soma de frações com mesmo denominador"
                 width={200}
                 height={100}
-                className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"
+                className="mx-auto w-full h-auto"
               />
             </div>
           </CarouselItem>
@@ -160,18 +156,18 @@ function FractionOperationHint(): ReactNode {
                 alt="Soma de frações com denominador diferente"
                 width={250}
                 height={100}
-                className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"
+                className="mx-auto w-full h-auto"
               />
             </div>
           </CarouselItem>
           <CarouselItem>
-            <div className="p-1 text-center">
+            <div className="pt-5 text-center">
               <Image
                 src="/frac3.svg"
                 alt="Soma de frações com denominador diferente"
                 width={250}
                 height={100}
-                className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"
+                className="mx-auto w-full h-auto"
               />
             </div>
           </CarouselItem>
@@ -182,7 +178,7 @@ function FractionOperationHint(): ReactNode {
                 alt="Soma de frações com denominador diferente"
                 width={250}
                 height={100}
-                className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"
+                className="mx-auto w-full h-auto"
               />
             </div>
           </CarouselItem>
@@ -204,7 +200,7 @@ function FractionMultiplicationHint(): ReactNode {
         alt="Soma de frações com denominador diferente"
          width={250}
          height={100}
-        className="mx-auto max-w-[80%] md:max-w-[70%] h-auto"/>
+        className="mx-auto w-full h-auto"/>
     </div>
   );
 }

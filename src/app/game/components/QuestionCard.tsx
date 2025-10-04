@@ -50,7 +50,7 @@ export default function QuestionCard({
           className={`absolute -top-4 -right-4 z-10 rounded-full flex flex-col items-center justify-center transition-all duration-200
                      focus:outline-none focus:ring-4 focus:ring-amber-500/80
                      animate-pulse shadow-lg shadow-yellow-500/90
-                     bg-yellow-400 hover:bg-yellow-500 hover:scale-110 hover:animate-none
+                     bg-yellow-400 hover:bg-yellow-500 hover:scale-110 hover:animate-none border-4 border-amber-500 border-
                      ${
                        isDesktop ? "w-14 h-14" : isTablet ? "w-14 h-14" : "w-12 h-12"
                      }`}
