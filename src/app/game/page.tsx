@@ -6,6 +6,7 @@ import {
   ExampleGeometryAreaSkeleton,
 } from "@/app/game/components";
 import FeedbackModal from "@/app/game/components/FeedbackModal";
+import PercentageSkeleton from "@/app/game/components/PercentageSkeleton";
 import {
   generateRandomProblem,
 } from "@/app/game/components/EquationSkeleton";
@@ -13,6 +14,9 @@ import {
   generateRandomGeometryProblem,
   type GeneratedGeometryProblem,
 } from "@/app/game/components/GeometryAreaSkeleton";
+import {
+  generatePercentageProblem,
+} from "@/lib/percentageProblemGenerator";
 import {
   useQuestionRotation,
   type QuestionData,
@@ -46,12 +50,14 @@ export default function QuestionPage() {
     // If no modules selected or "geral" is selected, use all question types
     if (selectedModules.length === 0 || selectedModules.includes("geral")) {
       const random = Math.random();
-      if (random < 0.33) {
+      if (random < 0.25) {
         return { type: "equation", equationProblem: generateRandomProblem() };
-      } else if (random < 0.66) {
+      } else if (random < 0.5) {
         return { type: "geometry", geometryProblem: generateRandomGeometryProblem() };
-      } else {
+      } else if (random < 0.75) {
         return { type: "fraction", fractionProblem: generateFractionQuestion() };
+      } else {
+        return { type: "percentage", percentageProblem: generatePercentageProblem() };
       }
     }
 
@@ -70,15 +76,21 @@ export default function QuestionPage() {
       availableTypes.push("fraction");
     }
 
+    if (selectedModules.includes("percentage")) {
+      availableTypes.push("percentage");
+    }
+
     // If no valid modules selected, default to all
     if (availableTypes.length === 0) {
       const random = Math.random();
-      if (random < 0.33) {
+      if (random < 0.25) {
         return { type: "equation", equationProblem: generateRandomProblem() };
-      } else if (random < 0.66) {
+      } else if (random < 0.5) {
         return { type: "geometry", geometryProblem: generateRandomGeometryProblem() };
-      } else {
+      } else if (random < 0.75) {
         return { type: "fraction", fractionProblem: generateFractionQuestion() };
+      } else {
+        return { type: "percentage", percentageProblem: generatePercentageProblem() };
       }
     }
 
@@ -93,8 +105,10 @@ export default function QuestionPage() {
         type: "geometry",
         geometryProblem: generateRandomGeometryProblem(),
       };
-    } else {
+    } else if (selectedType === "fraction") {
       return { type: "fraction", fractionProblem: generateFractionQuestion() };
+    } else {
+      return { type: "percentage", percentageProblem: generatePercentageProblem() };
     }
   };
 
@@ -267,6 +281,17 @@ export default function QuestionPage() {
         numerator,
         denominator
       );
+    } else if (
+      currentQuestion.type === "percentage" &&
+      currentQuestion.percentageProblem
+    ) {
+      const { problemType, result, base, percentage } = currentQuestion.percentageProblem;
+      if (problemType === 'calculate_percentage') {
+        return num === percentage;
+      } else if (problemType === 'calculate_base') {
+        return num === base;
+      }
+      return num === result;
     }
 
     return false;
@@ -312,6 +337,8 @@ export default function QuestionPage() {
       return "Operações Algébricas";
     } else if (currentQuestion.type === "geometry") {
       return "Geometria - Áreas";
+    } else if (currentQuestion.type === "percentage") {
+      return "Porcentagem";
     } else {
       return "Operações com Frações";
     }
@@ -347,6 +374,11 @@ export default function QuestionPage() {
       return currentQuestion.fractionProblem.operator === '+'
         ? 'fraction_operation_addition'
         : 'fraction_operation_multiplication';
+    } else if (
+      currentQuestion.type === "percentage" &&
+      currentQuestion.percentageProblem
+    ) {
+      return currentQuestion.percentageProblem.problemType;
     }
     return "default";
   };
@@ -386,6 +418,16 @@ export default function QuestionPage() {
           currentAnswer={fractionAnswer}
           activeInput={fractionActiveInput}
           onActiveInputChange={setFractionActiveInput}
+        />
+      );
+    } else if (
+      currentQuestion.type === "percentage" &&
+      currentQuestion.percentageProblem
+    ) {
+      return (
+        <PercentageSkeleton
+          externalAnswer={currentAnswer}
+          problem={currentQuestion.percentageProblem}
         />
       );
     }

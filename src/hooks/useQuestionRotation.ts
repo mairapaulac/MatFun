@@ -7,15 +7,20 @@ import {
   generateRandomGeometryProblem,
   type GeneratedGeometryProblem,
 } from "@/app/game/components/GeometryAreaSkeleton";
-import { type FractionQuestion } from "@/lib/fractionUtils";
+import {
+  generatePercentageProblem,
+  type GeneratedPercentageProblem,
+} from "@/lib/percentageProblemGenerator";
+import { type FractionQuestion, generateFractionQuestion } from "@/lib/fractionUtils";
 
-export type QuestionType = "equation" | "geometry" | "fraction";
+export type QuestionType = "equation" | "geometry" | "fraction" | "percentage";
 
 export interface QuestionData {
   type: QuestionType;
   equationProblem?: GeneratedProblem;
   geometryProblem?: GeneratedGeometryProblem;
   fractionProblem?: FractionQuestion;
+  percentageProblem?: GeneratedPercentageProblem;
 }
 
 export function useQuestionRotation(
@@ -27,29 +32,36 @@ export function useQuestionRotation(
   const [questionNumber, setQuestionNumber] = useState(1);
 
   const generateNewQuestion = (): QuestionData => {
-    // Use custom generator if provided, otherwise use default logic
     if (customQuestionGenerator) {
       return customQuestionGenerator();
     }
 
-    // Default logic: Alternar entre tipos de questão (50% cada)
-    const questionType: QuestionType =
-      Math.random() < 0.5 ? "equation" : "geometry";
+    const questionTypes: QuestionType[] = ["equation", "geometry", "percentage", "fraction"];
+    const questionType = questionTypes[Math.floor(Math.random() * questionTypes.length)];
 
     if (questionType === "equation") {
       return {
         type: "equation",
         equationProblem: generateRandomProblem(),
       };
-    } else {
+    } else if (questionType === "geometry") {
       return {
         type: "geometry",
         geometryProblem: generateRandomGeometryProblem(),
       };
+    } else if (questionType === "percentage") {
+      return {
+        type: "percentage",
+        percentageProblem: generatePercentageProblem(),
+      };
+    } else {
+      return {
+        type: "fraction",
+        fractionProblem: generateFractionQuestion(),
+      };
     }
   };
 
-  // Initialize first question after component mounts
   useEffect(() => {
     if (!currentQuestion) {
       setCurrentQuestion(generateNewQuestion());

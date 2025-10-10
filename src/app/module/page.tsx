@@ -12,6 +12,7 @@ import {
   Calculator,
   Square,
   Divide,
+  Percent,
 } from "lucide-react";
 
 interface Module {
@@ -51,6 +52,13 @@ const modules: Module[] = [
     subtitle: "Soma, subtração e multiplicação de frações",
     icon: Divide,
     iconColor: "#F59E0B", 
+  },
+  {
+    id: "percentage",
+    title: "Porcentagem",
+    subtitle: "Cálculos de porcentagem e variações",
+    icon: Percent,
+    iconColor: "#EF4444",
   },
 ];
 
