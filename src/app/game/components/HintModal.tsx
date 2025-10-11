@@ -249,7 +249,7 @@ export default function HintModal({ isOpen, onClose, questionType }: HintModalPr
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogTitle className="hidden"></DialogTitle>
-      <DialogContent variant="hint" className="max-w-lg">
+      <DialogContent variant="hint" className="max-w-md sm:max-w-lg md:max-w-2xl">
         {/* Top Icon - Lightbulb sitting on the edge */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-yellow-400 p-3 rounded-full border-4 border-[#3A55A3]">
           <Lightbulb className="size-10 text-white" />

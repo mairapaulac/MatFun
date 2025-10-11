@@ -14,7 +14,9 @@ export default function StatCard({ icon: Icon, title, subtitle, iconColor = "#2B
   return (
     <Card
       className={cn(
-        "flex items-center gap-3 sm:gap-4 p-4 sm:p-5 bg-gradient-to-br from-white to-gray-50 shadow-xl active:scale-95 transition-all duration-200",
+        "flex items-center gap-3 sm:gap-4 p-4 sm:p-5",
+        "bg-gradient-to-br from-white via-gray-50 to-white",
+        "shadow-xl active:scale-95 transition-all duration-200",
         className,
       )}
     >

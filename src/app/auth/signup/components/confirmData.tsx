@@ -25,7 +25,7 @@ export function ConfirmData({ open, onOpenChange, data }: confirmDataProps) {
         <div className="flex w-full justify-between gap-10">
           <Button
             variant="secondary"
-            className="bg-[#182a5c] flex-1 text-white border-white cursor-pointer"
+            className="bg-[#182a5c] flex-1 text-white border-white cursor-pointer active:scale-95 transition-all duration-200"
             onClick={() => onOpenChange(false)}
           >
             Editar
@@ -35,7 +35,7 @@ export function ConfirmData({ open, onOpenChange, data }: confirmDataProps) {
               router.push("/home")
             }}
             type="submit"
-            className="flex-1 cursor-pointer"
+            className="flex-1 cursor-pointer active:scale-95 transition-all duration-200"
           >
             Cadastrar
           </Button>
