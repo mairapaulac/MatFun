@@ -73,7 +73,7 @@ export default function SignInForm() {
             </FormItem>
           )}
         />
-        <div className="flex justify-between text-xs mt-1.5">
+        <div className="flex justify-between text-xs mt-1.5 items-center">
           <div className="flex items-center space-x-2">
             <Checkbox id="remember-me" />
             <label
@@ -83,6 +83,12 @@ export default function SignInForm() {
               Lembrar de mim
             </label>
           </div>
+          <Link
+            href={"#"}
+            className="text-xs sm:text-sm md:text-base lg:text-sm text-white hover:underline"
+          >
+            Esqueceu sua senha?
+          </Link>
         </div>
         <div className="pt-6 sm:pt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
           <Button
@@ -100,7 +106,7 @@ export default function SignInForm() {
               router.push("/auth/signup")
             }}
             type="submit"
-            className="w-full sm:w-[40%] cursor-pointer order-2 h-10 sm:h-12 md:h-14 lg:h-10 text-sm sm:text-base md:text-lg lg:text-base"
+            className="active:scale-95 transition-all duration-200 w-full sm:w-[40%] cursor-pointer order-2 h-10 sm:h-12 md:h-14 lg:h-10 text-sm sm:text-base md:text-lg lg:text-base"
             variant={"secondary"}
           >
             Cadastro

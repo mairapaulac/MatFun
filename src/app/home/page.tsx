@@ -23,23 +23,21 @@ export default function HomePage() {
         <div className="mb-8 flex items-center w-full animate-slide-in-up">
           <Button
             onClick={() => router.push("/ranking")}
-            className="w-full h-[50px] max-w-[420px] mx-auto rounded-4xl cursor-pointer"
+            className="w-full h-[50px] max-w-[420px] mx-auto rounded-4xl cursor-pointer gap-3 active:scale-95 transition-all duration-200"
           >
-            <Trophy className="h-8 w-8"></Trophy>
+            <Trophy className="size-8" />
             <span className="text-3xl">Ranking</span>
           </Button>
         </div>
 
         <div className="mb-8 space-y-5 flex-1" style={{ animationDelay: "0.3s" }}>
-          <Card
-            className="w-full h-auto min-h-[110px] flex items-center gap-2 p-2 sm:p-6 animate-slide-in-up"
-          >
+          <Card className="w-full h-auto min-h-[110px] flex items-center gap-2 p-2 sm:p-6 animate-slide-in-up active:scale-95 transition-all duration-200">
             <div className="flex-shrink-0 bg-gradient-to-br from-[#314991] to-[#24366b] p-3 rounded-xl">
               <Sword className="w-8 h-8 text-white" />
             </div>
             <div className="flex-1">
-              <h3 className="text-2xl md:text-3xl font-normal mb-2 text-[#2B3A67]">
-                Guerreiro da Matemática
+              <h3 className="text-2xl md:text-3xl font-normal mb-2 text-[#2B3A67] ">
+                Guerreiro Matemático
               </h3>
               <div className="flex items-center gap-3 mb-2">
                 <div className="flex-1 bg-gray-200 rounded-full h-3 overflow-hidden">
@@ -85,10 +83,7 @@ export default function HomePage() {
             </div>
           </Card>
 
-          <Card
-            className="w-full h-auto min-h-[110px] flex items-center gap-4 p-2 sm:p-6 animate-slide-in-up"
-            
-          >
+          <Card className="w-full h-auto min-h-[110px] flex items-center gap-4 p-2 sm:p-6 animate-slide-in-up active:scale-95 transition-all duration-200">
             <div className="flex-shrink-0 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] p-3 rounded-xl">
               <Calculator className="w-8 h-8 text-white" />
             </div>
@@ -137,9 +132,9 @@ export default function HomePage() {
         >
           <Button
             onClick={() => router.push("/module")} // Redirect to module selection
-            className="w-full max-w-[690px] h-[50px] sm:h-[70px] md:h-[70px] rounded-full cursor-pointer "
+            className="active:scale-95 transition-all duration-200 w-full max-w-[690px] h-[50px] sm:h-[70px] md:h-[70px] rounded-full cursor-pointer gap-3"
           >
-             <Gamepad2></Gamepad2>
+            <Gamepad2 className="size-8" />
             <span className="text-3xl">Jogar</span>
           </Button>
         </div>

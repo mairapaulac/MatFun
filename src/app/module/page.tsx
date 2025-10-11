@@ -113,7 +113,7 @@ export default function ModulePage() {
     <div className="flex flex-col w-full min-h-screen bg-[#24366b] bg-pattern overflow-x-hidden overflow-y-hidden">
       <ModuleNavbar />
 
-      <main className="flex-1 px-4 py-6 max-w-[780px] mx-auto w-full flex flex-col  overflow-x-hidden overflow-y-hidden">
+      <main className="flex-1 px-4 py-6 xl:py-2 max-w-[780px] mx-auto w-full flex flex-col  overflow-x-hidden overflow-y-hidden">
         <div className="mb-6 text-center">
           <h1 className="text-3xl sm:text-4xl font-normal text-white mb-2">
             Selecionar Módulos
@@ -142,9 +142,9 @@ export default function ModulePage() {
           <Button
             onClick={handleStartGame}
             disabled={selectedModules.length === 0}
-            className="w-full max-w-[690px] h-[50px] sm:h-[70px] md:h-[70px] rounded-full cursor-pointer"
+            className="w-full max-w-[690px] h-[50px] sm:h-[70px] md:h-[70px] rounded-full cursor-pointer active:scale-95 transition-all duration-200"
           >
-            <Gamepad2 className="w-6 h-6 sm:w-8 sm:h-8" />
+            <Gamepad2 className="w-6 h-6 sm:w-8 sm:h-8 size-8" />
             <span className="text-xl sm:text-3xl">Iniciar Jogo</span>
           </Button>
         </div>
