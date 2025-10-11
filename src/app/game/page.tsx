@@ -24,6 +24,7 @@ import {
 import { useModuleStore } from "@/stores/moduleStore";
 import { useState, useMemo, useRef } from "react";
 import FractionOperationCard from "@/app/game/components/FractionOperationCard";
+import ExitConfirmationDialog from "./components/ExitConfirmationDialog";
 import { generateFractionQuestion, validateFractionAnswer } from "@/lib/fractionUtils";
 import { type FractionQuestion } from "@/types/types";
 
@@ -435,7 +436,10 @@ export default function QuestionPage() {
   };
 
   return (
-    <>
+    <div className="relative min-h-screen bg-background bg-pattern">
+      <div className="absolute top-4 left-4 z-10">
+        <ExitConfirmationDialog />
+      </div>
       <QuestionScreen
         score={score}
         questionNumber={questionNumber}
@@ -459,6 +463,6 @@ export default function QuestionPage() {
         multiplier={feedback.multiplier}
         onClose={handleFeedbackClose}
       />
-    </>
+    </div>
   );
 }
