@@ -18,14 +18,15 @@ function getRandomElement<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-// Helper function to generate a random even number
-function getRandomEven(min: number, max: number): number {
-    let num;
-    do {
-      num = Math.floor(Math.random() * (max - min + 1)) + min;
-    } while (num % 2 !== 0);
-    return num;
-  }
+// Helper function to generate a random integer multiple
+const getRandomMultiple = (
+  multiple: number,
+  minFactor = 1,
+  maxFactor = 10,
+) => {
+  const factor = Math.floor(Math.random() * (maxFactor - minFactor + 1)) + minFactor;
+  return factor * multiple;
+};
 
 export function generatePercentageProblem(): GeneratedPercentageProblem {
   const problemType = getRandomElement<PercentageProblemType>([
@@ -36,61 +37,59 @@ export function generatePercentageProblem(): GeneratedPercentageProblem {
     "percentage_decrease",
   ]);
 
+  const easyPercentages = [10, 20, 25, 50, 75];
   let base: number;
   let percentage: number;
   let result: number;
 
   switch (problemType) {
     case "calculate_result":
-      // 50% de 200 = ? (100)
-      percentage = getRandomEven(10, 90);
-      base = getRandomEven(100, 500);
-      result = (base * percentage) / 100;
-      // Ensure result is an integer
-      if (result % 1 !== 0) {
-        // Recalculate with a new base or percentage
-        return generatePercentageProblem();
+    case "percentage_increase":
+    case "percentage_decrease":
+      // percentage% de base = ?
+      percentage = getRandomElement(easyPercentages);
+
+      // To ensure the result is an integer, the base must be compatible with the percentage.
+      if (percentage === 10) { // 1/10 -> base must be a multiple of 10
+        base = getRandomMultiple(10, 2, 10); // 20 to 100
+      } else if (percentage === 20) { // 1/5 -> base must be a multiple of 5
+        base = getRandomMultiple(5, 4, 20); // 20 to 100
+      } else if (percentage === 25 || percentage === 75) { // 1/4 or 3/4 -> base must be a multiple of 4
+        base = getRandomMultiple(4, 5, 25); // 20 to 100
+      } else { // 50% (1/2) -> base must be a multiple of 2
+        base = getRandomMultiple(2, 10, 50); // 20 to 100
+      }
+
+      if (problemType === "percentage_increase") {
+        result = base + (base * percentage) / 100;
+      } else if (problemType === "percentage_decrease") {
+        result = base - (base * percentage) / 100;
+      } else {
+        result = (base * percentage) / 100;
       }
       break;
 
     case "calculate_percentage":
-      // ?% de 80 = 20 (25%)
-      base = getRandomEven(50, 200);
-      result = getRandomEven(10, base / 2);
-      percentage = (result / base) * 100;
-      if (percentage % 1 !== 0) {
-        return generatePercentageProblem();
-      }
+      // ?% de base = result
+      percentage = getRandomElement(easyPercentages);
+      // Using a base that is a multiple of 100 makes the result an easy integer.
+      base = getRandomMultiple(100, 1, 5); // 100, 200, 300, 400, 500
+      result = (base * percentage) / 100;
       break;
 
     case "calculate_base":
-      // 25% de ? = 50 (200)
-      percentage = getRandomElement([10, 20, 25, 50, 75]);
-      result = getRandomEven(10, 100);
+      // percentage% de ? = result
+      percentage = getRandomElement(easyPercentages);
+
+      // To ensure the base is an integer, the result must be chosen carefully.
+      // base = (result * 100) / percentage
+      if (percentage === 75) { // base = result * 4/3 -> result must be a multiple of 3
+        result = getRandomMultiple(3, 5, 20); // 15 to 60
+      } else {
+        // For 10, 20, 25, 50, any "round" number for the result is fine.
+        result = getRandomMultiple(10, 2, 10); // 20 to 100
+      }
       base = (result * 100) / percentage;
-      if (base % 1 !== 0) {
-        return generatePercentageProblem();
-      }
-      break;
-
-    case "percentage_increase":
-      // 150 + 10% = ? (165)
-      base = getRandomEven(100, 300);
-      percentage = getRandomElement([10, 20, 25, 50]);
-      result = base + (base * percentage) / 100;
-      if (result % 1 !== 0) {
-        return generatePercentageProblem();
-      }
-      break;
-
-    case "percentage_decrease":
-      // 200 - 25% = ? (150)
-      base = getRandomEven(100, 400);
-      percentage = getRandomElement([10, 20, 25, 50, 75]);
-      result = base - (base * percentage) / 100;
-      if (result % 1 !== 0) {
-        return generatePercentageProblem();
-      }
       break;
   }
 
