@@ -45,8 +45,8 @@ export default function PlayerCard({ rank, name, points, avatar }: PlayerCardPro
           {rank}
         </div>
 
-        <div className="relative shrink-0">
-          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-blue-100 to-purple-100   overflow-hidden border border-gray-300 shadow-inner">
+        {/* <div className="relative shrink-0">
+          <div className=" hidden sm:flex w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-blue-100 to-purple-100   overflow-hidden border border-gray-300 shadow-inner">
             {avatar ? (
               <Image
                 src={avatar}
@@ -54,16 +54,16 @@ export default function PlayerCard({ rank, name, points, avatar }: PlayerCardPro
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-xl sm:text-2xl font-bold text-[#2B3A67]">
+              <div className="w-full h-full flex items-center justify-center text-xl sm:text-2xl font-bold text-[#2B3A67] ">
                 {name.charAt(0).toUpperCase()}
               </div>
             )}
           </div>
-        </div>
+        </div> */}
 
         {/* Player Info */}
         <div className="flex flex-col min-w-0">
-          <h3 className="font-semibold text-xl sm:text-2xl text-[#2B3A67] truncate"> {/* Ajuste no tamanho da fonte e peso para melhor UI */}
+          <h3 className="font-semibold text-lg sm:text-2xl text-[#2B3A67] text-nowrap"> {/* Ajuste no tamanho da fonte e peso para melhor UI */}
             {name}
           </h3>
           <p className="text-md text-gray-500">
@@ -81,7 +81,7 @@ export default function PlayerCard({ rank, name, points, avatar }: PlayerCardPro
       {/* Pontos + Troféu */}
       <div className="flex items-center gap-3 shrink-0"> 
         {/* Container de Pontos */}
-        <div className="flex flex-col items-center justify-center bg-[#F7F8FA] border border-gray-200 rounded-lg px-3 py-2 shadow-inner"> {/* ❌ REMOVIDO: min-w-[80px] */}
+        <div className="flex flex-col items-center justify-center bg-[#F7F8FA] border border-gray-200 rounded-lg px-2 py-1 md:p-3 shadow-inner"> {/* ❌ REMOVIDO: min-w-[80px] */}
           <span className="font-bold text-xl sm:text-2xl text-[#2B3A67] leading-none">
             {points.toLocaleString()}
           </span>

@@ -25,25 +25,21 @@ export default function ModuleCard({
 }: ModuleCardProps) {
   return (
     <Card
-      className="w-[90%] h-[90px]  md:h-[130px] flex items-center gap-3 sm:gap-4 p-4 sm:p-6 cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-all duration-200"
+      className="w-[90%] h-[90px] xl:h-[110px] md:h-[130px] flex items-center gap-3 sm:gap-4 p-4 sm:p-6 cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-all duration-200 bg-gradient-to-br from-white via-gray-50/95 to-slate-50/90  border-zinc-200 border-2 shadow-[inset_0_1px_2px_rgba(255,255,255,0.8)]"
       onClick={onToggle}
     >
       <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
         <div
           className="flex-shrink-0 p-2 sm:p-3 rounded-xl shadow-md"
           style={{
-            background: `linear-gradient(135deg, ${iconColor}, ${iconColor}dd)`,}}>
+            background: `linear-gradient(135deg, ${iconColor}, ${iconColor}dd)`,
+          }}
+        >
           <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
         </div>
         <div className="flex-1 min-w-0">
-          <h3
-            className="text-xl sm:text-3xl font-normal mb-1 truncate text-[#2B3A67]"
-          >
-            {title}
-          </h3>
-          <p className="text-sm sm:text-xl text-gray-600 truncate font-normal text-wrap">
-            {subtitle}
-          </p>
+          <h3 className="text-xl sm:text-3xl font-normal mb-1 truncate text-[#2B3A67]">{title}</h3>
+          <p className="text-sm sm:text-xl text-gray-600 truncate font-normal text-wrap">{subtitle}</p>
         </div>
       </div>
       <div className="flex-shrink-0" onClick={(e) => e.stopPropagation()}>
