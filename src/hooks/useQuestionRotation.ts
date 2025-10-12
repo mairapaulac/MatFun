@@ -1,72 +1,76 @@
-import { useState, useEffect } from "react";
-import {
-  generateRandomProblem,
-  type GeneratedProblem,
-} from "@/app/game/components/EquationSkeleton";
-import {
-  generateRandomGeometryProblem,
-  type GeneratedGeometryProblem,
-} from "@/app/game/components/GeometryAreaSkeleton";
-import {
-  generatePercentageProblem,
-  type GeneratedPercentageProblem,
-} from "@/lib/percentageProblemGenerator";
-import { type FractionQuestion, generateFractionQuestion } from "@/lib/fractionUtils";
-
-export type QuestionType = "equation" | "geometry" | "fraction" | "percentage";
+import { useState, useEffect, useCallback } from "react";
+import { useModuleStore } from "@/stores/moduleStore";
+import { questionGenerators, Problem } from "@/lib/questionGenerators";
+import { Module } from "@/types/types";
 
 export interface QuestionData {
-  type: QuestionType;
-  equationProblem?: GeneratedProblem;
-  geometryProblem?: GeneratedGeometryProblem;
-  fractionProblem?: FractionQuestion;
-  percentageProblem?: GeneratedPercentageProblem;
+  module: Module;
+  level: number;
+  problem: Problem;
 }
 
-export function useQuestionRotation(
-  customQuestionGenerator?: () => QuestionData
-) {
-  const [currentQuestion, setCurrentQuestion] = useState<QuestionData | null>(
-    null
-  );
-  const [questionNumber, setQuestionNumber] = useState(1);
-
-  const generateNewQuestion = (): QuestionData => {
-    if (customQuestionGenerator) {
-      return customQuestionGenerator();
-    }
-
-    const questionTypes: QuestionType[] = ["equation", "geometry", "percentage", "fraction"];
-    const questionType = questionTypes[Math.floor(Math.random() * questionTypes.length)];
-
-    if (questionType === "equation") {
-      return {
-        type: "equation",
-        equationProblem: generateRandomProblem(),
-      };
-    } else if (questionType === "geometry") {
-      return {
-        type: "geometry",
-        geometryProblem: generateRandomGeometryProblem(),
-      };
-    } else if (questionType === "percentage") {
-      return {
-        type: "percentage",
-        percentageProblem: generatePercentageProblem(),
-      };
-    } else {
-      return {
-        type: "fraction",
-        fractionProblem: generateFractionQuestion(),
-      };
-    }
+const moduleKeyMap: Record<string, Module> = {
+    "Operações Algébricas": "algebra",
+    "Áreas Geométricas": "geometry",
+    "Operações com Frações": "fraction",
+    "Porcentagem": "percentage",
+    "algebraic_multiplication": "algebra",
+    "area_geometry": "geometry",
+    "fraction": "fraction",
+    "percentage": "percentage",
+    "algebra": "algebra",
+    "geometry": "geometry",
   };
 
+export function useQuestionRotation(difficultyScores: Record<Module, number>) {
+  const { selectedModules } = useModuleStore();
+  const [currentQuestion, setCurrentQuestion] = useState<QuestionData | null>(null);
+  const [questionNumber, setQuestionNumber] = useState(1);
+
+  const getAvailableModules = useCallback(() => {
+    if (selectedModules.length === 0 || selectedModules.includes("Geral")) {
+      return Object.keys(questionGenerators) as Module[];
+    }
+    return selectedModules;
+  }, [selectedModules]);
+
+  const generateNewQuestion = useCallback(() => {
+    const availableModules = getAvailableModules();
+    const selectedModuleKey = availableModules[Math.floor(Math.random() * availableModules.length)];
+    const selectedModule = moduleKeyMap[selectedModuleKey] || "algebra";
+
+    const score = difficultyScores[selectedModule] || 1.0;
+    let level = Math.floor(score);
+
+    const moduleGenerators = questionGenerators[selectedModule];
+    
+    // Fallback logic for non-existent levels
+    if (!moduleGenerators[level]) {
+        const availableLevels = Object.keys(moduleGenerators).map(Number);
+        const lowerLevels = availableLevels.filter(l => l < level);
+        if (lowerLevels.length > 0) {
+            level = Math.max(...lowerLevels);
+        } else {
+            level = Math.min(...availableLevels); // Fallback to lowest if no lower level exists
+        }
+    }
+
+    const generatorsForLevel = moduleGenerators[level as keyof typeof moduleGenerators];
+    const generator = generatorsForLevel[Math.floor(Math.random() * generatorsForLevel.length)];
+    const problem = generator();
+
+    return {
+      module: selectedModule,
+      level: level,
+      problem: problem,
+    };
+  }, [difficultyScores, getAvailableModules]);
+
   useEffect(() => {
-    if (!currentQuestion) {
+    if (selectedModules.length > 0 && !currentQuestion) {
       setCurrentQuestion(generateNewQuestion());
     }
-  }, [currentQuestion]);
+  }, [selectedModules, currentQuestion, generateNewQuestion]);
 
   const nextQuestion = () => {
     setQuestionNumber((prev) => prev + 1);
@@ -75,7 +79,9 @@ export function useQuestionRotation(
 
   const resetQuestions = () => {
     setQuestionNumber(1);
-    setCurrentQuestion(generateNewQuestion());
+    if (selectedModules.length > 0) {
+      setCurrentQuestion(generateNewQuestion());
+    }
   };
 
   return {

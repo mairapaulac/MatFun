@@ -64,9 +64,8 @@ export function validateFractionAnswer(
 }
 
 // Fgerar pergunta aleatoria de fraçao
-export function generateFractionQuestion(): FractionQuestion {
-  const operators: ('+'  | '×')[] = ['+', '×']; // sem '-' por enquanto
-  const operator = operators[Math.floor(Math.random() * operators.length)];
+export function generateFractionQuestion(operator: '+' | '×' = '×'): FractionQuestion {
+
   
   // randint 1-9
   const num1 = Math.floor(Math.random() * 9) + 1;

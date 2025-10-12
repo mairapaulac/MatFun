@@ -28,14 +28,8 @@ const getRandomMultiple = (
   return factor * multiple;
 };
 
-export function generatePercentageProblem(): GeneratedPercentageProblem {
-  const problemType = getRandomElement<PercentageProblemType>([
-    "calculate_result",
-    "calculate_percentage",
-    "calculate_base",
-    "percentage_increase",
-    "percentage_decrease",
-  ]);
+export function generatePercentageProblem(allowedTypes: PercentageProblemType[]): GeneratedPercentageProblem {
+  const problemType = getRandomElement(allowedTypes);
 
   const easyPercentages = [10, 20, 25, 50, 75];
   let base: number;
