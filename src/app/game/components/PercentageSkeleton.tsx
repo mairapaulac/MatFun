@@ -27,7 +27,15 @@ export default function PercentageSkeleton({
     if (externalProblem) {
       setProblem(externalProblem);
     } else {
-      setProblem(generatePercentageProblem());
+      setProblem(
+        generatePercentageProblem([
+          "calculate_result",
+          "calculate_percentage",
+          "calculate_base",
+          "percentage_increase",
+          "percentage_decrease",
+        ]),
+      );
     }
   }, [externalProblem]);
 
@@ -97,7 +105,7 @@ export default function PercentageSkeleton({
         return (
           <div className="flex items-center justify-center space-x-2 sm:space-x-4 text-2xl sm:text-3xl font-bold text-slate-900">
             {staticField(base)}
-            <span className="text-slate-700">+</span>
+            <span className="text-slate-700" style={{color:"#00cd52ff"}}>+</span>
             {staticField(`${percentage}%`)}
             <span className="text-slate-700">=</span>
             {inputField}
@@ -108,7 +116,7 @@ export default function PercentageSkeleton({
         return (
           <div className="flex items-center justify-center space-x-2 sm:space-x-4 text-2xl sm:text-3xl font-bold text-slate-900">
             {staticField(base)}
-            <span className="text-slate-700">-</span>
+            <span className="text-slate-700"style={{color:"#cd0000ff"}}>-</span>
             {staticField(`${percentage}%`)}
             <span className="text-slate-700">=</span>
             {inputField}

@@ -56,6 +56,7 @@ export default function EquationSkeleton({
 
   // Handling new problem types with equationString
   if ((problem as any).equationString) {
+    let cor = "#000000a0";
     const equationString = (problem as any).equationString as string;
     const tokens = equationString.split(' ');
 
@@ -68,7 +69,14 @@ export default function EquationSkeleton({
             } else if (token === '?') { // It's the answer blank
               return <div key={index}>{renderField(answerValue, true)}</div>;
             } else { // It's an operator or parenthesis
-              return <span key={index} className="text-2xl md:text-4xl font-bold text-slate-700">{token}</span>;
+              //coloca corzinha nos operadores ><
+              switch(token){
+                case '+': cor = "#00cd52ff";break;
+                case '-': cor = "#cd0000ff";break;
+                default: cor = "#000000a0"; break;
+              }
+
+              return <span key={index} className="text-2xl md:text-4xl font-bold text-slate-700" style={{color:cor}}>{token}</span>;
             }
           })}
         </div>

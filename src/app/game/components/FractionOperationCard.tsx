@@ -35,7 +35,9 @@ export default function FractionOperationCard({
   );
 
   // input resultado
+  let cor = "#000000ff";
   const ResultInput = () => (
+    
     <div className="flex flex-col items-center">
       {/* num */}
       <div className="relative">
@@ -76,6 +78,8 @@ export default function FractionOperationCard({
       </div>
     </div>
   );
+  if(operator === '+'){cor = "#00cd52ff"};
+  //quando implementar subtração tira esse comentario if(operator === '-'){cor = "#cd0000ff"};
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4 sm:p-6">
@@ -84,7 +88,7 @@ export default function FractionOperationCard({
           <FractionDisplay numerator={num1} denominator={den1} />
           
           {/* op */}
-          <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-black">{operator}</span>
+          <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-black"style={{color:cor}}>{operator}</span>
           
           {/* segunda fraçaoo */}
           <FractionDisplay numerator={num2} denominator={den2} />
