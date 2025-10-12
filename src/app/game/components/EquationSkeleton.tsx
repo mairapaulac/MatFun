@@ -69,6 +69,7 @@ export default function EquationSkeleton({
             } else if (token === '?') { // It's the answer blank
               return <div key={index}>{renderField(answerValue, true)}</div>;
             } else { // It's an operator or parenthesis
+              
               //coloca corzinha nos operadores ><
               switch(token){
                 case '+': cor = "#00cd52ff";break;
