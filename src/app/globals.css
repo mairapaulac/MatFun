@@ -126,6 +126,7 @@
     background-size: 1000px 330px;
     background-attachment: fixed;
     background-position: 0 0;
+    overscroll-behavior-y: contain;
   }
 }
 
