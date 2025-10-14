@@ -17,7 +17,6 @@ export default function QuestionScreen({
   questionType = "default",
   initialAnswer = "",
   currentAnswer = "",
-  onAnswerChange,
   totalMs = 60000,
   onSubmit,
   onTimeout,
@@ -26,7 +25,6 @@ export default function QuestionScreen({
   isSubmitted,
 }: QuestionScreenProps): React.JSX.Element {
   const [timerKey, setTimerKey] = useState(0)
-  const [hasTimedOut, setHasTimedOut] = useState(false)
   const timeoutHandledRef = useRef(false)
 
   // verificando se a resposta esta vazia em questoes de fraçao
@@ -38,7 +36,6 @@ export default function QuestionScreen({
 
   // Reset timer when question changes
   useEffect(() => {
-    setHasTimedOut(false)
     timeoutHandledRef.current = false
     // Force timer reset by changing the key
     setTimerKey((prev) => prev + 1)
