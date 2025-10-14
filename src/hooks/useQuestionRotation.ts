@@ -42,8 +42,8 @@ export function useQuestionRotation(difficultyScores: Record<Module, number>) {
     const score = difficultyScores[selectedModule] || 1.0;
     let level = Math.floor(score);
 
-    const moduleGenerators = questionGenerators[selectedModule];
-    
+    const moduleGenerators = questionGenerators[selectedModule] as Record<number, (() => Problem)[]>;
+
     // Fallback logic for non-existent levels
     if (!moduleGenerators[level]) {
         const availableLevels = Object.keys(moduleGenerators).map(Number);

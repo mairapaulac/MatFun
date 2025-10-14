@@ -141,8 +141,8 @@ export default function QuestionPage() {
           return algebraProblem.firstNumber * num === algebraProblem.result;
         case 'second_filled': // User provides the first number
           return num * algebraProblem.secondNumber === algebraProblem.result;
-        case 'complex_blank' as any: // Level 3
-          return num === (algebraProblem as any).correctAnswer;
+        case 'complex_blank': // Level 3
+          return num === algebraProblem.correctAnswer;
         default:
             // This also handles level 2 where the type is 'result_empty'
             return num === algebraProblem.result;

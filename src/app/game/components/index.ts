@@ -6,11 +6,7 @@ export { default as Keypad } from "./Keypad";
 
 // Question Skeletons
 export { default as EquationSkeleton } from "./EquationSkeleton";
-export { ExampleEquationSkeleton } from "./EquationSkeleton";
-export { default as GeometryAreaSkeleton } from "./GeometryAreaSkeleton";
-export { ExampleGeometryAreaSkeleton } from "./GeometryAreaSkeleton";
-export { default as CircleFromCircumference } from "./CircleFromCircumference";
-export { ExampleCircleFromCircumference } from "./CircleFromCircumference";
+
 
 // Hooks
 export { useTimer } from "@/hooks/useTimer";

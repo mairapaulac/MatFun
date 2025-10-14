@@ -11,15 +11,19 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ISignInFormValues } from "@/types/types";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+// Definindo o tipo diretamente no arquivo
+export type SignInFormValues = {
+  email: string;
+  password: string;
+};
 
 export default function SignInForm() {
   const router = useRouter()
-  const form = useForm<ISignInFormValues>({
+  const form = useForm<SignInFormValues>({
     defaultValues: {
       email: "",
       password: "",

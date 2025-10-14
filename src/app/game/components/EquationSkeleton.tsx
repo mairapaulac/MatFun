@@ -55,9 +55,9 @@ export default function EquationSkeleton({
   }
 
   // Handling new problem types with equationString
-  if ((problem as any).equationString) {
+  if (problem && 'equationString' in problem && typeof problem.equationString === 'string') {
     let cor = "#000000a0";
-    const equationString = (problem as any).equationString as string;
+    const equationString = problem.equationString;
     const tokens = equationString.split(' ');
 
     return (

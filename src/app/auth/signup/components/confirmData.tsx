@@ -1,13 +1,27 @@
 "use client"
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
-import { confirmDataProps } from "@/types/types"
 import { Button } from "@/components/ui/button"
 import { UserDataCard } from "@/components/ui/user-data-card"
 import { CheckCircle } from "lucide-react"
 import { useRouter } from "next/navigation"
-//eslint-disable-next-line
-export function ConfirmData({ open, onOpenChange, data }: confirmDataProps) {
+
+interface UserData {
+  nome: string
+  email: string
+  nascimento: string
+  escola: string
+  ano: string
+  turma: string
+}
+
+interface ConfirmDataProps {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  data: UserData
+}
+
+export function ConfirmData({ open, onOpenChange, data }: ConfirmDataProps) {
   const router = useRouter()
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
