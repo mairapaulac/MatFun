@@ -9,7 +9,7 @@ import {
     type GeneratedGeometryProblem,
 } from './geometryProblemGenerator';
 import {
-    generateCircleFromCircumferenceSeed,
+
     type CircleFromCircumferenceProblem,
 } from './circleProblemGenerator';
 import {

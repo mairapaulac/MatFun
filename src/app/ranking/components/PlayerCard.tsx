@@ -1,15 +1,13 @@
 import { Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 
 interface PlayerCardProps {
   rank: number;
   name: string;
   points: number;
-  avatar?: string;
 }
 
-export default function PlayerCard({ rank, name, points, avatar }: PlayerCardProps) {
+export default function PlayerCard({ rank, name, points }: PlayerCardProps) {
   const isTopThree = rank <= 3;
 
   const getTrophyColor = () => {

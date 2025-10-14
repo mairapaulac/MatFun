@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState, useEffect } from "react"
-import { GeneratedProblem, ProblemType } from "@/lib/algebraProblemGenerator";
+import { GeneratedProblem } from "@/lib/algebraProblemGenerator";
 
 interface EquationSkeletonProps {
   onAnswerChange?: (answer: string) => void;

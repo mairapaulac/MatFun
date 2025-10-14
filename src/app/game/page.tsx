@@ -6,7 +6,6 @@ import PercentageSkeleton from "@/app/game/components/PercentageSkeleton";
 import EquationSkeleton from "@/app/game/components/EquationSkeleton";
 import GeometryAreaSkeleton from "@/app/game/components/GeometryAreaSkeleton";
 import { useQuestionRotation } from "@/hooks/useQuestionRotation";
-import { useModuleStore } from "@/stores/moduleStore";
 import { useState, useEffect } from "react";
 import FractionOperationCard from "@/app/game/components/FractionOperationCard";
 import ExitConfirmationDialog from "./components/ExitConfirmationDialog";
@@ -16,6 +15,8 @@ import { GeneratedProblem } from "@/lib/algebraProblemGenerator";
 import { GeneratedGeometryProblem } from "@/lib/geometryProblemGenerator";
 import { FractionQuestion } from "@/types/types";
 import { GeneratedPercentageProblem } from "@/lib/percentageProblemGenerator";
+import { useRouter } from "next/navigation";
+import { Undo2 } from "lucide-react";
 
 const initialDifficultyScores: Record<Module, number> = {
   algebra: 1.0,
@@ -25,11 +26,13 @@ const initialDifficultyScores: Record<Module, number> = {
 };
 
 export default function QuestionPage() {
+  const router = useRouter();
   const [score, setScore] = useState(0);
   const [currentAnswer, setCurrentAnswer] = useState("");
   const [fractionAnswer, setFractionAnswer] = useState({ numerator: "", denominator: "" });
   const [fractionActiveInput, setFractionActiveInput] = useState<'numerator' | 'denominator'>('numerator');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isExitModalOpen, setIsExitModalOpen] = useState(false);
   const [feedback, setFeedback] = useState<{
     isOpen: boolean;
     type: "correct" | "incorrect" | "timeout";
@@ -51,8 +54,35 @@ export default function QuestionPage() {
     }
   }, [currentQuestion, difficultyScores, questionNumber]);
 
-  const handleAnswerChange = (answer: string) => {
-    setCurrentAnswer(answer);
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setIsExitModalOpen(true);
+      window.history.pushState(null, "", window.location.href);
+    };
+
+    window.history.pushState(null, "", window.location.href);
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
+
+  const handleExitConfirm = () => {
+    router.push("/home");
   };
 
   const handleKeypadPress = (key: string) => {
@@ -250,7 +280,12 @@ export default function QuestionPage() {
   return (
     <div className="relative min-h-screen bg-background bg-pattern">
       <div className="absolute top-4 left-4 z-10">
-        <ExitConfirmationDialog />
+        <button
+          onClick={() => setIsExitModalOpen(true)}
+          className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 hover:scale-110 "
+        >
+          <Undo2 className="h-[30px] w-[30px] sm:h-[40px] sm:w-[40px] text-white transition-all group-hover:-translate-x-1" />
+        </button>
       </div>
       <QuestionScreen
         score={score}
@@ -259,7 +294,6 @@ export default function QuestionPage() {
         questionSkeleton={getQuestionSkeleton()}
         questionType={getQuestionType()}
         currentAnswer={currentAnswer}
-        onAnswerChange={handleAnswerChange}
         totalMs={60000}
         onSubmit={handleSubmit}
         onTimeout={handleTimeout}
@@ -273,6 +307,13 @@ export default function QuestionPage() {
         points={feedback.points}
         multiplier={feedback.multiplier}
         onClose={handleFeedbackClose}
+      />
+      <ExitConfirmationDialog
+        isOpen={isExitModalOpen}
+        onOpenChange={setIsExitModalOpen}
+        onConfirm={handleExitConfirm}
+        score={score}
+        questionsAnswered={questionNumber - 1}
       />
     </div>
   );

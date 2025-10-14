@@ -80,7 +80,7 @@ export function useTimer(totalMs = 60000, running = true, resetTrigger = 0, onTi
         clearInterval(intervalId);
       }
     };
-  }, [isRunning, totalMs]);
+  }, [isRunning, totalMs, onTimeout]);
 
   // Sync with running prop - but don't restart if timer has expired
   useEffect(() => {
