@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "Plataforma gameficada de matemática para estudantes do 8º e 9º ano do ensino fundamental.",
 };
 
+import { Toaster } from "@/components/ui/sonner";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,6 +28,7 @@ export default function RootLayout({
         className={`${paytone.variable}  antialiased touch-pan-x touch-pan-y overscroll-y-contain`}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );

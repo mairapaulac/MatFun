@@ -11,7 +11,7 @@ export default function Home() {
       <h1 className="text-white text-7xl">MAT <span className="text-[#F43F5E]">FUN</span></h1>
       <div className="flex flex-col space-y-3">
         <Button 
-          className="w-48" 
+          className="w-48 hover:scale-105 transition-all cursor-pointer" 
           onClick={() => router.push('/auth/signin')}
         >
           Entrar
