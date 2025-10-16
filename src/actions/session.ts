@@ -35,12 +35,12 @@ export async function encrypt(payload: {
     .sign(key);
 }
 
-export async function decrypt(session: string) {
+export async function decrypt(session: string): Promise<SessionPayload | null> {
   try {
     const { payload } = await jwtVerify(session, key, {
       algorithms: ["HS256"],
     });
-    return payload;
+    return payload as unknown as SessionPayload;
   } catch (error) {
     console.error("Falha na verificação do JWT:", error);
     return null;
@@ -58,26 +58,24 @@ export async function createSession(user: IUserSessionData) {
   });
 }
 
-export async function verifySession(token: string | undefined): Promise<IUserSessionData> {
-  if (!token) {
-    redirect("/auth/signin");
+export async function getSession(): Promise<SessionPayload | null> {
+  const sessionCookie = (await cookies()).get(cookieConfig.name)?.value;
+  if (!sessionCookie) {
+    return null;
   }
+  const session = await decrypt(sessionCookie);
+  if (!session) {
+    return null;
+  }
+  return session;
+}
 
-  const session = await decrypt(token);
-
+export async function verifySession() {
+  const session = await getSession();
   if (!session) {
     redirect("/auth/signin");
   }
-
-  const user: IUserSessionData = {
-    id: session.id as number,
-    email: session.email as string,
-    name: session.fullName as string,
-    classId: session.roleId as number,
-    token: session.token as string,
-  };
-
-  return user;
+  return session;
 }
 
 export async function deleteSession() {
