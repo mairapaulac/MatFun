@@ -7,7 +7,7 @@ export const signInSchema = z.object({
     .string()
     .min(1, "Por favor insira um endereço de email.")
     .email("Insira um endereço de email válido."),
-  password: z.string().min(8, "Por favor insira uma senha válida."),
+  senha: z.string().min(8, "Por favor insira uma senha válida."),
 });
 
 export const signUpSchema = z
