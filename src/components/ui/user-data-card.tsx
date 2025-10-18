@@ -21,7 +21,7 @@ export function UserDataCard({ data }: UserDataCardProps) {
       <DataItem icon={Mail} label="Email" value={data.email} />
       <DataItem icon={Calendar} label="Data de Nascimento" value={data.nascimento} />
       <DataItem icon={School} label="Escola" value={data.escola} />
-      <DataItem icon={BookText} label="Ano" value={data.ano} />
+      <DataItem icon={BookText} label="Ano" value={data.ano ? `${data.ano}º` : ""} />
       <DataItem icon={Users} label="Turma" value={data.turma} />
     </div>
   )
