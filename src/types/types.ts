@@ -51,6 +51,14 @@ export interface IUserSessionData{
   token:string;
 }
 
+export  interface IRegisterActionData{
+  name:string;
+  email:string;
+  senha:string;
+  dataNascimento:Date;
+  classId:number;
+}
+
 export interface ISchool {
 	schoolId: number;
 	school_name: string;

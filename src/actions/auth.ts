@@ -72,6 +72,75 @@ export async function signInUserAction(payload: SignInInputs): Promise<{
 	}
 }
 
-export async function registerUserAction(payload:SignUpInputs) {
-	
+export async function registerUserAction(payload : SignUpInputs): Promise<{
+	success: boolean;
+	message?: string;
+	data?: Omit<IUserSessionData, "token">;
+	error?: unknown;
+}> {
+	try {
+		const apiPayload = {
+			name: payload.name,
+			email: payload.email,
+			senha: payload.senha,
+			dataNascimento: new Date(payload.dataNascimento),
+			classId: Number(payload.class)
+			
+		};
+
+		const res = await fetch(`${apiUrl}/auth/register`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(apiPayload),
+		});
+
+		if (!res.ok) {
+			const errorText = await res.text();
+			console.error("API Error Response:", errorText);
+			console.error("API Error Status:", res.status);
+			//eslint-disable-next-line
+			let errorJson: any = {};
+			try {
+				errorJson = JSON.parse(errorText);
+			} catch (e) {
+				console.error("Failed to parse API error response as JSON.");
+				errorJson = { raw: errorText };
+			}
+			return {
+				success: false,
+				message: `Erro ${res.status} ao registrar. Por favor, verifique o console do servidor para mais detalhes.`,
+				error: errorJson,
+			};
+		}
+
+		const data = await res.json();
+		console.log("resposta da API:", data); //para depuração
+
+		const sessionData: IUserSessionData = {
+			id: data.user.userId,
+			name: data.user.name,
+			email: data.user.email,
+			classId: data.user.classId,
+			token: data.token
+		};
+
+		await createSession(sessionData);
+
+		return {
+			success: true,
+			message: "registrado com sucesso.",
+			data: {
+				id: data.user.userId,
+				name: data.user.name,
+				email: data.user.email,
+				classId: data.user.classId,
+			},
+		};
+	} catch (e) {
+		console.error("erro durante cadastro (catch):", e);
+		return {
+			success: false,
+			error: e
+		};
+	}
 }

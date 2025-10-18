@@ -28,6 +28,7 @@ import { ConfirmData } from "./confirmData";
 import { useFetchSchools } from "@/hooks/use-fetch-schools";
 import { useFetchGrades } from "@/hooks/use-fetch-grades";
 import { useFetchClasses } from "@/hooks/use-fetch-classes";
+import { useEffect } from "react";
 export function RegisterForm() {
   const [open, setOpen] = useState(false);
   const [selectedSchoolId, setSelectedSchoolId] = useState<number | null>(null);
@@ -53,6 +54,9 @@ export function RegisterForm() {
     useFetchGrades(selectedSchoolId);
   const { data: classes, isLoading: isLoadingClasses } =
     useFetchClasses(selectedGradeId);
+    // useEffect(() => {
+    //   console.log("Valores atuais:", form.watch());
+    // }, [form.watch()]);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const isValid = await form.trigger();
@@ -63,7 +67,8 @@ export function RegisterForm() {
 
   const selectedSchoolName =
     schools?.find((s) => s.schoolId === selectedSchoolId)?.school_name || "";
-
+  const selectedClassName =
+    classes?.find((c) => c.classId === selectedClassId)?.classLetter || "";
   return (
     <>
       <Form {...form}>
@@ -343,14 +348,7 @@ export function RegisterForm() {
       <ConfirmData
         open={open}
         onOpenChange={setOpen}
-        data={{
-          name: form.getValues("name"),
-          email: form.getValues("email"),
-          nascimento: form.getValues("dataNascimento"),
-          escola: selectedSchoolName,
-          ano: form.getValues("grade"),
-          turma: form.getValues("class"),
-        }}
+        data={form.getValues()}
       />
     </>
   );
