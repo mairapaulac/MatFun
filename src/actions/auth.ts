@@ -1,12 +1,12 @@
 "use server";
 
 import { createSession } from "@/actions/session";
-import { signInSchema} from "@/lib/schemas";
+import { signInSchema, signUpSchema} from "@/lib/schemas";
 import { IUserSessionData } from "@/types/types";
 import { z } from "zod";
 
 type SignInInputs = z.infer<typeof signInSchema>;
-
+type SignUpInputs = z.infer<typeof signUpSchema>
 const apiUrl = process.env.API_BASE_URL;  //definir no .env 
 
 
@@ -70,4 +70,8 @@ export async function signInUserAction(payload: SignInInputs): Promise<{
 			message: "Ocorreu um erro, por favor tente novamente.",
 		};
 	}
+}
+
+export async function registerUserAction(payload:SignUpInputs) {
+	
 }

@@ -2,7 +2,7 @@ import { DataItem } from "./data-item"
 import { UserCircle, Mail, Calendar, School, BookText, Users } from "lucide-react"
 
 interface UserData {
-  nome: string
+  name: string
   email: string
   nascimento: string
   escola: string
@@ -17,7 +17,7 @@ interface UserDataCardProps {
 export function UserDataCard({ data }: UserDataCardProps) {
   return (
     <div className="mt-4 grid gap-1 bg-white p-4 rounded-[38px] border-6 border-black">
-      <DataItem icon={UserCircle} label="Nome" value={data.nome} />
+      <DataItem icon={UserCircle} label="Nome" value={data.name} />
       <DataItem icon={Mail} label="Email" value={data.email} />
       <DataItem icon={Calendar} label="Data de Nascimento" value={data.nascimento} />
       <DataItem icon={School} label="Escola" value={data.escola} />

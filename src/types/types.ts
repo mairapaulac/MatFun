@@ -50,3 +50,18 @@ export interface IUserSessionData{
   classId:number;
   token:string;
 }
+
+export interface ISchool {
+	schoolId: number;
+	school_name: string;
+}
+
+export interface IGrade {
+	gradeId:number;
+  gradeName:string;
+}
+
+export interface IClass {
+  classId:number
+  classLetter: string
+}

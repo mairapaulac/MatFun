@@ -7,7 +7,7 @@ import { CheckCircle } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 interface UserData {
-  nome: string
+  name: string
   email: string
   nascimento: string
   escola: string
