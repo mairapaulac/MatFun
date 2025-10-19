@@ -350,6 +350,7 @@ export function RegisterForm() {
         onOpenChange={setOpen}
         data={{
           ...form.getValues(),
+          schoolName: selectedSchoolName,
           gradeName: grades?.find((g) => g.gradeId === selectedGradeId)?.gradeName || "",
           classLetter: classes?.find((c) => c.classId === selectedClassId)?.classLetter || "",
         }}

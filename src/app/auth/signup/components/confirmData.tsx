@@ -13,7 +13,9 @@ import { toast } from "sonner"
 
 type UserData = z.infer<typeof signUpSchema>& {
   gradeName?: string;
-  classLetter?: string;}
+  classLetter?: string;
+  schoolName?: string;
+}
 
 interface ConfirmDataProps {
   open: boolean
@@ -59,7 +61,7 @@ export function ConfirmData({ open, onOpenChange, data }: ConfirmDataProps) {
           name: data.name,
           email: data.email,
           nascimento: data.dataNascimento,
-          escola: data.school,
+          escola: data.schoolName || data.school,
           ano: data.gradeName || data.grade,
           turma: data.classLetter || data.class,
         }} />
