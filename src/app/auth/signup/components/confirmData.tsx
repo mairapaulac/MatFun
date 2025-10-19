@@ -11,7 +11,9 @@ import { signUpSchema } from "@/lib/schemas"
 import { useState } from "react"
 import { toast } from "sonner"
 
-type UserData = z.infer<typeof signUpSchema>;
+type UserData = z.infer<typeof signUpSchema>& {
+  gradeName?: string;
+  classLetter?: string;}
 
 interface ConfirmDataProps {
   open: boolean
@@ -58,8 +60,8 @@ export function ConfirmData({ open, onOpenChange, data }: ConfirmDataProps) {
           email: data.email,
           nascimento: data.dataNascimento,
           escola: data.school,
-          ano: data.grade,
-          turma: data.class
+          ano: data.gradeName || data.grade,
+          turma: data.classLetter || data.class,
         }} />
         <div className="flex w-full justify-between gap-10">
           <Button

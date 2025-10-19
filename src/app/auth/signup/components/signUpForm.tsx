@@ -348,7 +348,11 @@ export function RegisterForm() {
       <ConfirmData
         open={open}
         onOpenChange={setOpen}
-        data={form.getValues()}
+        data={{
+          ...form.getValues(),
+          gradeName: grades?.find((g) => g.gradeId === selectedGradeId)?.gradeName || "",
+          classLetter: classes?.find((c) => c.classId === selectedClassId)?.classLetter || "",
+        }}
       />
     </>
   );
