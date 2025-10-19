@@ -73,3 +73,12 @@ export interface IClass {
   classId:number
   classLetter: string
 }
+
+export interface IRankingPlayers{
+  rank:number;
+  user:{
+    userId:number;
+    name:string;
+  };
+  score:number;
+}
