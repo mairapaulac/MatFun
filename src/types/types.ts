@@ -43,12 +43,13 @@ export interface FractionQuestion {
 
 export type Module = 'algebra' | 'geometry' | 'fraction' | 'percentage';
 
-export interface IUserSessionData{
-  id:number;
-  name:string;
-  email:string;
-  classId:number;
-  token:string;
+export interface IUserSessionData {
+  id: number;
+  name: string;
+  email: string;
+  token: string;
+  gradeName: string;
+  classLetter: string;
 }
 
 export  interface IRegisterActionData{

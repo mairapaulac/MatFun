@@ -24,11 +24,8 @@ const cookieConfig = {
   duration: 24 * 60 * 60 * 1000, 
 };
 
-export async function encrypt(payload: {
-  email: string;
-  expires: Date;
-}): Promise<string> {
-  return new SignJWT(payload)
+export async function encrypt(payload: SessionPayload): Promise<string> {
+  return new SignJWT({ ...payload })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime("1day")

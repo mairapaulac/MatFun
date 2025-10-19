@@ -48,7 +48,8 @@ export async function signInUserAction(payload: SignInInputs): Promise<{
 			id: data.user.userId,
 			name: data.user.name,
 			email: data.user.email,
-			classId: data.user.classId,
+      gradeName: data.user.gradeName,
+      classLetter: data.user.classLetter,
       token: data.token
 		};
 
@@ -60,7 +61,8 @@ export async function signInUserAction(payload: SignInInputs): Promise<{
         id: data.user.userId,
         name: data.user.name,
         email: data.user.email,
-        classId: data.user.classId,
+        gradeName: data.user.gradeName,
+        classLetter: data.user.classLetter,
       },
 		};
 	} catch (e) {
@@ -120,7 +122,8 @@ export async function registerUserAction(payload : SignUpInputs): Promise<{
 			id: data.user.userId,
 			name: data.user.name,
 			email: data.user.email,
-			classId: data.user.classId,
+			gradeName: data.user.gradeName,
+			classLetter: data.user.classLetter,
 			token: data.token
 		};
 
@@ -133,7 +136,8 @@ export async function registerUserAction(payload : SignUpInputs): Promise<{
 				id: data.user.userId,
 				name: data.user.name,
 				email: data.user.email,
-				classId: data.user.classId,
+				gradeName: data.user.gradeName,
+				classLetter: data.user.classLetter,
 			},
 		};
 	} catch (e) {
