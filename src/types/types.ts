@@ -50,6 +50,7 @@ export interface IUserSessionData {
   token: string;
   gradeName: string;
   classLetter: string;
+  classId:number;
 }
 
 export  interface IRegisterActionData{
