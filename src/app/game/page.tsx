@@ -85,6 +85,7 @@ export default function QuestionPage() {
     router.push("/home");
   };
 
+  //se for fração ele verifica se foi acionado a tecla de apagar ou de trocar o focus do numerador/denominador, se nao for fração ele trata normal
   const handleKeypadPress = (key: string) => {
     if (currentQuestion?.module === "fraction") {
       if (key === "⌫") {
@@ -240,8 +241,14 @@ export default function QuestionPage() {
       return (problem as GeneratedGeometryProblem).shape;
     }
     if (module === "fraction") {
-      return (problem as FractionQuestion).operator === '+' ? 'fraction_operation_addition' : 'fraction_operation_multiplication';
+     const operatorMap: Record<string, string> = {
+    '+': 'fraction_operation_addition',
+    '×': 'fraction_operation_multiplication',
+    '=': 'fraction_operation_equivalent',
+    };
+    return operatorMap[(problem as FractionQuestion).operator] || 'fraction_operation_addition';
     }
+
     if (module === "percentage") {
       return (problem as GeneratedPercentageProblem).problemType;
     }

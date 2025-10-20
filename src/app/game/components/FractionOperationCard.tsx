@@ -4,7 +4,7 @@
 interface FractionOperationCardProps {
   num1: number;
   den1: number;
-  operator: '+' | '×';
+  operator: '+' | '×' | '=';
   num2: number;
   den2: number;
   currentAnswer: { numerator: string; denominator: string };
@@ -88,10 +88,11 @@ export default function FractionOperationCard({
           <FractionDisplay numerator={num1} denominator={den1} />
           
           {/* op */}
-          <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-black"style={{color:cor}}>{operator}</span>
+          {operator !== '=' && <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-black"style={{color:cor}}>{operator}</span>}
+          
           
           {/* segunda fraçaoo */}
-          <FractionDisplay numerator={num2} denominator={den2} />
+          {operator !== '=' && <FractionDisplay numerator={num2} denominator={den2} />}
           
           {/*  igual */}
           <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-black">=</span>
