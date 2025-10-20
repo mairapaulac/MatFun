@@ -37,6 +37,7 @@ export const questionGenerators = {
     },
     fraction: {
         1: [() => generateFractionQuestion('×')],
+        2: [() => generateFractionQuestion('=')],
         3: [() => generateFractionQuestion('+')],
     },
     percentage: {
