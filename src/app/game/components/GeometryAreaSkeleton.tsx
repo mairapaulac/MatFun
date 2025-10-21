@@ -9,7 +9,7 @@ interface GeometryAreaSkeletonProps {
   problem?: GeneratedGeometryProblem
 }
 
-export type GeometryShape = "triangle" | "rectangle" | "parallelogram" | "trapezoid" | "circle" | "circle_from_circumference"
+export type GeometryShape = "triangle" | "rectangle" | "parallelogram" | "trapezoid" | "circle" | "circle_from_circumference" | "rectangle_minus_circle"
 
 export interface GeneratedGeometryProblem {
   shape: GeometryShape
@@ -20,11 +20,11 @@ export interface GeneratedGeometryProblem {
 
 // Função para gerar problema geométrico aleatório
 export function generateRandomGeometryProblem(): GeneratedGeometryProblem {
-  const shapes: GeometryShape[] = ["triangle", "rectangle", "parallelogram", "trapezoid", "circle", "circle_from_circumference"]
+  const shapes: GeometryShape[] = ["triangle", "rectangle", "parallelogram", "trapezoid", "circle", "circle_from_circumference", "rectangle_minus_circle"]
   const shape = shapes[Math.floor(Math.random() * shapes.length)]
   
   let measurements: Record<string, number> = {}
-  let area: number
+  let area: number = 0; // Initialize area to 0
 
   switch (shape) {
     case "triangle":
@@ -87,6 +87,34 @@ export function generateRandomGeometryProblem(): GeneratedGeometryProblem {
       measurements = { circumference }
       area = 3 * r * r
       break
+
+    case "rectangle_minus_circle": {
+      const rectWidth = Math.floor(Math.random() * 5) + 6; // 6-10
+      let rectHeight = Math.floor(Math.random() * 5) + 6; // 6-10
+      
+      // Ensure rectangle dimensions are distinct for more variety
+      while (rectHeight === rectWidth) {
+        rectHeight = Math.floor(Math.random() * 5) + 6;
+      }
+
+      const minDim = Math.min(rectWidth, rectHeight);
+      const maxPossibleRadius = Math.floor(minDim / 2); 
+      
+      // Ensure maxPossibleRadius is at least 2 to allow for a valid circleRadius
+      const effectiveMaxRadius = Math.max(2, maxPossibleRadius); 
+
+      let circleRadius = Math.floor(Math.random() * (effectiveMaxRadius - 1)) + 1; // 1 to effectiveMaxRadius - 1
+
+      // Ensure circleRadius is at least 1
+      if (circleRadius < 1) circleRadius = 1;
+
+      const areaRect = rectWidth * rectHeight;
+      const areaCirc = 3 * circleRadius * circleRadius; // Using pi approx 3
+
+      area = areaRect - areaCirc;
+      measurements = { width: rectWidth, height: rectHeight, radius: circleRadius };
+      break;
+    }
   }
 
   return {
@@ -255,6 +283,54 @@ const CircleFromCircumferenceSVG: React.FC<{ circumference: number }> = () => (
   </svg>
 )
 
+const RectangleMinusCircleSVG: React.FC<{ width: number; height: number; radius: number }> = ({ width, height, radius }) => {
+  // Scale factors to fit within a 200x120 viewBox, similar to other SVGs
+  const scale = Math.min(180 / width, 80 / height);
+  const scaledWidth = width * scale;
+  const scaledHeight = height * scale;
+  const scaledRadius = radius * scale;
+
+  const rectX = (200 - scaledWidth) / 2;
+  const rectY = (120 - scaledHeight) / 2;
+  const circleCx = 100;
+  const circleCy = 60;
+
+  return (
+    <svg viewBox="0 0 200 120" className="w-full h-36 md:h-64">
+      {/* Rectangle */}
+      <rect
+        x={rectX}
+        y={rectY}
+        width={scaledWidth}
+        height={scaledHeight}
+        fill="none"
+        stroke="#374151"
+        strokeWidth="3"
+      />
+      {/* Circle (subtracted area) */}
+      <circle
+        cx={circleCx}
+        cy={circleCy}
+        r={scaledRadius}
+        fill="#ef444430" // Light red fill to indicate subtraction
+        stroke="#ef4444"
+        strokeWidth="2"
+        strokeDasharray="4,4"
+      />
+      {/* Text for dimensions */}
+      <text x={rectX + scaledWidth / 2} y={rectY + scaledHeight + 15} textAnchor="middle" className="text-[16px] sm:text-sm font-semibold fill-slate-700">
+        L: {width} cm
+      </text>
+      <text x={rectX - 10} y={rectY + scaledHeight / 2} textAnchor="middle" className="text-[16px] sm:text-sm font-semibold fill-slate-700" transform={`rotate(-90 ${rectX - 10} ${rectY + scaledHeight / 2})`}>
+        A: {height} cm
+      </text>
+      <text x={circleCx} y={circleCy - scaledRadius - 5} textAnchor="middle" className="text-[16px] sm:text-sm font-semibold fill-red-600">
+        R: {radius} cm
+      </text>
+    </svg>
+  );
+};
+
 export default function GeometryAreaSkeleton({
   onAnswerChange,
   externalAnswer = "",
@@ -314,6 +390,8 @@ export default function GeometryAreaSkeleton({
         return <CircleSVG radius={problem.measurements.radius} />
       case "circle_from_circumference":
         return <CircleFromCircumferenceSVG circumference={problem.measurements.circumference} />
+      case "rectangle_minus_circle":
+        return <RectangleMinusCircleSVG width={problem.measurements.width} height={problem.measurements.height} radius={problem.measurements.radius} />
       default:
         return null
     }
@@ -341,6 +419,14 @@ export default function GeometryAreaSkeleton({
           𝝿 = 3
         </div>
         
+      )}
+      {/* Show dimensions for rectangle_minus_circle */}
+      {problem.shape === "rectangle_minus_circle" && (
+        <div className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-700">
+          Retângulo: {problem.measurements.width}x{problem.measurements.height} cm, Círculo Raio: {problem.measurements.radius} cm
+          <br />
+          𝝿 = 3
+        </div>
       )}
 
       {/* Area prompt with answer field */}

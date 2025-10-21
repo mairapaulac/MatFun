@@ -113,6 +113,29 @@ function PerimetroCirculoHint(): ReactNode {
   );
 }
 
+function RectangleMinusCircleHint(): ReactNode {
+  return (
+    <div className="space-y-4">
+      <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">
+        Área do Retângulo - Área do Círculo
+      </h3>
+      <div className="bg-gray-50 p-4 rounded-lg">
+        <p className="text-lg font-semibold text-gray-700 mb-2">Fórmula:</p>
+        <div className="text-center bg-white p-3 rounded border-2 border-gray-300">
+          <span className="text-2xl font-bold text-blue-600">
+            Área = (Largura × Altura) - (3 × Raio × Raio)
+          </span>
+        </div>
+        <div className="text-sm text-gray-600 space-y-1 mt-2">
+          <p><strong>Largura</strong> e <strong>Altura</strong> do retângulo</p>
+          <p><strong>Raio</strong> do círculo</p>
+          <p><strong>π</strong> ≈ 3 (pi)</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function MultiplicacaoAlgebricaHint(): ReactNode {
   return (
     <div className="space-y-4">
@@ -230,6 +253,8 @@ const renderHintContent = (type: string): ReactNode => {
     case 'perimetro_circulo':
     case 'circle_perimeter':
       return <PerimetroCirculoHint />;
+    case 'rectangle_minus_circle':
+      return <RectangleMinusCircleHint />;
     case 'fraction_operation_addition':
       return <FractionOperationHint />;
     case 'fraction_operation_multiplication':
