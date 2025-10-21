@@ -284,48 +284,57 @@ const CircleFromCircumferenceSVG: React.FC<{ circumference: number }> = () => (
 )
 
 const RectangleMinusCircleSVG: React.FC<{ width: number; height: number; radius: number }> = ({ width, height, radius }) => {
-  // Scale factors to fit within a 200x120 viewBox, similar to other SVGs
-  const scale = Math.min(180 / width, 80 / height);
-  const scaledWidth = width * scale;
-  const scaledHeight = height * scale;
-  const scaledRadius = radius * scale;
+  // Fixed visual dimensions for the SVG elements
+  const visualRectWidth = 120;
+  const visualRectHeight = 80;
+  const visualCircleRadius = 20;
 
-  const rectX = (200 - scaledWidth) / 2;
-  const rectY = (120 - scaledHeight) / 2;
+  // Calculate positions to center them in the viewBox (200x120)
+  const rectX = (200 - visualRectWidth) / 2;
+  const rectY = (120 - visualRectHeight) / 2;
   const circleCx = 100;
   const circleCy = 60;
 
   return (
     <svg viewBox="0 0 200 120" className="w-full h-36 md:h-64">
-      {/* Rectangle */}
+      {/* Rectangle (fixed visual size) */}
       <rect
         x={rectX}
         y={rectY}
-        width={scaledWidth}
-        height={scaledHeight}
-        fill="none"
+        width={visualRectWidth}
+        height={visualRectHeight}
+        fill="#ef444430"
         stroke="#374151"
         strokeWidth="3"
       />
-      {/* Circle (subtracted area) */}
+      {/* Circle (fixed visual size) */}
       <circle
         cx={circleCx}
         cy={circleCy}
-        r={scaledRadius}
-        fill="#ef444430" // Light red fill to indicate subtraction
+        r={visualCircleRadius}
+        fill="white"
         stroke="#ef4444"
         strokeWidth="2"
         strokeDasharray="4,4"
       />
-      {/* Text for dimensions */}
-      <text x={rectX + scaledWidth / 2} y={rectY + scaledHeight + 15} textAnchor="middle" className="text-[16px] sm:text-sm font-semibold fill-slate-700">
-        L: {width} cm
+      {/* Radius line (fixed visual size) */}
+      <line
+        x1={circleCx}
+        y1={circleCy}
+        x2={circleCx + visualCircleRadius}
+        y2={circleCy}
+        stroke="#ef4444"
+        strokeWidth="2"
+      />
+      {/* Text for dimensions (using actual problem values) */}
+      <text x={rectX + visualRectWidth / 2} y={rectY + visualRectHeight + 15} textAnchor="middle" className="text-[16px] sm:text-sm font-normal fill-slate-700">
+         {width} cm
       </text>
-      <text x={rectX - 10} y={rectY + scaledHeight / 2} textAnchor="middle" className="text-[16px] sm:text-sm font-semibold fill-slate-700" transform={`rotate(-90 ${rectX - 10} ${rectY + scaledHeight / 2})`}>
-        A: {height} cm
+      <text x={rectX - 10} y={rectY + visualRectHeight / 2} textAnchor="middle" className="text-[16px] sm:text-sm font-normal fill-slate-700" transform={`rotate(-90 ${rectX - 10} ${rectY + visualRectHeight / 2})`}>
+         {height} cm
       </text>
-      <text x={circleCx} y={circleCy - scaledRadius - 5} textAnchor="middle" className="text-[16px] sm:text-sm font-semibold fill-red-600">
-        R: {radius} cm
+      <text x={circleCx} y={circleCy - visualCircleRadius - 5} textAnchor="middle" className="text-[12px] sm:text-xs font-normal fill-red-900">
+        Raio: {radius} cm
       </text>
     </svg>
   );
@@ -420,12 +429,9 @@ export default function GeometryAreaSkeleton({
         </div>
         
       )}
-      {/* Show dimensions for rectangle_minus_circle */}
-      {problem.shape === "rectangle_minus_circle" && (
+     {problem.shape === "rectangle_minus_circle" && (
         <div className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-700">
-          Retângulo: {problem.measurements.width}x{problem.measurements.height} cm, Círculo Raio: {problem.measurements.radius} cm
-          <br />
-          𝝿 = 3
+          <span>Calcule a área <span className="font-normal text-red-400">marcada</span>. π = 3 </span>
         </div>
       )}
 
