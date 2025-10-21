@@ -113,6 +113,21 @@ function PerimetroCirculoHint(): ReactNode {
   );
 }
 
+function RectangleMinusCircleHint(): ReactNode {
+  return (
+    <div className="space-y-4">
+      <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">
+      </h3>
+      <Image
+        src="/rect_minus_circ.svg"
+        alt="Calculo da área marcada"
+         width={250}
+         height={100}
+        className="mx-auto w-full h-auto"/>
+    </div>
+  );
+}
+
 function MultiplicacaoAlgebricaHint(): ReactNode {
   return (
     <div className="space-y-4">
@@ -205,6 +220,22 @@ function FractionMultiplicationHint(): ReactNode {
   );
 }
 
+function CircleFromCircumferenceHint(): ReactNode {
+  return (
+    <div className="space-y-4">
+      <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">
+        Área do Círculo a partir da Circunferência
+      </h3>
+      <Image
+        src="/circ_perim_hint.svg"
+        alt="Soma de frações com denominador diferente"
+         width={250}
+         height={100}
+        className="mx-auto w-full h-auto"/>
+    </div>
+  );
+}
+
 // Function to render hint content based on question type
 const renderHintContent = (type: string): ReactNode => {
   switch (type) {
@@ -216,8 +247,9 @@ const renderHintContent = (type: string): ReactNode => {
       return <AreaTrapezioHint />;
     case 'area_circulo':
     case 'circle':
-    case 'circle_from_circumference':
       return <AreaCirculoHint /> ;
+    case 'circle_from_circumference':
+      return <CircleFromCircumferenceHint />;
     case 'area_retangulo':
     case 'rectangle':
       return <AreaRetanguloHint />;
@@ -230,6 +262,8 @@ const renderHintContent = (type: string): ReactNode => {
     case 'perimetro_circulo':
     case 'circle_perimeter':
       return <PerimetroCirculoHint />;
+    case 'rectangle_minus_circle':
+      return <RectangleMinusCircleHint />;
     case 'fraction_operation_addition':
       return <FractionOperationHint />;
     case 'fraction_operation_multiplication':

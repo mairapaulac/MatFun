@@ -1,5 +1,5 @@
 
-export type GeometryShape = "triangle" | "rectangle" | "parallelogram" | "trapezoid" | "circle" | "circle_from_circumference";
+export type GeometryShape = "triangle" | "rectangle" | "parallelogram" | "trapezoid" | "circle" | "circle_from_circumference" | "rectangle_minus_circle";
 
 export interface GeneratedGeometryProblem {
   shape: GeometryShape;
@@ -63,6 +63,34 @@ export function generateGeometryProblem(allowedShapes: GeometryShape[]): Generat
       measurements = { circumference };
       area = 3 * r * r;
       break;
+
+    case "rectangle_minus_circle": {
+      const rectWidth = Math.floor(Math.random() * 5) + 6; // 6-10
+      let rectHeight = Math.floor(Math.random() * 5) + 6; // 6-10
+      
+      // Ensure rectangle dimensions are distinct for more variety
+      while (rectHeight === rectWidth) {
+        rectHeight = Math.floor(Math.random() * 5) + 6;
+      }
+
+      const minDim = Math.min(rectWidth, rectHeight);
+      const maxPossibleRadius = Math.floor(minDim / 2); 
+      
+      // Ensure maxPossibleRadius is at least 2 to allow for a valid circleRadius
+      const effectiveMaxRadius = Math.max(2, maxPossibleRadius); 
+
+      let circleRadius = Math.floor(Math.random() * (effectiveMaxRadius - 1)) + 1; // 1 to effectiveMaxRadius - 1
+
+      // Ensure circleRadius is at least 1
+      if (circleRadius < 1) circleRadius = 1;
+
+      const areaRect = rectWidth * rectHeight;
+      const areaCirc = 3 * circleRadius * circleRadius; // Using pi approx 3
+
+      area = areaRect - areaCirc;
+      measurements = { width: rectWidth, height: rectHeight, radius: circleRadius };
+      break;
+    }
   }
 
   return {
