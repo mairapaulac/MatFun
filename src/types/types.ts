@@ -84,3 +84,17 @@ export interface IRankingPlayers{
   };
   score:number;
 }
+  
+export interface IUserAchievements {
+  achievementId: number;
+  achievementName: string;
+  achievementDescription: string;
+  requiredStat: string;
+  requiredValue: number;
+  achievementIcon: string;
+  achievementCategory: string;
+  iconColor: string;
+  isUnlocked: false;
+  progress: number;
+  currentValue: number;
+}
