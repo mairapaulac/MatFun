@@ -82,8 +82,11 @@ export default function FractionOperationCard({
   //quando implementar subtração tira esse comentario if(operator === '-'){cor = "#cd0000ff"};
 
   return (
+    
     <div className="w-full max-w-4xl mx-auto p-4 sm:p-6">
+      {operator === '=' && (<h1 className="text-4xl sm:text-4xl md:text-6xl font-bold text-center mb-12 relative -top-4">Simplifique</h1>)}
         <div className="flex items-center justify-center space-x-4 sm:space-x-6 md:space-x-8 flex-wrap gap-y-4">
+          
           {/* primeira fracoeo */}
           <FractionDisplay numerator={num1} denominator={den1} />
           
