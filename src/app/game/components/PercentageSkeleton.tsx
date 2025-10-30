@@ -57,9 +57,9 @@ export default function PercentageSkeleton({
     );
 
     const staticField = (value: number | string) => (
-      <div className="w-18 h-16 sm:w-28 sm:h-20 md:w-32 md:h-24 text-center text-3xl sm:text-4xl md:text-5xl font-normal border-2 border-slate-400 rounded-lg flex items-center justify-center bg-slate-100 text-slate-600">
-        {value}
-      </div>
+    <div className="px-6 py-4 text-center text-3xl sm:text-4xl md:text-5xl font-normal border-2 border-slate-400 rounded-lg flex items-center justify-center bg-slate-100 text-slate-600 w-fit">
+      {value}
+    </div>
     );
 
     switch (problemType) {
@@ -102,7 +102,7 @@ export default function PercentageSkeleton({
           <div className="flex items-center justify-center space-x-2 sm:space-x-4 text-2xl sm:text-3xl font-bold text-slate-900">
             {staticField(base)}
             <span className="text-slate-700" style={{color:"#00cd52ff"}}>+</span>
-            {staticField(`${percentage}%`)}
+            {staticField(`${percentage}% de ${base}`)}
             <span className="text-slate-700">=</span>
             {inputField}
           </div>
@@ -113,7 +113,7 @@ export default function PercentageSkeleton({
           <div className="flex items-center justify-center space-x-2 sm:space-x-4 text-2xl sm:text-3xl font-bold text-slate-900">
             {staticField(base)}
             <span className="text-slate-700"style={{color:"#cd0000ff"}}>-</span>
-            {staticField(`${percentage}%`)}
+            {staticField(`${percentage}% de ${base}`)}
             <span className="text-slate-700">=</span>
             {inputField}
           </div>
