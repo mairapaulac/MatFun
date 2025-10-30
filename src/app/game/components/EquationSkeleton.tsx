@@ -54,6 +54,21 @@ export default function EquationSkeleton({
     );
   }
 
+  if (problem.type === 'exponentiation') {
+    const base = problem.firstNumber;
+    const exponent = problem.secondNumber;
+    const exponentChar = exponent === 2 ? '²' : '³';
+    const numberString = `${base}${exponentChar}`;
+
+    return (
+      <div className="relative flex items-center justify-center space-x-2 sm:space-x-4 md:space-x-6">
+        {renderField(numberString, false)}
+        <span className="text-3xl md:text-4xl font-bold text-slate-700">=</span>
+        {renderField(answerValue, true)}
+      </div>
+    );
+  }
+
   // Handling new problem types with equationString
   if (problem && 'equationString' in problem && typeof problem.equationString === 'string') {
     let cor = "#000000a0";
@@ -87,7 +102,10 @@ export default function EquationSkeleton({
       <div className="text-center space-y-4 md:space-y-6">
         <div className="relative flex items-center justify-center flex-wrap gap-x-2 sm:gap-x-4 text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-slate-900">
           {tokens.map((token, index) => {
-            if (!isNaN(Number(token))) { // It's a number
+            if (token.startsWith('√')) { // Special case for square root
+              const sqrtContainerClasses = "h-12 sm:h-16 md:h-24 lg:h-20 px-4 text-center text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-normal border-2 rounded-lg flex items-center justify-center border-slate-400 bg-slate-100 text-slate-600";
+              return <div key={index} className={sqrtContainerClasses}>{token}</div>;
+            } else if (!isNaN(Number(token))) { // It's a number
               return <div key={index}>{renderField(token, false)}</div>;
             } else if (token === '?') { // It's the answer blank
               return <div key={index}>{renderField(answerValue, true)}</div>;
