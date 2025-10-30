@@ -301,7 +301,7 @@ export default function QuestionPage() {
         questionSkeleton={getQuestionSkeleton()}
         questionType={getQuestionType()}
         currentAnswer={currentAnswer}
-        totalMs={9999999999}//{60000}
+        totalMs={60000}
         onSubmit={handleSubmit}
         onTimeout={handleTimeout}
         onKeypadPress={handleKeypadPress}
