@@ -60,6 +60,29 @@ export default function EquationSkeleton({
     const equationString = problem.equationString;
     const tokens = equationString.split(' ');
 
+    if (problem.type === 'first_degree_equation') {
+      return (
+        <div className="text-center space-y-6">
+          <h2 className="text-2xl md:text-3xl font-semibold text-slate-800">Encontre o valor de x:</h2>
+          
+          {/* The equation in blocks */}
+          <div className="relative flex items-center justify-center flex-wrap gap-x-2 sm:gap-x-4 text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-slate-900">
+            {renderField(problem.firstNumber + 'x', false)}
+            <span className="text-3xl md:text-4xl font-bold text-slate-700">+</span>
+            {renderField(problem.secondNumber.toString(), false)}
+            <span className="text-3xl md:text-4xl font-bold text-slate-700">=</span>
+            {renderField(problem.result.toString(), false)}
+          </div>
+
+          {/* The answer input */}
+          <div className="flex items-center justify-center pt-4">
+            <span className="text-3xl md:text-4xl font-bold text-slate-700 mr-4">x =</span>
+            {renderField(answerValue, true)}
+          </div>
+        </div>
+      )
+    }
+
     return (
       <div className="text-center space-y-4 md:space-y-6">
         <div className="relative flex items-center justify-center flex-wrap gap-x-2 sm:gap-x-4 text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-slate-900">

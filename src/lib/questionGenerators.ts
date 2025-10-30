@@ -2,6 +2,7 @@ import {
     generateLevel1AlgebraProblem,
     generateOrderOfPrecedenceEquation,
     generateComplexEquationWithBlanks,
+    generateFirstDegreeEquation,
     type GeneratedProblem
 } from './algebraProblemGenerator';
 import {
@@ -27,7 +28,7 @@ export type Problem = GeneratedProblem | GeneratedGeometryProblem | CircleFromCi
 export const questionGenerators = {
     algebra: {
         1: [generateLevel1AlgebraProblem],
-        2: [generateOrderOfPrecedenceEquation],
+        2: [generateOrderOfPrecedenceEquation, generateFirstDegreeEquation],
         3: [generateComplexEquationWithBlanks],
     },
     geometry: {

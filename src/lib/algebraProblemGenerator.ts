@@ -1,5 +1,5 @@
 
-export type ProblemType = "both_empty" | "first_filled" | "second_filled" | "result_empty" | "complex_blank";
+export type ProblemType = "both_empty" | "first_filled" | "second_filled" | "result_empty" | "complex_blank" | "first_degree_equation";
 
 export interface GeneratedProblem {
   firstNumber: number;
@@ -85,5 +85,24 @@ export function generateOrderOfPrecedenceEquation(): GeneratedProblem {
         type: 'complex_blank',
         equationString: equation,
         correctAnswer: missing_b,
+    };
+  }
+
+  export function generateFirstDegreeEquation(): GeneratedProblem {
+    const x = Math.floor(Math.random() * 10) + 1; // Solution 1-10
+    const a = Math.floor(Math.random() * 4) + 2;  // Coefficient 'a' 2-5
+    const b = Math.floor(Math.random() * 20) + 1; // Term 'b' 1-20
+    const c = a * x + b; // Calculate 'c'
+  
+    // The user needs to find 'x'. The equation string will not show 'x' but a blank space.
+    const equationString = `${a}x + ${b} = ${c}`;
+  
+    return {
+      firstNumber: a,
+      secondNumber: b,
+      result: c,
+      type: 'first_degree_equation',
+      equationString: `${a}x + ${b} = ${c}`,
+      correctAnswer: x,
     };
   }
