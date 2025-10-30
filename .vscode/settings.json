@@ -1,9 +1,0 @@
-{
-  "editor.fontSize": 17,
-  "editor.lineHeight": 22,
-  "editor.fontFamily": "Fira Code",
-  "workbench.colorCustomizations": {
-    "editor.background": "#1e2735",
-    "sideBar.background": "#242e3c"
-  }
-}
