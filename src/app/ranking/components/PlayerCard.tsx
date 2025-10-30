@@ -28,7 +28,7 @@ export default function PlayerCard({ rank, name, points }: PlayerCardProps) {
     <div
       className={cn(
         "relative flex items-center justify-between gap-4 p-4 rounded-2xl transition-all duration-300 hover:scale-[1.01] border bg-white shadow-sm",
-        isTopThree ? "border-blue-200 shadow-md" : "border-gray-200 hover:shadow-md"
+        isTopThree ? "border-3 border-[#1E3A8A]/70 shadow-md" : "border-3 border-[#1E3A8A]/70 hover:shadow-md"
       )}
       style={{ animationDelay: `${rank * 0.05}s` }}
     >
