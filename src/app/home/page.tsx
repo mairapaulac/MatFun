@@ -17,8 +17,11 @@ export default function HomePage() {
   const router = useRouter();
   const { userData } = useUserStore();
   const userId = userData?.id;
-  
-  const {data: achievements, isLoading, isError, error} = useFetchUserAchievements(userId)
+  const {data: achievements, isLoading} = useFetchUserAchievements(userId)
+  const totalQuestions =
+  achievements
+    ?.filter((a) => a.achievementName !== "Guerreiro Matemático") // exclui a conquista específica
+    .reduce((sum, item) => sum + (item.currentValue || 0), 0) || 0;
   return (
     <div className="flex flex-col w-full min-h-screen bg-[#24366b] bg-pattern overflow-x-hidden overflow-y-auto">
       <Navbar />
@@ -34,7 +37,7 @@ export default function HomePage() {
           </Button>
         </div>
 
-        <div className="mb-8 space-y-5 flex-1 max-h-[400px] overflow-y-auto" style={{ animationDelay: "0.3s" }}>
+        <div className="mb-4 space-y-5 flex-1 max-h-[400px] md:max-h-[620px] lg:max-h-[400px] overflow-y-auto custom-scrollbar" style={{ animationDelay: "0.3s" }}>
           {isLoading ? (
             <p className="text-white text-center">Carregando conquistas...</p>
           ) : achievements && achievements.length > 0 ? (
@@ -61,7 +64,7 @@ export default function HomePage() {
           />
           <StatCard
             icon={BookMarked}
-            title="156"
+            title={totalQuestions.toString()}
             subtitle="questões acertadas"
             iconColor="#3B82F6"
             className="h-[80px] sm:h-[100px] md:h-[110px]"

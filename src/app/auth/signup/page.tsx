@@ -6,15 +6,12 @@ export default function SignUpPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
       <Image
-        className="mb-4 w-[220px] sm:w-[280px] md:w-[350px]"
-        src="/logo-matfun.svg"
+        className="mb-4 w-[220px] sm:w-[280px] md:w-[650px]"
+        src="/logomatfun.svg"
         width={350}
         height={87}
         alt="MatFun's logo"
       />
-      <h1 className="mb-4 text-4xl md:text-5xl lg:text-6xl text-white text-center">
-        MAT <span className="text-[#F43F5E]">FUN</span>
-      </h1>
       <TanstackProvider>
         <RegisterForm />
       </TanstackProvider>

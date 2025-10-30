@@ -25,7 +25,7 @@ export default function AchievementCard({ achievement }: AchievementCardProps) {
   const Icon = iconMap[achievementIcon];
 
   return (
-    <Card className="w-full h-auto min-h-[110px] flex items-center gap-2 p-2 sm:p-6 animate-slide-in-up active:scale-95 transition-all duration-200">
+    <Card className="w-full h-auto min-h-[110px] flex items-center gap-2 p-2 sm:p-2 md:p-4 lg:p-3 animate-slide-in-up active:scale-95 transition-all duration-200 border-3 border-[#1E3A8A]/70">
       <div
         className="flex-shrink-0 p-3 rounded-xl "
          style={{ backgroundColor: iconColor }}

@@ -31,7 +31,7 @@ export default function RankingScreen() {
           </TabsList>
         </div>
         <TabsContent value="geral" className="mt-0 max-w-[800px]">
-          <div className="bg-gradient-to-r from-[#2B3A67] via-[#314991] to-[#2B3A67] rounded-2xl p-4 shadow-md border-2 border-gray-200/30">
+          <div className="bg-gradient-to-r from-[#2B3A67] via-[#314991] to-[#2B3A67] rounded-2xl p-4 shadow-md border-3 border-gray-300/30">
             <div className="flex items-center gap-2 mb-4 text-white">
               <Globe className="size-5" />
               <h2 className="text-xl font-normal">Ranking Geral</h2>

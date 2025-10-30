@@ -50,10 +50,9 @@ export default function LandingPage() {
 
       {/* Hero Section */}
       <main className="text-center py-20 px-8 bg-pattern">
-        <div className="mb-8">
-            <Image src="/logo-matfun.svg" alt="MatFun Logo" width={400} height={128} className="mx-auto"/>
-            <h1 className="mb-4 text-4xl md:text-5xl lg:text-6xl text-white text-center">MAT <span className="text-[#F43F5E]">FUN</span>
-      </h1>
+        <div className="mb-12 ">
+            {/* <Image src="/logo-matfun.svg" alt="MatFun Logo" width={400} height={128} className="mx-auto"/> */}
+            <Image src="/logomatfun.svg" alt="MatFun Logo" width={800} height={256} className="mx-auto"/>
         </div>
         <h2 className="text-5xl font-bold mb-4 text-shadow">Aprenda Matemática Jogando!</h2>
         <p className="text-lg max-w-2xl mx-auto mb-8 text-shadow">

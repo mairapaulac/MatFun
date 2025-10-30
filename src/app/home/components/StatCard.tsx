@@ -16,7 +16,7 @@ export default function StatCard({ icon: Icon, title, subtitle, iconColor = "#2B
       className={cn(
         "flex items-center gap-3 sm:gap-4 p-4 sm:p-5",
         "bg-gradient-to-br from-white via-gray-50 to-white",
-        "shadow-xl active:scale-95 transition-all duration-200",
+        "shadow-xl active:scale-95 transition-all duration-200 border-3 border-[#1E3A8A]/70",
         className,
       )}
     >
