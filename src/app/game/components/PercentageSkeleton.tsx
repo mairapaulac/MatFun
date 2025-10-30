@@ -57,7 +57,7 @@ export default function PercentageSkeleton({
     );
 
     const staticField = (value: number | string) => (
-    <div className="px-6 py-4 text-center text-3xl sm:text-4xl md:text-5xl font-normal border-2 border-slate-400 rounded-lg flex items-center justify-center bg-slate-100 text-slate-600 w-fit">
+    <div className="px-4 py-4 text-center text-3xl sm:text-4xl md:text-5xl font-normal border-2 border-slate-400 rounded-lg flex items-center justify-center bg-slate-100 text-slate-600 w-fit">
       {value}
     </div>
     );
