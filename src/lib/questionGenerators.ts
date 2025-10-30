@@ -3,7 +3,10 @@ import {
     generateOrderOfPrecedenceEquation,
     generateComplexEquationWithBlanks,
     generateFirstDegreeEquation,
-    type GeneratedProblem
+    generateSystemOfEquations,
+    generateExponentProblem,
+    generateSquareRootProblem,
+    type GeneratedProblem,
 } from './algebraProblemGenerator';
 import {
     generateGeometryProblem,
@@ -28,7 +31,7 @@ export type Problem = GeneratedProblem | GeneratedGeometryProblem | CircleFromCi
 export const questionGenerators = {
     algebra: {
         1: [generateLevel1AlgebraProblem],
-        2: [generateOrderOfPrecedenceEquation, generateFirstDegreeEquation],
+        2: [generateOrderOfPrecedenceEquation, generateFirstDegreeEquation, generateExponentProblem, generateSquareRootProblem],
         3: [generateComplexEquationWithBlanks],
     },
     geometry: {
