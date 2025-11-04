@@ -303,7 +303,7 @@ const RectangleMinusCircleSVG: React.FC<{ width: number; height: number; radius:
         y={rectY}
         width={visualRectWidth}
         height={visualRectHeight}
-        fill="#ef444430"
+        fill="#fb2c36"
         stroke="#374151"
         strokeWidth="3"
       />
@@ -323,7 +323,7 @@ const RectangleMinusCircleSVG: React.FC<{ width: number; height: number; radius:
         y1={circleCy}
         x2={circleCx + visualCircleRadius}
         y2={circleCy}
-        stroke="#ef4444"
+        stroke="#ef1111"
         strokeWidth="2"
       />
       {/* Text for dimensions (using actual problem values) */}
@@ -333,8 +333,8 @@ const RectangleMinusCircleSVG: React.FC<{ width: number; height: number; radius:
       <text x={rectX - 10} y={rectY + visualRectHeight / 2} textAnchor="middle" className="text-[16px] sm:text-sm font-normal fill-slate-700" transform={`rotate(-90 ${rectX - 10} ${rectY + visualRectHeight / 2})`}>
          {height} cm
       </text>
-      <text x={circleCx} y={circleCy - visualCircleRadius - 5} textAnchor="middle" className="text-[12px] sm:text-xs font-normal fill-red-900">
-        Raio: {radius} cm
+      <text x={circleCx} y={circleCy - visualCircleRadius - 5} textAnchor="middle" className="text-[10px] sm:text-xs font-normal fill-white">
+        r = {radius} cm
       </text>
     </svg>
   );
@@ -431,7 +431,7 @@ export default function GeometryAreaSkeleton({
       )}
      {problem.shape === "rectangle_minus_circle" && (
         <div className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-700">
-          <span>Calcule a área <span className="font-normal text-red-400">marcada</span>. π = 3 </span>
+          <span>Calcule a área <span className="font-normal text-red-500">destacada </span>. π = 3 </span>
         </div>
       )}
 

@@ -3,7 +3,6 @@ import {
     generateOrderOfPrecedenceEquation,
     generateComplexEquationWithBlanks,
     generateFirstDegreeEquation,
-    generateSystemOfEquations,
     generateExponentProblem,
     generateSquareRootProblem,
     type GeneratedProblem,
@@ -37,7 +36,8 @@ export const questionGenerators = {
     geometry: {
         1: [() => generateGeometryProblem(["triangle", "rectangle", "parallelogram", "trapezoid"])],
         2: [() => generateGeometryProblem(["circle"])],
-                3: [() => generateGeometryProblem(["circle_from_circumference", "rectangle_minus_circle"])],    },
+                3: [() => generateGeometryProblem(["circle_from_circumference", "rectangle_minus_circle"])],
+    },
     fraction: {
         1: [() => generateFractionQuestion('×')],
         2: [() => generateFractionQuestion('=')],
