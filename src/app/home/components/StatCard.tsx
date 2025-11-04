@@ -15,15 +15,14 @@ export default function StatCard({ icon: Icon, title, subtitle, iconColor = "#2B
     <Card
       className={cn(
         "flex items-center gap-3 sm:gap-4 p-4 sm:p-5",
-        "bg-gradient-to-br from-white via-gray-50 to-white",
+        "bg-white",
         "shadow-xl active:scale-95 transition-all duration-200",
         className,
       )}
     >
       <div
-        className="flex-shrink-0 p-3 sm:p-4 rounded-2xl shadow-lg"
+        className="flex-shrink-0 p-3 sm:p-4 rounded-2xl "
         style={{
-          background: `linear-gradient(135deg, ${iconColor}20, ${iconColor}10)`,
           border: `2px solid ${iconColor}30`,
         }}
       >

@@ -14,7 +14,7 @@ export default function LandingPage() {
   return (
     <div className="bg-background text-white min-h-screen w-screen overflow-x-hidden">
       {/* Header */}
-      <header className="py-4 px-8 flex justify-between items-center bg-gradient-to-r from-[#2B3A67] via-[#314991] to-[#2B3A67] border-b border-white/10 drop-shadow-xl sticky top-0 z-50">
+      <header className="py-4 px-8 flex justify-between items-center bg-[#2B3A67] border-b border-gray-700  sticky top-0 z-50">
         <div className="flex items-center">
             <Image src="/logomatfun.svg" alt="MatFun Logo" width={150} height={50} />
             <nav className="hidden lg:flex items-center space-x-6 text-lg ml-10">

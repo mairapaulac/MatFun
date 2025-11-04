@@ -32,7 +32,7 @@ export default function HomePage() {
 
         <div className="mb-8 space-y-5 flex-1" style={{ animationDelay: "0.3s" }}>
           <Card className="w-full h-auto min-h-[110px] flex items-center gap-2 p-2 sm:p-6 animate-slide-in-up active:scale-95 transition-all duration-200">
-            <div className="flex-shrink-0 bg-gradient-to-br from-[#314991] to-[#24366b] p-3 rounded-xl">
+            <div className="flex-shrink-0 bg-[#314991] p-3 rounded-xl">
               <Sword className="w-8 h-8 text-white" />
             </div>
             <div className="flex-1">
@@ -42,7 +42,7 @@ export default function HomePage() {
               <div className="flex items-center gap-3 mb-2">
                 <div className="flex-1 bg-gray-200 rounded-full h-3 overflow-hidden">
                   <div
-                    className="bg-gradient-to-r from-[#22C55E] to-[#16A34A] h-full rounded-full transition-all duration-500"
+                    className="bg-[#22C55E] h-full rounded-full transition-all duration-500"
                     style={{ width: "66%" }}
                   />
                 </div>
@@ -69,7 +69,7 @@ export default function HomePage() {
               <div className="flex items-center gap-3 mb-2">
                 <div className="flex-1 bg-gray-200 rounded-full h-3 overflow-hidden">
                   <div
-                    className="bg-gradient-to-r from-[#F43F5E] to-[#E11D48] h-full rounded-full transition-all duration-500"
+                    className="bg-[#F43F5E]  h-full rounded-full transition-all duration-500"
                     style={{ width: "47%" }}
                   />
                 </div>
@@ -84,7 +84,7 @@ export default function HomePage() {
           </Card>
 
           <Card className="w-full h-auto min-h-[110px] flex items-center gap-4 p-2 sm:p-6 animate-slide-in-up active:scale-95 transition-all duration-200">
-            <div className="flex-shrink-0 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] p-3 rounded-xl">
+            <div className="flex-shrink-0 bg-[#3B82F6] p-3 rounded-xl">
               <Calculator className="w-8 h-8 text-white" />
             </div>
             <div className="flex-1">
