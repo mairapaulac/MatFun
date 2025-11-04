@@ -296,9 +296,9 @@ export default function QuestionPage() {
       <div className="absolute top-4 left-4 z-10">
         <button
           onClick={() => setIsExitModalOpen(true)}
-          className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 hover:scale-110 "
+          className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white backdrop-blur-sm transition-all duration-300 hover:scale-110 "
         >
-          <Undo2 className="h-[30px] w-[30px] sm:h-[40px] sm:w-[40px] text-white transition-all group-hover:-translate-x-1" />
+          <Undo2 className="h-[30px] w-[30px] sm:h-[40px] sm:w-[40px] text-blue-950 transition-all group-hover:-translate-x-1" />
         </button>
       </div>
       <QuestionScreen
