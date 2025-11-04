@@ -8,7 +8,7 @@ export default function RankingScreen() {
     <div className="flex flex-col items-center min-h-screen max-h-[1280px] max-w-screen mx-auto px-0 py-0 text-white relative overflow-hidden bg-pattern">
       <Navbar   />
       <Tabs defaultValue="geral" className="w-full max-w-[800px] z-10 pt-2 md:pt-6 ">
-        <div className="bg-[#2B3A67] rounded-2xl p-2 mb-8 shadow-xl border-2 border-white/30">
+        <div className="bg-[#2B3A67] rounded-2xl p-2 mb-8 shadow-xl border-1 border-gray-400">
           <TabsList className="flex justify-center w-full gap-4">
             <TabsTrigger
               value="turma"
@@ -22,7 +22,7 @@ export default function RankingScreen() {
         </div>
 
         <TabsContent value="turma" className="mt-0 max-w-[800px]">
-          <div className="bg-gradient-to-r from-[#2B3A67] via-[#314991] to-[#2B3A67] rounded-2xl p-4 shadow-md border-2 border-gray-200/30">
+          <div className="bg-[#2B3A67] rounded-2xl p-4 shadow-md border-1 border-gray-400 ">
             <div className="flex items-center gap-2 mb-4 text-white">
               <Users className="size-5" />
               <h2 className="text-xl font-normal">Ranking da Turma</h2>
@@ -43,7 +43,7 @@ export default function RankingScreen() {
 
         {/* Conteúdo: Ranking Geral */}
         <TabsContent value="geral" className="mt-0">
-          <div className="bg-gradient-to-r from-[#2B3A67] via-[#314991] to-[#2B3A67] rounded-2xl p-4 shadow-md border-2 border-gray-200/30">
+          <div className="bg-[#2B3A67] rounded-2xl p-4 shadow-md border-1 border-gray-400">
             <div className="flex items-center gap-2 mb-4 text-white">
               <Globe className="size-5" />
               <h2 className="text-xl font-normal">Ranking Geral</h2>
@@ -64,7 +64,7 @@ export default function RankingScreen() {
       </Tabs>
 
       <div className="w-full z-10 mt-2 max-w-[800px]">
-        <div className="bg-gradient-to-r from-[#2B3A67] via-[#314991] to-[#2B3A67] rounded-2xl p-4 shadow-xl border-2 border-white/20">
+        <div className="bg-[#2B3A67] rounded-2xl p-4 shadow-xl border-1 border-gray-400">
           <PlayerCard {...userData}  />
         </div>
       </div>

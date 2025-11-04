@@ -10,16 +10,16 @@ export default function Navbar() {
         <div className="flex items-center justify-center w-[50px] h-[50px] sm:w-[60px] sm:h-[60px]">
           <Link
             href={"/home"}
-            className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 hover:scale-110 "
+            className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white backdrop-blur-sm hover:bg-blue-600 transition-all duration-300 hover:scale-110 "
           >
-            <ArrowLeft className="w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] text-white hover:text-gray-300 transition-all hover:-translate-x-1" />
+            <ArrowLeft className="w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] text-blue-950 hover:text-gray-300 transition-all hover:-translate-x-1" />
           </Link>
         </div>
 
         <div className="flex-grow flex flex-col items-center justify-center">
           <div className="flex items-center gap-3">
             <Trophy className="size-8 md:size-12 text-yellow-400" fill="currentColor" />
-            <h1 className="text-4xl md:text-5xl font-light text-center bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-light text-center bg-white  bg-clip-text ">
               Ranking
             </h1>
           </div>
@@ -33,11 +33,8 @@ export default function Navbar() {
 
         {/* logout */}
         <div className="flex items-center justify-center w-[50px] h-[50px] sm:w-[60px] sm:h-[60px]">
-          <Link
-            href={"/auth/signin"}
-            className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 hover:scale-110 "
-          >
-            <LogOut className="w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] text-red-400 hover:text-red-300 transition-all  hover:translate-x-1" />
+          <Link href={"/auth/signin"}className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white backdrop-blur-sm hover:bg-blue-600 transition-all duration-300 hover:scale-110 ">
+            <LogOut className="w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] text-red-500 hover:text-red-800 transition-all " />
           </Link>
         </div>
       </div>

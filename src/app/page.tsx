@@ -36,7 +36,7 @@ export default function LandingPage() {
       </header>
 
       {isMenuOpen && (
-        <div className="lg:hidden bg-gradient-to-b from-[#314991] to-[#2B3A67] py-4 px-8 space-y-4">
+        <div className="lg:hidden bg-[#2B3A67] py-4 px-8 space-y-4">
             <Link href="#como-funciona" className="block hover:text-gray-300 transition-colors">Como Funciona</Link>
             <Link href="#modulos" className="block hover:text-gray-300 transition-colors">Módulos</Link>
             <Link href="#ranking" className="block hover:text-gray-300 transition-colors">Ranking</Link>
@@ -65,20 +65,20 @@ export default function LandingPage() {
       </main>
 
       {/* Como Funciona Section */}
-      <section id="como-funciona" className="py-20 px-8 bg-gradient-to-b from-white to-blue-100 text-gray-800">
+      <section id="como-funciona" className="py-20 px-8 bg-white  text-gray-800">
         <h3 className="text-4xl font-bold text-center mb-12">Como Funciona</h3>
         <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div className="text-center p-6 rounded-lg shadow-lg bg-white/50 backdrop-blur-sm">
+          <div className="text-center p-6 rounded-lg shadow-lg bg-gray-50 backdrop-blur-sm">
             <Star className="mx-auto h-12 w-12 text-yellow-500 mb-4" />
             <h4 className="text-2xl font-bold mb-2">Escolha um módulo</h4>
             <p>Frações, Porcentagem, Geometria e muito mais.</p>
           </div>
-          <div className="text-center p-6 rounded-lg shadow-lg bg-white/50 backdrop-blur-sm">
+          <div className="text-center p-6 rounded-lg shadow-lg bg-gray-50 backdrop-blur-sm">
             <Trophy className="mx-auto h-12 w-12 text-yellow-500 mb-4" />
             <h4 className="text-2xl font-bold mb-2">Resolva os desafios</h4>
             <p>Responda perguntas e ganhe pontos.</p>
           </div>
-          <div className="text-center p-6 rounded-lg shadow-lg bg-white/50 backdrop-blur-sm">
+          <div className="text-center p-6 rounded-lg shadow-lg bg-gray-50 backdrop-blur-sm">
             <Users className="mx-auto h-12 w-12 text-yellow-500 mb-4" />
             <h4 className="text-2xl font-bold mb-2">Suba no ranking!</h4>
             <p>Compare seu desempenho com colegas e escolas.</p>
@@ -96,7 +96,7 @@ export default function LandingPage() {
       </section>
 
       {/* Ranking Section */}
-      <section id="ranking" className="py-20 px-8 bg-gradient-to-b from-white to-blue-100 text-gray-800">
+      <section id="ranking" className="py-20 px-8 bg-white text-gray-800">
         <h3 className="text-4xl font-bold text-center mb-12">Sistema de Ranking e Recompensas</h3>
         {/* Placeholder for ranking */}
         <div className="text-center">
@@ -114,7 +114,7 @@ export default function LandingPage() {
       </section>
 
       {/* Depoimentos Section */}
-      <section id="depoimentos" className="py-20 px-8 bg-gradient-to-b from-white to-blue-100 text-gray-800">
+      <section id="depoimentos" className="py-20 px-8 bg-white text-gray-800">
         <h3 className="text-4xl font-bold text-center mb-12">Depoimentos</h3>
         {/* Placeholder for testimonials */}
         <div className="text-center">
@@ -132,7 +132,7 @@ export default function LandingPage() {
       </section>
 
       {/* Call to Action Final */}
-      <section className="py-20 px-8 text-center bg-gradient-to-b from-white to-blue-100 text-gray-800">
+      <section className="py-20 px-8 text-center bg-white text-gray-800">
         <h3 className="text-4xl font-bold mb-4">Pronto para entrar no jogo?</h3>
         <Button onClick={() => router.push('/auth/signup')} size="lg" className="transition-all duration-300 hover:scale-105 active:scale-95 rounded-bl-4xl rounded-tr-4xl">Começar Agora!</Button>
       </section>

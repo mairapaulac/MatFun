@@ -59,7 +59,7 @@ export default function HomePage() {
           <Card
             className="w-full h-auto min-h-[110px] flex items-center gap-4 p-2 sm:p-6 animate-slide-in-up"
           >
-            <div className="flex-shrink-0 bg-gradient-to-br from-[#F43F5E] to-[#E11D48] p-3 rounded-xl">
+            <div className="flex-shrink-0 bg-[#F43F5E] p-3 rounded-xl">
               <Target className="w-8 h-8 text-white" />
             </div>
             <div className="flex-1">
