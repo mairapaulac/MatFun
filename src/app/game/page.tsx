@@ -174,6 +174,8 @@ export default function QuestionPage() {
           return num * algebraProblem.secondNumber === algebraProblem.result;
         case 'complex_blank': // Level 3
           return num === algebraProblem.correctAnswer;
+        case 'first_degree_equation':
+          return num === algebraProblem.correctAnswer;
       case 'exponentiation':
       case 'square_root': {
         const simpleProblem = problem as GeneratedProblem;
