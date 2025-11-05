@@ -9,7 +9,7 @@ export default function ModuleNavbar() {
       <div className="w-full max-w-[800px] mx-auto h-full flex justify-between items-center">
         {/* back button */}
         <div className="flex items-center justify-center w-[50px] h-[50px] sm:w-[60px] sm:h-[60px]">
-          <Link href={"/home"}className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white backdrop-blur-sm hover:bg-blue-600 transition-all duration-300 hover:scale-110 ">
+          <Link href={"/home"}className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white hover:bg-blue-600 transition-all duration-300 hover:scale-110 ">
             <ArrowLeft className="w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] text-blue-950 hover:text-gray-500 transition-all hover:-translate-x-1" />
           </Link>
         </div>
@@ -25,13 +25,6 @@ export default function ModuleNavbar() {
               <p className="text-lg sm:text-lg text-white">8º Ano, Turma A</p>
             </div>
           </div>
-        </div>
-
-        {/* logout */}
-        <div className="flex items-center justify-center w-[50px] h-[50px] sm:w-[60px] sm:h-[60px]">
-          <Link href={"/auth/signin"}className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white backdrop-blur-sm hover:bg-blue-600 transition-all duration-300 hover:scale-110 ">
-            <LogOut className="w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] text-red-400 hover:text-red-800 transition-all  hover:translate-x-1" />
-          </Link>
         </div>
       </div>
     </nav>

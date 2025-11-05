@@ -94,7 +94,7 @@ export default function HomePage() {
               <div className="flex items-center gap-3 mb-2">
                 <div className="flex-1 bg-gray-200 rounded-full h-3 overflow-hidden">
                   <div
-                    className="bg-gradient-to-r from-[#3B82F6] to-[#2563EB] h-full rounded-full transition-all duration-500"
+                    className="bg-[#2563EB] h-full rounded-full transition-all duration-500"
                     style={{ width: "89%" }}
                   />
                 </div>
