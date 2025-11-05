@@ -22,7 +22,7 @@ export default function RankingScreen() {
         </div>
 
         <TabsContent value="turma" className="mt-0 max-w-[800px]">
-          <div className="bg-[#2B3A67] rounded-2xl p-4 shadow-md border-1 border-gray-400 ">
+          <div className=" bg-gradient-to-r from-[#293864] via-[#334a91] to-[#293864] rounded-2xl p-4 shadow-md border-1 border-gray-400 ">
             <div className="flex items-center gap-2 mb-4 text-white">
               <Users className="size-5" />
               <h2 className="text-xl font-normal">Ranking da Turma</h2>
@@ -43,7 +43,7 @@ export default function RankingScreen() {
 
         {/* Conteúdo: Ranking Geral */}
         <TabsContent value="geral" className="mt-0">
-          <div className="bg-[#2B3A67] rounded-2xl p-4 shadow-md border-1 border-gray-400">
+          <div className=" bg-gradient-to-r from-[#293864] via-[#334a91] to-[#293864] rounded-2xl p-4 shadow-md border-1 border-gray-400">
             <div className="flex items-center gap-2 mb-4 text-white">
               <Globe className="size-5" />
               <h2 className="text-xl font-normal">Ranking Geral</h2>
