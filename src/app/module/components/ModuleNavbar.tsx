@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, LogOut, User } from "lucide-react";
+import { ArrowLeft, User } from "lucide-react";
 import Link from "next/link";
 
 export default function ModuleNavbar() {
