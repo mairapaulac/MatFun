@@ -1,19 +1,12 @@
 "use client";
 
-import { Settings, LogOut, User } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 import Link from "next/link";
 
 export default function Navbar() {
   return (
     <nav className="w-full h-[120px] sm:h-[120px] bg-gradient-to-r from-[#293864] via-[#334a91] to-[#293864] px-4 py-4 sm:py-6 drop-shadow-xl border-b border-gray-700">
       <div className="w-full max-w-[800px] mx-auto h-full flex justify-between items-center">
-        {/* configs */}
-        <div className="flex items-center justify-center w-[50px] h-[50px] sm:w-[60px] sm:h-[60px]">
-          <Link href={"/settings"}className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white backdrop-blur-sm hover:bg-blue-600 transition-all duration-300 hover:scale-110 ">
-            <Settings className="w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] text-[#2B3A67] hover:text-gray-300  transition-all hover:rotate-12" />
-          </Link>
-        </div>
-        
         {/* user info*/}
         <div className="flex-grow flex justify-center items-center gap-2 sm:gap-4">
           <div className="flex items-center gap-2 sm:gap-4">
@@ -29,7 +22,7 @@ export default function Navbar() {
         
         {/* logout */}
         <div className="flex items-center justify-center w-[50px] h-[50px] sm:w-[60px] sm:h-[60px]">
-          <Link href={"/auth/signin"}className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white backdrop-blur-sm hover:bg-blue-600 transition-all duration-300 hover:scale-110 ">
+          <Link href={"/auth/signin"}className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white hover:bg-blue-600 transition-all duration-300 hover:scale-110 ">
             <LogOut className="w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] text-red-500 hover:text-red-800 transition-all " />
           </Link>
         </div>
