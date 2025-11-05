@@ -18,6 +18,8 @@ import { GeneratedPercentageProblem } from "@/lib/percentageProblemGenerator";
 import { useRouter } from "next/navigation";
 import { Undo2 } from "lucide-react";
 
+import { useModuleStore } from "@/stores/moduleStore";
+
 const initialDifficultyScores: Record<Module, number> = {
   algebra: 1.0,
   geometry: 1.0,
@@ -27,6 +29,7 @@ const initialDifficultyScores: Record<Module, number> = {
 
 export default function QuestionPage() {
   const router = useRouter();
+  const { selectedModules } = useModuleStore();
   const [score, setScore] = useState(0);
   const [currentAnswer, setCurrentAnswer] = useState("");
   const [fractionAnswer, setFractionAnswer] = useState({ numerator: "", denominator: "" });
@@ -45,14 +48,9 @@ export default function QuestionPage() {
   const [difficultyScores, setDifficultyScores] = useState(initialDifficultyScores);
   const [shouldAdvance, setShouldAdvance] = useState(false);
 
-  const { currentQuestion, questionNumber, nextQuestion, isReady } = useQuestionRotation(difficultyScores);
+  const { currentQuestion, questionNumber, nextQuestion, isReady } = useQuestionRotation(difficultyScores, selectedModules);
 
-  useEffect(() => {
-    if (currentQuestion) {
-      console.log(`Question #${questionNumber} (Module: ${currentQuestion.module}, Level: ${currentQuestion.level})`);
-      console.log("Current difficulty scores:", difficultyScores);
-    }
-  }, [currentQuestion, difficultyScores, questionNumber]);
+  
 
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
