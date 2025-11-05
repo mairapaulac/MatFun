@@ -186,3 +186,9 @@
   background-attachment: fixed;
   background-position: 0 0;
 }
+
+/* Fallback for old browsers or systems that don't support gradients */
+.no-gradient .bg-gradient-to-r.from-\[\#293864\].via-\[\#334a91\].to-\[\#293864\] {
+  background-image: none;
+  background-color: #24366b;
+}
