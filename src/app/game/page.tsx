@@ -158,7 +158,6 @@ export default function QuestionPage() {
     setTimeout(() => {
       const nextQuestionNumber = questionNumber + 1;
       if (nextQuestionNumber > totalQuestions) {
-        console.log('FIM DE JOGO (Submit) - Salvando:', { updatedGameLog, finalScore });
         setGameResult(updatedGameLog, finalScore);
         router.push("/fim-de-partida");
       } else {
@@ -244,7 +243,6 @@ export default function QuestionPage() {
     setTimeout(() => {
       const nextQuestionNumber = questionNumber + 1;
       if (nextQuestionNumber > totalQuestions) {
-        console.log('FIM DE JOGO (Timeout) - Salvando:', { updatedGameLog, score });
         setGameResult(updatedGameLog, score);
         router.push("/fim-de-partida");
       } else {

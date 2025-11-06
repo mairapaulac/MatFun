@@ -2,42 +2,30 @@
 
 export const dynamic = 'force-dynamic';
 
-import { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { useGameResultStore } from '@/stores/gameResultStore';
 import { Button } from '@/components/ui/button';
 
 export default function EndGamePage() {
   const router = useRouter();
-  const { gameLog, totalScore, clearGameResult } = useGameResultStore((state) => state);
-
-  console.log('TELA DE RESULTADOS - Dados recebidos do store:', { gameLog, totalScore });
-
-  const questionsCorrect = gameLog.filter((entry) => entry.correct).length;
-  const questionsWrong = gameLog.length - questionsCorrect;
-
-  const countModule = (moduleName: string) => {
-    return gameLog.filter((entry) => entry.module === moduleName).length;
-  };
-
-  const fractionsQuestions = countModule('fractions');
-  const geometryQuestions = countModule('geometry');
-  const algebraQuestions = countModule('algebra');
-  const percentageQuestions = countModule('percentage');
-
-  const payload = useMemo(() => ({
-    scoreGained: totalScore,
-    questionsCorrect,
-    fractionsQuestions,
-    geometryQuestions,
-    algebraQuestions,
-    percentageQuestions,
-  }), [totalScore, questionsCorrect, fractionsQuestions, geometryQuestions, algebraQuestions, percentageQuestions]);
+  const { payload, clearGameResult } = useGameResultStore((state) => state);
 
   const handleGoHome = () => {
     clearGameResult();
     router.push('/home');
   };
+
+  // Fallback in case the page is accessed directly without a payload
+  if (!payload) {
+    return (
+      <div className="min-h-screen bg-background bg-pattern flex items-center justify-center p-4">
+        <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-700 mb-4">Nenhum resultado para exibir</h1>
+            <Button onClick={() => router.push('/home')}>Voltar para Home</Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background bg-pattern flex items-center justify-center p-4">
@@ -50,15 +38,15 @@ export default function EndGamePage() {
           <div className="flex flex-col space-y-4 bg-slate-100 p-4 rounded-lg">
             <div className="text-center">
               <p className="text-lg font-semibold text-gray-700">Pontuação Total</p>
-              <p className="text-2xl font-bold text-green-500">{totalScore} pts</p>
+              <p className="text-2xl font-bold text-green-500">{payload.scoreGained} pts</p>
             </div>
             <div className="text-center">
               <p className="text-lg font-semibold text-gray-700">Acertos</p>
-              <p className="text-2xl font-bold text-blue-500">{questionsCorrect}</p>
+              <p className="text-2xl font-bold text-blue-500">{payload.questionsCorrect}</p>
             </div>
             <div className="text-center">
               <p className="text-lg font-semibold text-gray-700">Erros</p>
-              <p className="text-2xl font-bold text-red-500">{questionsWrong}</p>
+              <p className="text-2xl font-bold text-red-500">{payload.questionsWrong}</p>
             </div>
           </div>
         </div>
