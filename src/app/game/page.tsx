@@ -19,6 +19,12 @@ import { useRouter } from "next/navigation";
 import { Undo2 } from "lucide-react";
 
 import { useModuleStore } from "@/stores/moduleStore";
+import { useGameResultStore } from "@/stores/gameResultStore";
+
+interface GameLogEntry {
+  module: string;
+  correct: boolean;
+}
 
 const initialDifficultyScores: Record<Module, number> = {
   algebra: 1.0,
@@ -30,6 +36,10 @@ const initialDifficultyScores: Record<Module, number> = {
 export default function QuestionPage() {
   const router = useRouter();
   const { selectedModules } = useModuleStore();
+  const { setGameResult } = useGameResultStore();
+  const [gameLog, setGameLog] = useState<GameLogEntry[]>([]);
+  const totalQuestions = 20;
+
   const [score, setScore] = useState(0);
   const [currentAnswer, setCurrentAnswer] = useState("");
   const [fractionAnswer, setFractionAnswer] = useState({ numerator: "", denominator: "" });
@@ -117,11 +127,18 @@ export default function QuestionPage() {
 
     const isCorrect = checkAnswer(currentAnswer);
 
+    const newLogEntry = { module: currentQuestion.module, correct: isCorrect };
+    const updatedGameLog = [...gameLog, newLogEntry];
+    setGameLog(updatedGameLog);
+
+    let finalScore = score;
+
     if (isCorrect) {
       const level = currentQuestion.level;
       const basePoints = level === 1 ? 10 : level === 2 ? 15 : 20;
       const points = basePoints * metadata.multiplier;
-      setScore((prev) => prev + points);
+      finalScore += points;
+      setScore(finalScore);
 
       // Update difficulty score
       const difficultyIncrease = metadata.multiplier === 8 ? 0.5 : metadata.multiplier === 4 ? 0.3 : 0.1;
@@ -139,7 +156,13 @@ export default function QuestionPage() {
     }
 
     setTimeout(() => {
-      setShouldAdvance(true);
+      const nextQuestionNumber = questionNumber + 1;
+      if (nextQuestionNumber > totalQuestions) {
+        setGameResult(updatedGameLog, finalScore);
+        router.push("/fim-de-partida");
+      } else {
+        setShouldAdvance(true);
+      }
     }, 1800);
   };
 
@@ -209,9 +232,22 @@ export default function QuestionPage() {
   };
 
   const handleTimeout = () => {
+    if (!currentQuestion) return;
+
+    const newLogEntry = { module: currentQuestion.module, correct: false };
+    const updatedGameLog = [...gameLog, newLogEntry];
+    setGameLog(updatedGameLog);
+
     setFeedback({ isOpen: true, type: "timeout" });
+
     setTimeout(() => {
-      setShouldAdvance(true);
+      const nextQuestionNumber = questionNumber + 1;
+      if (nextQuestionNumber > totalQuestions) {
+        setGameResult(updatedGameLog, score);
+        router.push("/fim-de-partida");
+      } else {
+        setShouldAdvance(true);
+      }
     }, 1800);
   };
 
