@@ -47,7 +47,7 @@ export default function EndGamePage() {
         </div>
 
         <div className="my-6 space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-100 p-4 rounded-lg">
+          <div className="flex flex-col space-y-4 bg-slate-100 p-4 rounded-lg">
             <div className="text-center">
               <p className="text-lg font-semibold text-gray-700">Pontuação Total</p>
               <p className="text-2xl font-bold text-green-500">{totalScore} pts</p>
@@ -63,10 +63,10 @@ export default function EndGamePage() {
           </div>
         </div>
 
-        <div className="!justify-center sm:!justify-center flex-col sm:flex-row gap-3 mt-4">
+        <div className="flex justify-center mt-4">
           <Button
             onClick={handleGoHome}
-            className="w-full sm:w-auto whitespace-normal h-auto active:scale-95 transition-all duration-200"
+            className="w-full max-w-xs mx-auto whitespace-normal h-auto active:scale-95 transition-all duration-200"
           >
             Voltar para Home
           </Button>
