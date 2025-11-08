@@ -30,46 +30,75 @@ import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
-import { signUpSchema, /*signUpType*/ } from "@/lib/schemas";
+import { ISchool } from "@/types/types";
+import { signUpSchema /*signUpType*/ } from "@/lib/schemas";
 import { ConfirmData } from "./confirmData";
-
+import { useFetchSchools } from "@/hooks/use-fetch-schools";
+import { useFetchGrades } from "@/hooks/use-fetch-grades";
+import { useFetchClasses } from "@/hooks/use-fetch-classes";
+import { useEffect } from "react";
 export function RegisterForm() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [selectedSchoolId, setSelectedSchoolId] = useState<number | null>(null);
+  const [selectedGradeId, setSelectedGradeId] = useState<number | null>(null);
+  const [selectedClassId, setSelectedClassId] = useState<number | null>(null);
+  console.log(selectedClassId, selectedGradeId, selectedSchoolId);
   const form = useForm({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
-      nome: "",
+      name: "",
       email: "",
       dataNascimento: "",
-      serie: "",
-      turma: "",
-      escola: "",
+      grade: "",
+      class: "",
+      school: "",
       senha: "",
       confirmarSenha: "",
     },
-  })
+  });
 
+  const { data: schools, isLoading: isLoadingSchools } = useFetchSchools();
+  const { data: grades, isLoading: isLoadingGrades } =
+    useFetchGrades(selectedSchoolId);
+  const { data: classes, isLoading: isLoadingClasses } =
+    useFetchClasses(selectedGradeId);
+    // useEffect(() => {
+    //   console.log("Valores atuais:", form.watch());
+    // }, [form.watch()]);
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    const isValid = await form.trigger()
+    e.preventDefault();
+    const isValid = await form.trigger();
     if (isValid) {
-      setOpen(true)
+      setOpen(true);
     }
-  }
+  };
 
+  const selectedSchoolName =
+    schools?.find((s) => s.schoolId === selectedSchoolId)?.school_name || "";
+  const selectedClassName =
+    classes?.find((c) => c.classId === selectedClassId)?.classLetter || "";
   return (
     <>
       <Form {...form}>
-        <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-md md:max-w-lg mx-auto p-4">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 w-full max-w-md md:max-w-lg mx-auto p-4"
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-1 m-0">
             <FormField
               control={form.control}
-              name="nome"
+              name="name"
               render={({ field }) => (
                 <FormItem className="col-span-full">
-                  <FormLabel className="text-white text-sm md:text-base">Nome Completo</FormLabel>
+                  <FormLabel className="text-white text-sm md:text-base">
+                    Nome Completo
+                  </FormLabel>
                   <FormControl>
-                    <Input placeholder="Seu nome" className="h-10 md:h-12 text-sm md:text-base" {...field} />
+                    <Input
+                      placeholder="Seu nome"
+                      className="h-10 md:h-12 text-sm md:text-base"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -81,7 +110,9 @@ export function RegisterForm() {
               name="email"
               render={({ field }) => (
                 <FormItem className="col-span-full">
-                  <FormLabel className="text-white text-sm md:text-base">E-mail</FormLabel>
+                  <FormLabel className="text-white text-sm md:text-base">
+                    E-mail
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="email"
@@ -141,20 +172,45 @@ export function RegisterForm() {
           <div className="grid grid-cols-1 m-0">
             <FormField
               control={form.control}
-              name="escola"
+              name="school"
               render={({ field }) => (
                 <FormItem className="col-span-full">
-                  <FormLabel className="text-white text-sm md:text-base">Escola</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormLabel className="text-white text-sm md:text-base">
+                    Escola
+                  </FormLabel>
+                  <Select
+                    onValueChange={(value) => {
+                      field.onChange(value);
+                      setSelectedSchoolId(Number(value));
+                      form.setValue("grade", "");
+                      form.setValue("class", "");
+                      setSelectedGradeId(null);
+                      setSelectedClassId(null);
+                    }}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger className="w-full h-10 md:h-12 text-sm md:text-base">
                         <SelectValue placeholder="Selecione sua escola" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="escola-a">Escola A</SelectItem>
-                      <SelectItem value="escola-b">Escola B</SelectItem>
-                      <SelectItem value="escola-c">Escola C</SelectItem>
+                      {isLoadingSchools ? (
+                        <SelectItem value="loading" disabled>
+                          Carregando escolas...
+                        </SelectItem>
+                      ) : (
+                        schools?.map((school: ISchool) => {
+                          return (
+                            <SelectItem
+                              key={school.schoolId}
+                              value={String(school.schoolId)}
+                            >
+                              {school.school_name}
+                            </SelectItem>
+                          );
+                        })
+                      )}
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -166,20 +222,42 @@ export function RegisterForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 m-0">
             <FormField
               control={form.control}
-              name="serie"
+              name="grade"
               render={({ field }) => (
                 <FormItem className="col-span-full md:col-span-1">
-                  <FormLabel className="text-white text-sm md:text-base">Ano</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormLabel className="text-white text-sm md:text-base">
+                    Ano
+                  </FormLabel>
+                  <Select
+                    onValueChange={(value) => {
+                      field.onChange(value);
+                      setSelectedGradeId(Number(value));
+                      form.setValue("class", "");
+                      setSelectedClassId(null);
+                    }}
+                    defaultValue={field.value}
+                    disabled={!selectedSchoolId || isLoadingGrades}
+                  >
                     <FormControl>
                       <SelectTrigger className="w-full h-10 md:h-12 text-sm md:text-base">
                         <SelectValue placeholder="Selecione seu ano" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="1">1º Ano</SelectItem>
-                      <SelectItem value="2">2º Ano</SelectItem>
-                      <SelectItem value="3">3º Ano</SelectItem>
+                      {isLoadingGrades ? (
+                        <SelectItem value="loading_grades" disabled>
+                          Carregando anos...
+                        </SelectItem>
+                      ) : (
+                        grades?.map((grade) => (
+                          <SelectItem
+                            key={grade.gradeId}
+                            value={String(grade.gradeId)}
+                          >
+                            {grade.gradeName}
+                          </SelectItem>
+                        ))
+                      )}
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -189,20 +267,40 @@ export function RegisterForm() {
 
             <FormField
               control={form.control}
-              name="turma"
+              name="class"
               render={({ field }) => (
                 <FormItem className="col-span-full md:col-span-1">
-                  <FormLabel className="text-white text-sm md:text-base">Turma</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormLabel className="text-white text-sm md:text-base">
+                    Turma
+                  </FormLabel>
+                  <Select
+                    onValueChange={(value) => {
+                      field.onChange(value);
+                      setSelectedClassId(Number(value));
+                    }}
+                    defaultValue={field.value}
+                    disabled={!selectedGradeId || isLoadingClasses}
+                  >
                     <FormControl>
                       <SelectTrigger className="w-full h-10 md:h-12 text-sm md:text-base">
                         <SelectValue placeholder="Selecione sua turma" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="A">Turma A</SelectItem>
-                      <SelectItem value="B">Turma B</SelectItem>
-                      <SelectItem value="C">Turma C</SelectItem>
+                      {isLoadingClasses ? (
+                        <SelectItem value="loading_classes" disabled>
+                          Carregando turmas...
+                        </SelectItem>
+                      ) : (
+                        classes?.map((clss) => (
+                          <SelectItem
+                            key={clss.classId}
+                            value={String(clss.classId)}
+                          >
+                            {clss.classLetter}
+                          </SelectItem>
+                        ))
+                      )}
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -217,7 +315,9 @@ export function RegisterForm() {
               name="senha"
               render={({ field }) => (
                 <FormItem className="col-span-full md:col-span-1">
-                  <FormLabel className="text-white text-sm md:text-base">Senha</FormLabel>
+                  <FormLabel className="text-white text-sm md:text-base">
+                    Senha
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="password"
@@ -236,7 +336,9 @@ export function RegisterForm() {
               name="confirmarSenha"
               render={({ field }) => (
                 <FormItem className="col-span-full md:col-span-1">
-                  <FormLabel className="text-white text-sm md:text-base">Confirmar Senha</FormLabel>
+                  <FormLabel className="text-white text-sm md:text-base">
+                    Confirmar Senha
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="password"
@@ -251,7 +353,10 @@ export function RegisterForm() {
             />
           </div>
           <div className="flex justify-center items-center">
-            <Button type="submit" className="w-[60%] md:w-[50%] h-10 md:h-12 text-sm md:text-base cursor-pointer">
+            <Button
+              type="submit"
+              className="w-[60%] md:w-[50%] h-10 md:h-12 text-sm md:text-base cursor-pointer"
+            >
               Cadastrar
             </Button>
           </div>
@@ -262,14 +367,12 @@ export function RegisterForm() {
         open={open}
         onOpenChange={setOpen}
         data={{
-          nome: form.getValues("nome"),
-          email: form.getValues("email"),
-          nascimento: form.getValues("dataNascimento"),
-          escola: form.getValues("escola"),
-          ano: form.getValues("serie"),
-          turma: form.getValues("turma"),
+          ...form.getValues(),
+          schoolName: selectedSchoolName,
+          gradeName: grades?.find((g) => g.gradeId === selectedGradeId)?.gradeName || "",
+          classLetter: classes?.find((c) => c.classId === selectedClassId)?.classLetter || "",
         }}
       />
     </>
-  )
+  );
 }

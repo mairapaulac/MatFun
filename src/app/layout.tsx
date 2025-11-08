@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Paytone_One } from "next/font/google";
 import "./globals.css";
 import { visualFallbackScript } from "@/hooks/useVisualFallback";
-
+import VisualFallbackProvider from "@/components/ui/VisualFallbackProvider";
 const paytone = Paytone_One({
   subsets: ['latin'], // caracteres que serão carregados
   weight: ['400'],      // essa fonte só tem 400
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: "Plataforma gameficada de matemática para estudantes do 8º e 9º ano do ensino fundamental.",
 };
 
-import VisualFallbackProvider from "@/components/ui/VisualFallbackProvider";
+
 
 export default function RootLayout({
   children,

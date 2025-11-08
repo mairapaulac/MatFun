@@ -14,25 +14,43 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signInSchema } from "@/lib/schemas";
+import { signInUserAction } from "@/actions/auth";
+import { useState } from "react";
+import { z } from "zod";
+import { toast } from "sonner";
 
-// Definindo o tipo diretamente no arquivo
-export type SignInFormValues = {
-  email: string;
-  password: string;
-};
+type SignInFormValues = z.infer<typeof signInSchema>;
 
 export default function SignInForm() {
-  const router = useRouter()
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
   const form = useForm<SignInFormValues>({
+    resolver: zodResolver(signInSchema),
     defaultValues: {
       email: "",
-      password: "",
+      senha: "",
     },
-  })
+  });
 
-  const onSubmit = () => {
-    console.log("fazer função de submit aqui")
-  }
+  const onSubmit = async (values: SignInFormValues) => {
+    setLoading(true);
+    try {
+      const res = await signInUserAction(values);
+      if (!res.success) {
+        toast.error(res.message);
+      } else {
+        toast.success("Autenticado com sucesso!");
+        router.push("/home");
+      }
+    } catch (error) {
+      console.error( error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Form {...form}>
@@ -61,7 +79,7 @@ export default function SignInForm() {
 
         <FormField
           control={form.control}
-          name="password"
+          name="senha"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-sm sm:text-base md:text-lg lg:text-base">Senha</FormLabel>
@@ -97,26 +115,20 @@ export default function SignInForm() {
         <div className="pt-6 sm:pt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
           <Button
             type="submit"
-            onClick={() => {
-              router.push("/home")
-            }}
+            disabled={loading}
             className="w-full sm:w-[40%] cursor-pointer order-1 h-10 sm:h-12 md:h-14 lg:h-10 text-sm sm:text-base md:text-lg lg:text-base"
           >
-            Entrar
+            {loading ? "Entrando..." : "Entrar"}
           </Button>
-          <Link href={"/auth/signup"}></Link>
           <Button
-            onClick={() => {
-              router.push("/auth/signup")
-            }}
-            type="submit"
-            className="active:scale-95 transition-all duration-200 w-full sm:w-[40%] cursor-pointer order-2 h-10 sm:h-12 md:h-14 lg:h-10 text-sm sm:text-base md:text-lg lg:text-base"
+            asChild
             variant={"secondary"}
+            className="active:scale-95 transition-all duration-200 w-full sm:w-[40%] cursor-pointer order-2 h-10 sm:h-12 md:h-14 lg:h-10 text-sm sm:text-base md:text-lg lg:text-base"
           >
-            Cadastro
+            <Link href="/auth/signup">Cadastro</Link>
           </Button>
         </div>
       </form>
     </Form>
-  )
+  );
 }

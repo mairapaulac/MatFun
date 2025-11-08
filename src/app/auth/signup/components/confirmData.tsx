@@ -5,14 +5,16 @@ import { Button } from "@/components/ui/button"
 import { UserDataCard } from "@/components/ui/user-data-card"
 import { CheckCircle } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { registerUserAction } from "@/actions/auth"
+import { z } from "zod"
+import { signUpSchema } from "@/lib/schemas"
+import { useState } from "react"
+import { toast } from "sonner"
 
-interface UserData {
-  nome: string
-  email: string
-  nascimento: string
-  escola: string
-  ano: string
-  turma: string
+type UserData = z.infer<typeof signUpSchema>& {
+  gradeName?: string;
+  classLetter?: string;
+  schoolName?: string;
 }
 
 interface ConfirmDataProps {
@@ -23,6 +25,26 @@ interface ConfirmDataProps {
 
 export function ConfirmData({ open, onOpenChange, data }: ConfirmDataProps) {
   const router = useRouter()
+  const [loading, setLoading] = useState(false);
+
+  const handleRegister = async () => {
+    setLoading(true);
+    try {
+      const res = await registerUserAction(data);
+      if (!res.success) {
+        toast.error(res.message);
+      } else {
+        toast.success("Cadastro realizado com sucesso!");
+        router.push("/home");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Ocorreu um erro ao realizar o cadastro.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-lg border-[#3A55A3] border-4 rounded-[28px] bg-[#182a5c] p-8 pb-6">
@@ -35,7 +57,14 @@ export function ConfirmData({ open, onOpenChange, data }: ConfirmDataProps) {
             Confira se suas informações estão corretas antes de finalizar o cadastro.
           </DialogDescription>
         </DialogHeader>
-        <UserDataCard data={data} />
+        <UserDataCard data={{
+          name: data.name,
+          email: data.email,
+          nascimento: data.dataNascimento,
+          escola: data.schoolName || data.school,
+          ano: data.gradeName || data.grade,
+          turma: data.classLetter || data.class,
+        }} />
         <div className="flex w-full justify-between gap-10">
           <Button
             variant="secondary"
@@ -45,13 +74,12 @@ export function ConfirmData({ open, onOpenChange, data }: ConfirmDataProps) {
             Editar
           </Button>
           <Button
-            onClick={() => {
-              router.push("/home")
-            }}
+            onClick={handleRegister}
             type="submit"
+            disabled={loading}
             className="flex-1 cursor-pointer active:scale-95 transition-all duration-200"
           >
-            Cadastrar
+            {loading ? "Cadastrando..." : "Cadastrar"}
           </Button>
         </div>
       </DialogContent>

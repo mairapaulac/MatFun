@@ -1,6 +1,8 @@
 "use client";
 
-import { ArrowLeft, Trophy, TrendingUp } from "lucide-react";
+import { deleteSession } from "@/actions/session";
+
+import { ArrowLeft, LogOut, Trophy, TrendingUp } from "lucide-react";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -29,6 +31,16 @@ export default function Navbar() {
               Classificação de Jogadores
             </span>
           </div>
+        </div>
+
+        {/* logout */}
+        <div className="flex items-center justify-center w-[50px] h-[50px] sm:w-[60px] sm:h-[60px]">
+          <button
+            onClick={() => deleteSession()}
+            className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 hover:scale-110 cursor-pointer"
+          >
+            <LogOut className="w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] text-red-400 hover:text-red-300 transition-all  hover:translate-x-1" />
+          </button>
         </div>
       </div>
     </nav>
