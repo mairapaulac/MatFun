@@ -162,7 +162,7 @@ export default function LandingPage() {
         </div>
       )}
 
-      <main className="text-center py-20 px-8 bg-pattern">
+      <main className="text-center py-24 px-8 bg-pattern">
         <div className="mb-12 ">
           {/* <Image src="/logo-matfun.svg" alt="MatFun Logo" width={400} height={128} className="mx-auto"/> */}
           <Image
@@ -207,17 +207,17 @@ export default function LandingPage() {
           Como Funciona
         </h3>
         <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div className="text-center p-6 rounded-lg shadow-lg bg-gray-800 text-white">
+          <div className="text-center p-6 rounded-lg shadow-lg bg-[#24366b] text-white">
             <Star className="mx-auto h-12 w-12 text-yellow-500 mb-4" />
             <h4 className="text-2xl font-normal mb-2">Escolha um módulo</h4>
             <p>Frações, Porcentagem, Geometria e muito mais.</p>
           </div>
-          <div className="text-center p-6 rounded-lg shadow-lg bg-gray-800 text-white">
+          <div className="text-center p-6 rounded-lg shadow-lg bg-[#24366b] text-white">
             <Trophy className="mx-auto h-12 w-12 text-yellow-500 mb-4" />
             <h4 className="text-2xl font-normal mb-2">Resolva os desafios</h4>
             <p>Responda perguntas e ganhe pontos.</p>
           </div>
-          <div className="text-center p-6 rounded-lg shadow-lg bg-gray-800 text-white">
+          <div className="text-center p-6 rounded-lg shadow-lg bg-[#24366b] text-white">
             <Users className="mx-auto h-12 w-12 text-yellow-500 mb-4" />
             <h4 className="text-2xl font-normal mb-2">Suba no ranking!</h4>
             <p>Compare seu desempenho com colegas e escolas.</p>
@@ -257,7 +257,7 @@ export default function LandingPage() {
           Conteúdo Educacional
         </h3>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-          <div className="text-center p-6 rounded-lg shadow-lg bg-gray-50">
+          <div className="text-center p-6 rounded-lg shadow-lg bg-[#24366b] text-white">
             <Calculator className="mx-auto h-12 w-12 text-blue-500 mb-4" />
             <h4 className="text-2xl font-normal mb-2">Álgebra</h4>
             <p>
@@ -265,7 +265,7 @@ export default function LandingPage() {
               algébricos.
             </p>
           </div>
-          <div className="text-center p-6 rounded-lg shadow-lg bg-gray-50">
+          <div className="text-center p-6 rounded-lg shadow-lg bg-[#24366b] text-white">
             <Scaling className="mx-auto h-12 w-12 text-green-500 mb-4" />
             <h4 className="text-2xl font-normal mb-2">Geometria</h4>
             <p>
@@ -273,7 +273,7 @@ export default function LandingPage() {
               maneira interativa.
             </p>
           </div>
-          <div className="text-center p-6 rounded-lg shadow-lg bg-gray-50">
+          <div className="text-center p-6 rounded-lg shadow-lg bg-[#24366b] text-white">
             <DivideSquareIcon className="mx-auto h-12 w-12 text-yellow-500 mb-4" />
             <h4 className="text-2xl font-normal mb-2">Frações</h4>
             <p>
@@ -281,7 +281,7 @@ export default function LandingPage() {
               visual.
             </p>
           </div>
-          <div className="text-center p-6 rounded-lg shadow-lg bg-gray-50">
+          <div className="text-center p-6 rounded-lg shadow-lg bg-[#24366b] text-white">
             <Percent className="mx-auto h-12 w-12 text-red-500 mb-4" />
             <h4 className="text-2xl font-normal mb-2">Porcentagem</h4>
             <p>
@@ -298,7 +298,7 @@ export default function LandingPage() {
           Sistema de Ranking e Recompensas
         </h3>
         <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div className="text-center p-6 rounded-lg shadow-lg bg-gray-800 text-white">
+          <div className="text-center p-6 rounded-lg shadow-lg bg-white text-gray-800">
             <Users className="mx-auto h-12 w-12 text-blue-500 mb-4" />
             <h4 className="text-2xl font-normal mb-2">Ranking Competitivo</h4>
             <p>
@@ -306,7 +306,7 @@ export default function LandingPage() {
               competição saudável motiva o aprendizado!
             </p>
           </div>
-          <div className="text-center p-6 rounded-lg shadow-lg bg-gray-800 text-white">
+          <div className="text-center p-6 rounded-lg shadow-lg bg-white text-gray-800">
             <Trophy className="mx-auto h-12 w-12 text-green-500 mb-4" />
             <h4 className="text-2xl font-normal mb-2">Conquistas</h4>
             <p>
@@ -314,7 +314,7 @@ export default function LandingPage() {
               módulos ou acertar sequências de perguntas.
             </p>
           </div>
-          <div className="text-center p-6 rounded-lg shadow-lg bg-gray-800 text-white">
+          <div className="text-center p-6 rounded-lg shadow-lg bg-white text-gray-800">
             <Medal className="mx-auto h-12 w-12 text-yellow-500 mb-4" />
             <h4 className="text-2xl font-normal mb-2">Medalhas Virtuais</h4>
             <p>
@@ -330,7 +330,7 @@ export default function LandingPage() {
           Funcionalidades Futuras
         </h3>
         <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div className="text-center p-6 rounded-lg shadow-lg bg-gray-50">
+          <div className="text-center p-6 rounded-lg shadow-lg bg-[#24366b] text-white">
             <BarChart className="mx-auto h-12 w-12 text-blue-500 mb-4" />
             <h4 className="text-2xl font-normal mb-2">
               Acompanhamento de Desempenho
@@ -340,7 +340,7 @@ export default function LandingPage() {
               pontos fortes e dificuldades.
             </p>
           </div>
-          <div className="text-center p-6 rounded-lg shadow-lg bg-gray-50">
+          <div className="text-center p-6 rounded-lg shadow-lg bg-[#24366b] text-white">
             <ClipboardList className="mx-auto h-12 w-12 text-green-500 mb-4" />
             <h4 className="text-2xl font-normal mb-2">
               Relatórios Automáticos
@@ -350,7 +350,7 @@ export default function LandingPage() {
               facilitando a tomada de decisões pedagógicas.
             </p>
           </div>
-          <div className="text-center p-6 rounded-lg shadow-lg bg-gray-50">
+          <div className="text-center p-6 rounded-lg shadow-lg bg-[#24366b] text-white">
             <School className="mx-auto h-12 w-12 text-yellow-500 mb-4" />
             <h4 className="text-2xl font-normal mb-2">
               Atividades Personalizadas
@@ -367,19 +367,19 @@ export default function LandingPage() {
         <h3 className="text-4xl font-normal text-center mb-16 text-shadow">
           O Que os Alunos Dizem
         </h3>
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto ">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="p-8 rounded-2xl shadow-xl bg-gray-50 hover:shadow-2xl transition-shadow duration-300"
+              className="p-8 rounded-2xl shadow-xl bg-white text-[#24366b] hover:shadow-2xl transition-shadow duration-300"
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 rounded-full bg-blue-400  flex items-center justify-center text-white font-bold text-lg">
                   {testimonial.name.charAt(0)}
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg">{testimonial.name}</h4>
-                  <p className="text-sm text-gray-500">
+                  <h4 className="font-bold text-lg text-[#24366b]">{testimonial.name}</h4>
+                  <p className="text-sm text-gray-800 ">
                     {testimonial.age} anos • {testimonial.school}
                   </p>
                 </div>
@@ -392,7 +392,7 @@ export default function LandingPage() {
                   />
                 ))}
               </div>
-              <p className="text-gray-700 leading-relaxed italic">
+              <p className="text-[#24366b] leading-relaxed italic">
                 {testimonial.text}
               </p>
             </div>
