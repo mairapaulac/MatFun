@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import ModuleNavbar from "./components/ModuleNavbar";
 import ModuleCard from "./components/ModuleCard";
@@ -30,28 +29,28 @@ const modules: Module[] = [
     title: "Geral",
     subtitle: "Seleciona todos os módulos",
     icon: BookOpen,
-    iconColor: "#3B82F6", 
+    iconColor: "#3B82F6",
   },
   {
     id: "algebraic_multiplication",
     title: "Operações Algébricas",
     subtitle: "Multiplicação e operações básicas",
     icon: Calculator,
-    iconColor: "#10B981", 
+    iconColor: "#10B981",
   },
   {
     id: "area_geometry",
     title: "Áreas Geométricas",
     subtitle: "Cálculo de áreas de figuras geométricas",
     icon: Square,
-    iconColor: "#8B5CF6", 
+    iconColor: "#8B5CF6",
   },
   {
     id: "fraction",
     title: "Operações com Frações",
     subtitle: "Soma, subtração e multiplicação de frações",
     icon: Divide,
-    iconColor: "#F59E0B", 
+    iconColor: "#F59E0B",
   },
   {
     id: "percentage",
@@ -64,33 +63,30 @@ const modules: Module[] = [
 
 export default function ModulePage() {
   const router = useRouter();
-  const { setSelectedModules } = useModuleStore();
-  const [selectedModules, setLocalSelectedModules] = useState<string[]>([]);
+  const { selectedModules, setSelectedModules } = useModuleStore();
 
   const handleModuleToggle = (moduleId: string) => {
     if (moduleId === "geral") {
       if (selectedModules.includes("geral")) {
-        setLocalSelectedModules([]);
+        setSelectedModules([]);
       } else {
-        setLocalSelectedModules(modules.map((m) => m.id));
+        setSelectedModules(modules.map((m) => m.id));
       }
     } else {
-      setLocalSelectedModules((prev) => {
-        const newSelection = prev.includes(moduleId)
-          ? prev.filter((id: string) => id !== moduleId)
-          : [...prev, moduleId];
+      const newSelection = selectedModules.includes(moduleId)
+        ? selectedModules.filter((id) => id !== moduleId)
+        : [...selectedModules, moduleId];
 
-        const specificModules = modules.filter((m) => m.id !== "geral");
-        const allSpecificSelected = specificModules.every((m) =>
-          newSelection.includes(m.id)
-        );
-        
-        if (allSpecificSelected && newSelection.length === specificModules.length) {
-          return [...newSelection, "geral"];
-        } else {
-          return newSelection.filter((id: string) => id !== "geral");
-        }
-      });
+      const specificModules = modules.filter((m) => m.id !== "geral");
+      const allSpecificSelected = specificModules.every((m) =>
+        newSelection.includes(m.id)
+      );
+
+      if (allSpecificSelected && newSelection.length === specificModules.length) {
+        setSelectedModules([...newSelection, "geral"]);
+      } else {
+        setSelectedModules(newSelection.filter((id) => id !== "geral"));
+      }
     }
   };
 
@@ -104,8 +100,6 @@ export default function ModulePage() {
   };
 
   const handleStartGame = () => {
-    // Save selected modules to the store before navigating
-    setSelectedModules(selectedModules);
     router.push("/game");
   };
 

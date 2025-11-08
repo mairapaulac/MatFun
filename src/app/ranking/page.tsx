@@ -18,7 +18,7 @@ export default function RankingScreen() {
     <div className="flex flex-col items-center min-h-screen max-h-[1280px] max-w-screen mx-auto px-0 py-0 text-white relative overflow-hidden bg-pattern">
       <Navbar   />
       <Tabs defaultValue="geral" className="w-full max-w-[800px] z-10 pt-2 md:pt-6 ">
-        <div className="bg-[#2B3A67] rounded-2xl p-2 mb-8 shadow-xl border-2 border-white/30">
+        <div className="bg-[#2B3A67] rounded-2xl p-2 mb-8 shadow-xl border-1 border-gray-400">
           <TabsList className="flex justify-center w-full gap-4">
             <TabsTrigger
               value="geral"

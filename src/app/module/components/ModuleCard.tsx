@@ -25,14 +25,14 @@ export default function ModuleCard({
 }: ModuleCardProps) {
   return (
     <Card
-      className="w-[90%] h-[90px] xl:h-[110px] md:h-[130px] flex items-center gap-3 sm:gap-4 p-4 sm:p-6 cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-all duration-200 bg-gradient-to-br from-white via-gray-50/95 to-slate-50/90  border-zinc-200 border-2 shadow-[inset_0_1px_2px_rgba(255,255,255,0.8)]"
+      className="w-[90%] h-[90px] xl:h-[110px] md:h-[130px] flex items-center gap-3 sm:gap-4 p-4 sm:p-6 cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-all duration-200 bg-white border-zinc-200 border-2 "
       onClick={onToggle}
     >
       <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
         <div
           className="flex-shrink-0 p-2 sm:p-3 rounded-xl shadow-md"
           style={{
-            background: `linear-gradient(135deg, ${iconColor}, ${iconColor}dd)`,
+            background: `${iconColor}`,
           }}
         >
           <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />

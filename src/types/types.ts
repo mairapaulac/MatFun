@@ -36,7 +36,7 @@ export interface FractionQuestion {
   type: 'fraction_operation';
   num1: number;
   den1: number;
-  operator: '+' | '×';
+  operator: '+' | '×' | '=';
   num2: number;
   den2: number;
 }

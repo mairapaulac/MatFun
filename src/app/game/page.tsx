@@ -18,6 +18,14 @@ import { GeneratedPercentageProblem } from "@/lib/percentageProblemGenerator";
 import { useRouter } from "next/navigation";
 import { Undo2 } from "lucide-react";
 
+import { useModuleStore } from "@/stores/moduleStore";
+import { useGameResultStore } from "@/stores/gameResultStore";
+
+interface GameLogEntry {
+  module: string;
+  correct: boolean;
+}
+
 const initialDifficultyScores: Record<Module, number> = {
   algebra: 1.0,
   geometry: 1.0,
@@ -27,6 +35,11 @@ const initialDifficultyScores: Record<Module, number> = {
 
 export default function QuestionPage() {
   const router = useRouter();
+  const { selectedModules } = useModuleStore();
+  const { setGameResult } = useGameResultStore();
+  const [gameLog, setGameLog] = useState<GameLogEntry[]>([]);
+  const totalQuestions = 20;
+
   const [score, setScore] = useState(0);
   const [currentAnswer, setCurrentAnswer] = useState("");
   const [fractionAnswer, setFractionAnswer] = useState({ numerator: "", denominator: "" });
@@ -45,14 +58,9 @@ export default function QuestionPage() {
   const [difficultyScores, setDifficultyScores] = useState(initialDifficultyScores);
   const [shouldAdvance, setShouldAdvance] = useState(false);
 
-  const { currentQuestion, questionNumber, nextQuestion, isReady } = useQuestionRotation(difficultyScores);
+  const { currentQuestion, questionNumber, nextQuestion, isReady } = useQuestionRotation(difficultyScores, selectedModules);
 
-  useEffect(() => {
-    if (currentQuestion) {
-      console.log(`Question #${questionNumber} (Module: ${currentQuestion.module}, Level: ${currentQuestion.level})`);
-      console.log("Current difficulty scores:", difficultyScores);
-    }
-  }, [currentQuestion, difficultyScores, questionNumber]);
+  
 
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -85,6 +93,7 @@ export default function QuestionPage() {
     router.push("/home");
   };
 
+  //se for fração ele verifica se foi acionado a tecla de apagar ou de trocar o focus do numerador/denominador, se nao for fração ele trata normal
   const handleKeypadPress = (key: string) => {
     if (currentQuestion?.module === "fraction") {
       if (key === "⌫") {
@@ -118,11 +127,18 @@ export default function QuestionPage() {
 
     const isCorrect = checkAnswer(currentAnswer);
 
+    const newLogEntry = { module: currentQuestion.module, correct: isCorrect };
+    const updatedGameLog = [...gameLog, newLogEntry];
+    setGameLog(updatedGameLog);
+
+    let finalScore = score;
+
     if (isCorrect) {
       const level = currentQuestion.level;
       const basePoints = level === 1 ? 10 : level === 2 ? 15 : 20;
       const points = basePoints * metadata.multiplier;
-      setScore((prev) => prev + points);
+      finalScore += points;
+      setScore(finalScore);
 
       // Update difficulty score
       const difficultyIncrease = metadata.multiplier === 8 ? 0.5 : metadata.multiplier === 4 ? 0.3 : 0.1;
@@ -140,7 +156,13 @@ export default function QuestionPage() {
     }
 
     setTimeout(() => {
-      setShouldAdvance(true);
+      const nextQuestionNumber = questionNumber + 1;
+      if (nextQuestionNumber > totalQuestions) {
+        setGameResult(updatedGameLog, finalScore);
+        router.push("/fim-de-partida");
+      } else {
+        setShouldAdvance(true);
+      }
     }, 1800);
   };
 
@@ -173,6 +195,13 @@ export default function QuestionPage() {
           return num * algebraProblem.secondNumber === algebraProblem.result;
         case 'complex_blank': // Level 3
           return num === algebraProblem.correctAnswer;
+        case 'first_degree_equation':
+          return num === algebraProblem.correctAnswer;
+      case 'exponentiation':
+      case 'square_root': {
+        const simpleProblem = problem as GeneratedProblem;
+        return num === simpleProblem.correctAnswer;
+      }
         default:
             // This also handles level 2 where the type is 'result_empty'
             return num === algebraProblem.result;
@@ -203,9 +232,22 @@ export default function QuestionPage() {
   };
 
   const handleTimeout = () => {
+    if (!currentQuestion) return;
+
+    const newLogEntry = { module: currentQuestion.module, correct: false };
+    const updatedGameLog = [...gameLog, newLogEntry];
+    setGameLog(updatedGameLog);
+
     setFeedback({ isOpen: true, type: "timeout" });
+
     setTimeout(() => {
-      setShouldAdvance(true);
+      const nextQuestionNumber = questionNumber + 1;
+      if (nextQuestionNumber > totalQuestions) {
+        setGameResult(updatedGameLog, score);
+        router.push("/fim-de-partida");
+      } else {
+        setShouldAdvance(true);
+      }
     }, 1800);
   };
 
@@ -240,8 +282,14 @@ export default function QuestionPage() {
       return (problem as GeneratedGeometryProblem).shape;
     }
     if (module === "fraction") {
-      return (problem as FractionQuestion).operator === '+' ? 'fraction_operation_addition' : 'fraction_operation_multiplication';
+     const operatorMap: Record<string, string> = {
+    '+': 'fraction_operation_addition',
+    '×': 'fraction_operation_multiplication',
+    '=': 'fraction_operation_equivalent',
+    };
+    return operatorMap[(problem as FractionQuestion).operator] || 'fraction_operation_addition';
     }
+
     if (module === "percentage") {
       return (problem as GeneratedPercentageProblem).problemType;
     }
@@ -282,9 +330,9 @@ export default function QuestionPage() {
       <div className="absolute top-4 left-4 z-10">
         <button
           onClick={() => setIsExitModalOpen(true)}
-          className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 hover:scale-110 "
+          className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white backdrop-blur-sm transition-all duration-300 hover:scale-110 "
         >
-          <Undo2 className="h-[30px] w-[30px] sm:h-[40px] sm:w-[40px] text-white transition-all group-hover:-translate-x-1" />
+          <Undo2 className="h-[30px] w-[30px] sm:h-[40px] sm:w-[40px] text-blue-950 transition-all group-hover:-translate-x-1" />
         </button>
       </div>
       <QuestionScreen

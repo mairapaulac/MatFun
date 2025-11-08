@@ -21,6 +21,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 import { ISchool } from "@/types/types";
 import { signUpSchema /*signUpType*/ } from "@/lib/schemas";
@@ -121,33 +129,43 @@ export function RegisterForm() {
             <FormField
               control={form.control}
               name="dataNascimento"
-              render={({ field }) => {
-                const today = new Date();
-                const minDate = new Date(today.getFullYear() - 120, 0, 1)
-                  .toISOString()
-                  .split("T")[0];
-                const maxDate = new Date(today.getFullYear() - 5, 11, 31)
-                  .toISOString()
-                  .split("T")[0];
-
-                return (
-                  <FormItem className="col-span-full">
-                    <FormLabel className="text-white text-sm md:text-base">
-                      Data de Nascimento
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="date"
-                        min={minDate}
-                        max={maxDate}
-                        className="h-10 md:h-12 text-sm md:text-base"
-                        {...field}
+              render={({ field }) => (
+                <FormItem className="col-span-full flex flex-col">
+                  <FormLabel className="text-white text-sm md:text-base">Data de Nascimento</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant={"outline"}
+                          className={`h-10 md:h-12 text-left font-normal bg-white justify-start pl-3 ${
+                            !field.value && "text-muted-foreground"
+                          }`}
+                        >
+                          {field.value ? (
+                            format(new Date(field.value), "dd/MM/yyyy", { locale: ptBR })
+                          ) : (
+                            <span>Selecione uma data</span>
+                          )}
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={field.value ? new Date(field.value) : undefined}
+                        onSelect={(date) => {
+                          field.onChange(date ? format(date, "yyyy-MM-dd") : "");
+                        }}
+                        initialFocus
+                        captionLayout="dropdown"
+                        fromYear={new Date().getFullYear() - 120}
+                        toYear={new Date().getFullYear() - 5}
                       />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                );
-              }}
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
           </div>
 

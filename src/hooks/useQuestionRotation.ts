@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from "react";
-import { useModuleStore } from "@/stores/moduleStore";
 import { questionGenerators, Problem } from "@/lib/questionGenerators";
 import { Module } from "@/types/types";
 
@@ -22,13 +21,12 @@ const moduleKeyMap: Record<string, Module> = {
     "geometry": "geometry",
   };
 
-export function useQuestionRotation(difficultyScores: Record<Module, number>) {
-  const { selectedModules } = useModuleStore();
+export function useQuestionRotation(difficultyScores: Record<Module, number>, selectedModules: string[]) {
   const [currentQuestion, setCurrentQuestion] = useState<QuestionData | null>(null);
   const [questionNumber, setQuestionNumber] = useState(1);
 
   const getAvailableModules = useCallback(() => {
-    if (selectedModules.length === 0 || selectedModules.includes("Geral")) {
+    if (selectedModules.length === 0 || selectedModules.includes("geral")) {
       return Object.keys(questionGenerators) as Module[];
     }
     return selectedModules;
@@ -67,10 +65,10 @@ export function useQuestionRotation(difficultyScores: Record<Module, number>) {
   }, [difficultyScores, getAvailableModules]);
 
   useEffect(() => {
-    if (selectedModules.length > 0 && !currentQuestion) {
+    if (!currentQuestion) {
       setCurrentQuestion(generateNewQuestion());
     }
-  }, [selectedModules, currentQuestion, generateNewQuestion]);
+  }, [currentQuestion, generateNewQuestion]);
 
   const nextQuestion = () => {
     setQuestionNumber((prev) => prev + 1);

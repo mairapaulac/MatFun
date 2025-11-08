@@ -1,5 +1,5 @@
 
-export type ProblemType = "both_empty" | "first_filled" | "second_filled" | "result_empty" | "complex_blank";
+export type ProblemType = "both_empty" | "first_filled" | "second_filled" | "result_empty" | "complex_blank" | "first_degree_equation" | "system_of_equations" | "exponentiation" | "square_root";
 
 export interface GeneratedProblem {
   firstNumber: number;
@@ -85,5 +85,85 @@ export function generateOrderOfPrecedenceEquation(): GeneratedProblem {
         type: 'complex_blank',
         equationString: equation,
         correctAnswer: missing_b,
+    };
+  }
+
+  export function generateFirstDegreeEquation(): GeneratedProblem {
+    const x = Math.floor(Math.random() * 10) + 1; // Solution 1-10
+    const a = Math.floor(Math.random() * 4) + 2;  // Coefficient 'a' 2-5
+    const b = Math.floor(Math.random() * 20) + 1; // Term 'b' 1-20
+    const c = a * x + b; // Calculate 'c'
+  
+    return {
+      firstNumber: a,
+      secondNumber: b,
+      result: c,
+      type: 'first_degree_equation',
+      equationString: `Encontre o valor de x na equação: ${a}x + ${b} = ${c}`,
+      correctAnswer: x,
+    };
+  }
+
+  export interface GeneratedSystemProblem {
+    type: 'system_of_equations';
+    eq1: { a: number; b: number; c: number };
+    eq2: { a: number; b: number; c: number };
+    correctAnswer: { x: number; y: number };
+  }
+  
+  export function generateSystemOfEquations(): GeneratedSystemProblem {
+    const x = Math.floor(Math.random() * 10) - 4; // -4 to 5
+    const y = Math.floor(Math.random() * 10) - 4; // -4 to 5
+    
+    const finalX = x === 0 ? -5 : x;
+    const finalY = y === 0 ? -5 : y;
+  
+    const a1 = Math.floor(Math.random() * 4) + 1; // 1-4
+    const b1 = Math.floor(Math.random() * 4) + 1; // 1-4
+    const c1 = a1 * finalX + b1 * finalY;
+  
+    let a2 = Math.floor(Math.random() * 4) + 1;
+    let b2 = Math.floor(Math.random() * 4) + 1;
+    
+    while ((a1 * b2) - (a2 * b1) === 0) {
+      a2 = Math.floor(Math.random() * 4) + 1;
+      b2 = Math.floor(Math.random() * 4) + 1;
+    }
+    const c2 = a2 * finalX + b2 * finalY;
+  
+    return {
+      type: 'system_of_equations',
+      eq1: { a: a1, b: b1, c: c1 },
+      eq2: { a: a2, b: b2, c: c2 },
+      correctAnswer: { x: finalX, y: finalY },
+    };
+  }
+
+  export function generateExponentProblem(): GeneratedProblem {
+    const base = Math.floor(Math.random() * 9) + 2; // Base 2-10
+    const exponent = Math.floor(Math.random() * 2) + 2; // Exponent 2 or 3
+    const result = Math.pow(base, exponent);
+
+    return {
+      firstNumber: base,
+      secondNumber: exponent,
+      result: result,
+      type: 'exponentiation',
+      equationString: `${base} ${exponent === 2 ? '²' : '³'} = ?`,
+      correctAnswer: result,
+    };
+  }
+
+  export function generateSquareRootProblem(): GeneratedProblem {
+    const root = Math.floor(Math.random() * 14) + 2; // Result 2-15
+    const perfectSquare = root * root;
+
+    return {
+      firstNumber: perfectSquare,
+      secondNumber: 2, // Implied square root
+      result: root,
+      type: 'square_root',
+      equationString: `√${perfectSquare} = ?`,
+      correctAnswer: root,
     };
   }

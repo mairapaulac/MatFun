@@ -2,7 +2,10 @@ import {
     generateLevel1AlgebraProblem,
     generateOrderOfPrecedenceEquation,
     generateComplexEquationWithBlanks,
-    type GeneratedProblem
+    generateFirstDegreeEquation,
+    generateExponentProblem,
+    generateSquareRootProblem,
+    type GeneratedProblem,
 } from './algebraProblemGenerator';
 import {
     generateGeometryProblem,
@@ -27,16 +30,17 @@ export type Problem = GeneratedProblem | GeneratedGeometryProblem | CircleFromCi
 export const questionGenerators = {
     algebra: {
         1: [generateLevel1AlgebraProblem],
-        2: [generateOrderOfPrecedenceEquation],
+        2: [generateOrderOfPrecedenceEquation, generateFirstDegreeEquation, generateExponentProblem, generateSquareRootProblem],
         3: [generateComplexEquationWithBlanks],
     },
     geometry: {
         1: [() => generateGeometryProblem(["triangle", "rectangle", "parallelogram", "trapezoid"])],
         2: [() => generateGeometryProblem(["circle"])],
-        3: [() => generateGeometryProblem(["circle_from_circumference"])],
+                3: [() => generateGeometryProblem(["circle_from_circumference", "rectangle_minus_circle"])],
     },
     fraction: {
         1: [() => generateFractionQuestion('×')],
+        2: [() => generateFractionQuestion('=')],
         3: [() => generateFractionQuestion('+')],
     },
     percentage: {
