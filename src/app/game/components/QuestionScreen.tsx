@@ -185,7 +185,7 @@ export default function QuestionScreen({
               variant={"default"}
               onClick={handleSubmit}
               disabled={isDisabled || isAnswerEmpty}
-              className="w-full text-[#24366B]  font-bold py-4 px-8 rounded-full text-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full  bg-green-600 hover:bg-green-700 text-white font-normal py-4 px-8 rounded-full text-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitted ? "Respondido!" : "Responder!"}
             </Button>
