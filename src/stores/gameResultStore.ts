@@ -10,10 +10,10 @@ interface GamePayload {
   scoreGained: number;
   questionsCorrect: number;
   questionsWrong: number;
-  fractionsQuestions: number;
-  geometryQuestions: number;
-  algebraQuestions: number;
-  percentageQuestions: number;
+  algebraCorrect: number;
+  geometryCorrect: number;
+  fractionsCorrect: number;
+  percentageCorrect: number;
 }
 
 interface GameResultState {
@@ -35,22 +35,23 @@ export const useGameResultStore = create<GameResultState>()(
     (set) => ({
       ...initialState,
       setGameResult: (log, score) => {
-
         const questionsCorrect = log.filter((entry) => entry.correct).length;
         const questionsWrong = log.length - questionsCorrect;
 
-        const countModule = (moduleName: string) => {
-          return log.filter((entry) => entry.module === moduleName).length;
+        const countModuleCorrect = (moduleName: string) => {
+          return log.filter(
+            (entry) => entry.module === moduleName && entry.correct
+          ).length;
         };
 
         const newPayload: GamePayload = {
           scoreGained: score,
           questionsCorrect,
           questionsWrong,
-          fractionsQuestions: countModule('fractions'),
-          geometryQuestions: countModule('geometry'),
-          algebraQuestions: countModule('algebra'),
-          percentageQuestions: countModule('percentage'),
+          algebraCorrect: countModuleCorrect('algebra'),
+          geometryCorrect: countModuleCorrect('geometry'),
+          fractionsCorrect: countModuleCorrect('fraction'),
+          percentageCorrect: countModuleCorrect('percentage'),
         };
 
         set({ gameLog: log, totalScore: score, payload: newPayload });

@@ -54,6 +54,8 @@ export default function AchievementCard({ achievement }: AchievementCardProps) {
         <p className="text-md font-medium text-[#F43F5E]">
           {isUnlocked
             ? "Desbloqueado!"
+            : achievementName === "Guerreiro Matemático"
+            ? "Acumule 5000 pontos para desbloquear"
             : `Acerte ${requiredValue} questões para desbloquear`}
         </p>
       </div>
