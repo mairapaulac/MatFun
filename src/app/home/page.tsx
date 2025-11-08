@@ -37,7 +37,7 @@ export default function HomePage() {
           </Button>
         </div>
 
-        <div className="mb-4 space-y-5 flex-1 max-h-[400px] md:max-h-[620px] lg:max-h-[400px] overflow-y-auto custom-scrollbar" style={{ animationDelay: "0.3s" }}>
+        <div className="mb-4 space-y-5 flex-1 max-h-[400px] md:max-h-[620px] lg:max-h-[500px] overflow-y-auto custom-scrollbar" style={{ animationDelay: "0.3s" }}>
           {isLoading ? (
             <p className="text-white text-center">Carregando conquistas...</p>
           ) : achievements && achievements.length > 0 ? (
