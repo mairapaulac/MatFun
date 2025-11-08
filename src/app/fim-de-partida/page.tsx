@@ -29,7 +29,7 @@ export default function EndGamePage() {
 
   return (
     <div className="min-h-screen bg-background bg-pattern flex items-center justify-center p-4">
-      <div className="relative bg-white rounded-3xl p-6 border-[#6D93FF] border-4 max-w-md sm:max-w-lg md:max-w-2xl w-full">
+      <div className="relative bg-white rounded-3xl p-6 border-[#1E3A8A]/70 border-4 max-w-md sm:max-w-lg md:max-w-2xl w-full">
         <div className="text-center space-y-2">
           <h1 className="text-3xl font-bold text-gray-800">Fim da Partida</h1>
         </div>
