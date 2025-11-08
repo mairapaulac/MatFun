@@ -126,7 +126,7 @@ export async function registerUserAction(payload : SignUpInputs): Promise<{
 			email: data.user.email,
 			gradeName: data.user.gradeName,
 			classLetter: data.user.classLetter,
-			classId:data.user.classId,
+			classId: Number(payload.class),
 			token: data.token
 		};
 
@@ -141,7 +141,7 @@ export async function registerUserAction(payload : SignUpInputs): Promise<{
 				email: data.user.email,
 				gradeName: data.user.gradeName,
 				classLetter: data.user.classLetter,
-				classId:data.user.classId,
+				classId: Number(payload.class),
 			},
 		};
 	} catch (e) {

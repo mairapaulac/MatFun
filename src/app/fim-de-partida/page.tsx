@@ -5,17 +5,19 @@ export const dynamic = "force-dynamic"
 import { useRouter } from "next/navigation"
 import { useGameResultStore } from "@/stores/gameResultStore"
 import { Button } from "@/components/ui/button"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { submitGameResult } from "@/actions/game"
 import { Trophy, CheckCircle2, XCircle, Home, Zap } from "lucide-react"
 
 export default function EndGamePage() {
   const router = useRouter()
   const { payload, clearGameResult } = useGameResultStore((state) => state)
+  const submittedRef = useRef(false)
 
   useEffect(() => {
     const handleSubmitResult = async () => {
-      if (payload) {
+      if (payload && !submittedRef.current) {
+        submittedRef.current = true
         console.log("Submitting game result:", payload)
         const result = await submitGameResult(payload)
         console.log("Submission result:", result)

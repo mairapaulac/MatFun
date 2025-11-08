@@ -98,3 +98,13 @@ export interface IUserAchievements {
   progress: number;
   currentValue: number;
 }
+
+export interface IMatchResultPayload {
+  scoreGained: number;
+  questionsCorrect: number;
+  questionsWrong: number;
+  algebraCorrect: number;
+  geometryCorrect: number;
+  fractionsCorrect: number;
+  percentageCorrect: number;
+}
