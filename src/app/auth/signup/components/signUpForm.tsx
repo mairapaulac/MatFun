@@ -36,7 +36,6 @@ import { ConfirmData } from "./confirmData";
 import { useFetchSchools } from "@/hooks/use-fetch-schools";
 import { useFetchGrades } from "@/hooks/use-fetch-grades";
 import { useFetchClasses } from "@/hooks/use-fetch-classes";
-import { useEffect } from "react";
 export function RegisterForm() {
   const [open, setOpen] = useState(false);
   const [selectedSchoolId, setSelectedSchoolId] = useState<number | null>(null);
@@ -75,8 +74,8 @@ export function RegisterForm() {
 
   const selectedSchoolName =
     schools?.find((s) => s.schoolId === selectedSchoolId)?.school_name || "";
-  const selectedClassName =
-    classes?.find((c) => c.classId === selectedClassId)?.classLetter || "";
+  // const selectedClassName =
+  //   classes?.find((c) => c.classId === selectedClassId)?.classLetter || "";
   return (
     <>
       <Form {...form}>

@@ -14,9 +14,9 @@ export async function submitGameResult(payload: IMatchResultPayload) {
     }
 
     const response = await fetch(`${apiUrl}/matches`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ ...payload }),
@@ -24,14 +24,15 @@ export async function submitGameResult(payload: IMatchResultPayload) {
 
     if (!response.ok) {
       const errorData = await response.json();
-      console.error("Failed to submit game result:", errorData);
-      return { error: `Failed to submit game result: ${errorData.message || response.statusText}` };
+      return console.error("failed to submit game data", errorData)
     }
 
     const data = await response.json();
     return { success: true, data };
   } catch (error) {
     console.error("An unexpected error occurred:", error);
-    return { error: "An unexpected error occurred while submitting the game result." };
+    return {
+      error: "An unexpected error occurred while submitting the game result.",
+    };
   }
 }

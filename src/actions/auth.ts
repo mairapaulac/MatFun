@@ -25,21 +25,9 @@ export async function signInUserAction(payload: SignInInputs): Promise<{
 		});
 
 		if (!res.ok) {
-			const errorText = await res.text();
-			console.error("API Error Response:", errorText);
-			console.error("API Error Status:", res.status);
-			//eslint-disable-next-line
-			let errorJson: any = {};
-			try {
-				errorJson = JSON.parse(errorText);
-			} catch (e) {
-				console.error("Failed to parse API error response as JSON.");
-				errorJson = { raw: errorText };
-			}
 			return {
 				success: false,
 				message: `Erro ${res.status} ao fazer login. Por favor, verifique o console do servidor para mais detalhes.`,
-				error: errorJson,
 			};
 		}
 		const data = await res.json();
@@ -48,10 +36,10 @@ export async function signInUserAction(payload: SignInInputs): Promise<{
 			id: data.user.userId,
 			name: data.user.name,
 			email: data.user.email,
-      gradeName: data.user.gradeName,
-      classLetter: data.user.classLetter,
-	  classId:data.user.classId,
-      token: data.token
+			gradeName: data.user.gradeName,
+			classLetter: data.user.classLetter,
+			classId:data.user.classId,
+			token: data.token
 		};
 
 		await createSession(sessionData);
@@ -59,12 +47,12 @@ export async function signInUserAction(payload: SignInInputs): Promise<{
 			success: true,
 			message: "Autenticado com sucesso.",
 			data: {
-        id: data.user.userId,
-        name: data.user.name,
-        email: data.user.email,
-        gradeName: data.user.gradeName,
-        classLetter: data.user.classLetter,
-		classId:data.user.classId,
+			id: data.user.userId,
+			name: data.user.name,
+			email: data.user.email,
+			gradeName: data.user.gradeName,
+			classLetter: data.user.classLetter,
+			classId:data.user.classId,
       },
 		};
 	} catch (e) {
@@ -102,18 +90,9 @@ export async function registerUserAction(payload : SignUpInputs): Promise<{
 			const errorText = await res.text();
 			console.error("API Error Response:", errorText);
 			console.error("API Error Status:", res.status);
-			//eslint-disable-next-line
-			let errorJson: any = {};
-			try {
-				errorJson = JSON.parse(errorText);
-			} catch (e) {
-				console.error("Failed to parse API error response as JSON.");
-				errorJson = { raw: errorText };
-			}
 			return {
 				success: false,
 				message: `Erro ${res.status} ao registrar. Por favor, verifique o console do servidor para mais detalhes.`,
-				error: errorJson,
 			};
 		}
 
