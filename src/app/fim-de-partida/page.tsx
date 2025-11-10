@@ -14,7 +14,7 @@ export default function EndGamePage() {
   const { payload, clearGameResult } = useGameResultStore((state) => state)
   const submittedRef = useRef(false)
 
-  useEffect(() => {
+  const handleGoHome = () => {
     const handleSubmitResult = async () => {
       if (payload && !submittedRef.current) {
         submittedRef.current = true
@@ -23,11 +23,6 @@ export default function EndGamePage() {
         console.log("Submission result:", result)
       }
     }
-
-    handleSubmitResult()
-  }, [payload])
-
-  const handleGoHome = () => {
     clearGameResult()
     router.push("/home")
   }
