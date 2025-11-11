@@ -38,7 +38,8 @@ export default function QuestionPage() {
   const { selectedModules } = useModuleStore();
   const { setGameResult } = useGameResultStore();
   const [gameLog, setGameLog] = useState<GameLogEntry[]>([]);
-  const totalQuestions = 20;
+ //ALTERAR AQUI HAHAHAHAHAHAHAHHAHAHAHA
+  const totalQuestions = 5;
 
   const [score, setScore] = useState(0);
   const [currentAnswer, setCurrentAnswer] = useState("");

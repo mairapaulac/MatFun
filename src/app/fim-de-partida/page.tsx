@@ -23,6 +23,7 @@ export default function EndGamePage() {
         console.log("Submission result:", result)
       }
     }
+    handleSubmitResult()
     clearGameResult()
     router.push("/home")
   }
