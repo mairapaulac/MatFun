@@ -1,5 +1,6 @@
 import { IRankingPlayers } from "@/types/types";
 import PlayerCard from "./PlayerCard";
+import { PlayerCardSkeleton } from "@/components/PlayerCardSkeleton";
 
 interface RankingListProps {
   players: IRankingPlayers[] | undefined;
@@ -9,7 +10,13 @@ interface RankingListProps {
 
 export default function RankingList({ players, isLoading, isError }: RankingListProps) {
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex flex-col gap-3">
+        {[...Array(4)].map((_, i) => (
+          <PlayerCardSkeleton key={i} />
+        ))}
+      </div>
+    );
   }
 
   if (isError) {

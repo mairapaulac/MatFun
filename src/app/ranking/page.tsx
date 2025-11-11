@@ -1,5 +1,6 @@
 'use client'
 import PlayerCard from "./components/PlayerCard";
+import { PlayerCardSkeleton } from "@/components/PlayerCardSkeleton";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Users, Globe } from "lucide-react";
 import Navbar from "./components/Navbar";
@@ -52,7 +53,11 @@ export default function RankingScreen() {
 
       <div className="w-full z-10 mt-2 max-w-[800px]">
         <div className="bg-gradient-to-r from-[#2B3A67] via-[#314991] to-[#2B3A67] rounded-2xl p-4 shadow-xl border-2 border-white/20">
-          {currentUserRank && <PlayerCard rank={currentUserRank.rank} name={currentUserRank.user.name} points={currentUserRank.score} />}
+          {isLoadingRanking ? (
+            <PlayerCardSkeleton />
+          ) : (
+            currentUserRank && <PlayerCard rank={currentUserRank.rank} name={currentUserRank.user.name} points={currentUserRank.score} />
+          )}
         </div>
       </div>
     </div>

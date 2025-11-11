@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import Navbar from "./components/Navbar";
 import { StatCard, AchievementCard } from "@/app/home/components";
+import { AchievementCardSkeleton } from "@/components/AchievementCardSkeleton";
 import {
   Trophy,
   Gamepad2,
@@ -39,7 +40,13 @@ export default function HomePage() {
 
         <div className="mb-4 space-y-5 flex-1 max-h-[400px] md:max-h-[620px] lg:max-h-[500px] overflow-y-auto custom-scrollbar" style={{ animationDelay: "0.3s" }}>
           {isLoading ? (
-            <p className="text-white text-center">Carregando conquistas...</p>
+            <div className="flex flex-col gap-4">
+              <AchievementCardSkeleton />
+              <AchievementCardSkeleton />
+              <AchievementCardSkeleton />
+              <AchievementCardSkeleton />
+              <AchievementCardSkeleton className="md:hidden" />
+            </div>
           ) : achievements && achievements.length > 0 ? (
             achievements.map((achievement) => (
               <AchievementCard
