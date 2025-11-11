@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
+import { LoadingButton } from "@/components/ui/loading-button";
 import {
   Form,
   FormControl,
@@ -36,12 +37,16 @@ import { ConfirmData } from "./confirmData";
 import { useFetchSchools } from "@/hooks/use-fetch-schools";
 import { useFetchGrades } from "@/hooks/use-fetch-grades";
 import { useFetchClasses } from "@/hooks/use-fetch-classes";
+
 export function RegisterForm() {
   const [open, setOpen] = useState(false);
   const [selectedSchoolId, setSelectedSchoolId] = useState<number | null>(null);
   const [selectedGradeId, setSelectedGradeId] = useState<number | null>(null);
   const [selectedClassId, setSelectedClassId] = useState<number | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Estado de loading
+
   console.log(selectedClassId, selectedGradeId, selectedSchoolId);
+
   const form = useForm({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -61,21 +66,26 @@ export function RegisterForm() {
     useFetchGrades(selectedSchoolId);
   const { data: classes, isLoading: isLoadingClasses } =
     useFetchClasses(selectedGradeId);
-    // useEffect(() => {
-    //   console.log("Valores atuais:", form.watch());
-    // }, [form.watch()]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const isValid = await form.trigger();
-    if (isValid) {
-      setOpen(true);
+    setIsSubmitting(true); // Inicia o loading
+    
+    try {
+      const isValid = await form.trigger();
+      if (isValid) {
+        setOpen(true);
+      }
+    } catch (error) {
+      console.error("Erro na validação:", error);
+    } finally {
+      setIsSubmitting(false); // Finaliza o loading
     }
   };
 
   const selectedSchoolName =
     schools?.find((s) => s.schoolId === selectedSchoolId)?.school_name || "";
-  // const selectedClassName =
-  //   classes?.find((c) => c.classId === selectedClassId)?.classLetter || "";
+
   return (
     <>
       <Form {...form}>
@@ -97,6 +107,7 @@ export function RegisterForm() {
                       placeholder="Seu nome"
                       className="h-10 md:h-12 text-sm md:text-base"
                       {...field}
+                      disabled={isSubmitting} // Desabilita durante loading
                     />
                   </FormControl>
                   <FormMessage />
@@ -118,6 +129,7 @@ export function RegisterForm() {
                       placeholder="exemplo@email.com"
                       className="h-10 md:h-12 text-sm md:text-base"
                       {...field}
+                      disabled={isSubmitting} // Desabilita durante loading
                     />
                   </FormControl>
                   <FormMessage />
@@ -130,7 +142,9 @@ export function RegisterForm() {
               name="dataNascimento"
               render={({ field }) => (
                 <FormItem className="col-span-full flex flex-col">
-                  <FormLabel className="text-white text-sm md:text-base">Data de Nascimento</FormLabel>
+                  <FormLabel className="text-white text-sm md:text-base">
+                    Data de Nascimento
+                  </FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -138,7 +152,10 @@ export function RegisterForm() {
                           variant={"outline"}
                           className={`h-10 md:h-12 text-left font-normal bg-white justify-start pl-3 ${
                             !field.value && "text-muted-foreground"
+                          } ${
+                            isSubmitting ? "opacity-50 cursor-not-allowed" : ""
                           }`}
+                          disabled={isSubmitting} // Desabilita durante loading
                         >
                           {field.value ? (
                             format(new Date(field.value), "dd/MM/yyyy", { locale: ptBR })
@@ -153,12 +170,15 @@ export function RegisterForm() {
                         mode="single"
                         selected={field.value ? new Date(field.value) : undefined}
                         onSelect={(date) => {
-                          field.onChange(date ? format(date, "yyyy-MM-dd") : "");
+                          if (!isSubmitting) {
+                            field.onChange(date ? format(date, "yyyy-MM-dd") : "");
+                          }
                         }}
                         initialFocus
                         captionLayout="dropdown"
                         fromYear={new Date().getFullYear() - 120}
                         toYear={new Date().getFullYear() - 5}
+                        disabled={isSubmitting} // Desabilita calendário durante loading
                       />
                     </PopoverContent>
                   </Popover>
@@ -179,14 +199,17 @@ export function RegisterForm() {
                   </FormLabel>
                   <Select
                     onValueChange={(value) => {
-                      field.onChange(value);
-                      setSelectedSchoolId(Number(value));
-                      form.setValue("grade", "");
-                      form.setValue("class", "");
-                      setSelectedGradeId(null);
-                      setSelectedClassId(null);
+                      if (!isSubmitting) {
+                        field.onChange(value);
+                        setSelectedSchoolId(Number(value));
+                        form.setValue("grade", "");
+                        form.setValue("class", "");
+                        setSelectedGradeId(null);
+                        setSelectedClassId(null);
+                      }
                     }}
                     defaultValue={field.value}
+                    disabled={isSubmitting} // Desabilita durante loading
                   >
                     <FormControl>
                       <SelectTrigger className="w-full h-10 md:h-12 text-sm md:text-base">
@@ -229,13 +252,15 @@ export function RegisterForm() {
                   </FormLabel>
                   <Select
                     onValueChange={(value) => {
-                      field.onChange(value);
-                      setSelectedGradeId(Number(value));
-                      form.setValue("class", "");
-                      setSelectedClassId(null);
+                      if (!isSubmitting) {
+                        field.onChange(value);
+                        setSelectedGradeId(Number(value));
+                        form.setValue("class", "");
+                        setSelectedClassId(null);
+                      }
                     }}
                     defaultValue={field.value}
-                    disabled={!selectedSchoolId || isLoadingGrades}
+                    disabled={!selectedSchoolId || isLoadingGrades || isSubmitting}
                   >
                     <FormControl>
                       <SelectTrigger className="w-full h-10 md:h-12 text-sm md:text-base">
@@ -274,11 +299,13 @@ export function RegisterForm() {
                   </FormLabel>
                   <Select
                     onValueChange={(value) => {
-                      field.onChange(value);
-                      setSelectedClassId(Number(value));
+                      if (!isSubmitting) {
+                        field.onChange(value);
+                        setSelectedClassId(Number(value));
+                      }
                     }}
                     defaultValue={field.value}
-                    disabled={!selectedGradeId || isLoadingClasses}
+                    disabled={!selectedGradeId || isLoadingClasses || isSubmitting}
                   >
                     <FormControl>
                       <SelectTrigger className="w-full h-10 md:h-12 text-sm md:text-base">
@@ -323,6 +350,7 @@ export function RegisterForm() {
                       placeholder="Sua senha"
                       className="h-10 md:h-12 text-sm md:text-base"
                       {...field}
+                      disabled={isSubmitting} // Desabilita durante loading
                     />
                   </FormControl>
                   <FormMessage />
@@ -344,6 +372,7 @@ export function RegisterForm() {
                       placeholder="Confirme sua senha"
                       className="h-10 md:h-12 text-sm md:text-base"
                       {...field}
+                      disabled={isSubmitting} // Desabilita durante loading
                     />
                   </FormControl>
                   <FormMessage />
@@ -351,13 +380,16 @@ export function RegisterForm() {
               )}
             />
           </div>
+
           <div className="flex justify-center items-center">
-            <Button
+            <LoadingButton
               type="submit"
-              className="w-[60%] md:w-[50%] h-10 md:h-12 text-sm md:text-base cursor-pointer"
+              isLoading={isSubmitting}
+              loadingText="Validando..."
+              className="w-[60%] md:w-[50%] h-10 md:h-12 text-sm md:text-base cursor-pointer bg-blue-600 hover:bg-blue-700 text-white"
             >
               Cadastrar
-            </Button>
+            </LoadingButton>
           </div>
         </form>
       </Form>

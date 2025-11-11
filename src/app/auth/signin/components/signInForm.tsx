@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { LoadingButton } from "@/components/ui/loading-button"; // Importe o LoadingButton
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -46,7 +47,8 @@ export default function SignInForm() {
         router.push("/home");
       }
     } catch (error) {
-      console.error( error);
+      console.error(error);
+      toast.error("Erro ao fazer login. Tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -70,6 +72,7 @@ export default function SignInForm() {
                   type="email"
                   placeholder="seu@email.com"
                   className="h-10 sm:h-12 md:h-14 lg:h-10 text-sm sm:text-base md:text-lg lg:text-base"
+                  disabled={loading} // Desabilita input durante loading
                 />
               </FormControl>
               <FormMessage />
@@ -89,15 +92,20 @@ export default function SignInForm() {
                   type="password"
                   placeholder="••••••••"
                   className="h-10 sm:h-12 md:h-14 lg:h-10 text-sm sm:text-base md:text-lg lg:text-base"
+                  disabled={loading} // Desabilita input durante loading
                 />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+
         <div className="flex justify-between text-xs mt-1.5 items-center">
           <div className="flex items-center space-x-2">
-            <Checkbox id="remember-me" />
+            <Checkbox 
+              id="remember-me" 
+              disabled={loading} // Desabilita checkbox durante loading
+            />
             <label
               htmlFor="remember-me"
               className="text-xs sm:text-sm md:text-base lg:text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white"
@@ -106,24 +114,32 @@ export default function SignInForm() {
             </label>
           </div>
           <Link
-            href={"#"}
-            className="text-xs sm:text-sm md:text-base lg:text-sm text-white hover:underline"
+            href="#"
+            className={`text-xs sm:text-sm md:text-base lg:text-sm text-white hover:underline ${
+              loading ? "pointer-events-none opacity-50" : ""
+            }`}
           >
             Esqueceu sua senha?
           </Link>
         </div>
+
         <div className="pt-6 sm:pt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-          <Button
+          <LoadingButton
             type="submit"
-            disabled={loading}
+            isLoading={loading}
+            loadingText="Entrando..."
             className="w-full sm:w-[40%] cursor-pointer order-1 h-10 sm:h-12 md:h-14 lg:h-10 text-sm sm:text-base md:text-lg lg:text-base"
           >
-            {loading ? "Entrando..." : "Entrar"}
-          </Button>
+            Entrar
+          </LoadingButton>
+          
           <Button
             asChild
             variant={"secondary"}
-            className="active:scale-95 transition-all duration-200 w-full sm:w-[40%] cursor-pointer order-2 h-10 sm:h-12 md:h-14 lg:h-10 text-sm sm:text-base md:text-lg lg:text-base"
+            className={`active:scale-95 transition-all duration-200 w-full sm:w-[40%] cursor-pointer order-2 h-10 sm:h-12 md:h-14 lg:h-10 text-sm sm:text-base md:text-lg lg:text-base ${
+              loading ? "opacity-50 pointer-events-none" : ""
+            }`}
+            disabled={loading} // Desabilita botão de cadastro durante loading
           >
             <Link href="/auth/signup">Cadastro</Link>
           </Button>
