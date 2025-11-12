@@ -386,7 +386,7 @@ export function RegisterForm() {
               type="submit"
               isLoading={isSubmitting}
               loadingText="Validando..."
-              className="w-[60%] md:w-[50%] h-10 md:h-12 text-sm md:text-base cursor-pointer text-white"
+              className="w-[60%] md:w-[50%] h-10 md:h-12 text-sm md:text-base cursor-pointer text-[#293864]"
             >
               Cadastrar
             </LoadingButton>
