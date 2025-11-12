@@ -85,7 +85,14 @@ export function RegisterForm() {
 
   const selectedSchoolName =
     schools?.find((s) => s.schoolId === selectedSchoolId)?.school_name || "";
-
+  if (isLoadingSchools) {
+    return (
+      <div className="flex justify-center items-center h-48">
+        <p className="text-white text-lg">Carregando dados iniciais...</p>
+        {/* Você pode substituir isso por um componente de Loading/Spinner mais elaborado */}
+      </div>
+    );
+  }
   return (
     <>
       <Form {...form}>
