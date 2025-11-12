@@ -5,9 +5,9 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { gradeId: string } }
+  context: any // eslint-disable-line @typescript-eslint/no-explicit-any
 ) {
-  const gradeId = params.gradeId;
+  const { gradeId } = context.params;
 
   try {
     const result = await fetch(`${apiUrl}/support/anos/${gradeId}/turmas`, {

@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic"
 import { useRouter } from "next/navigation"
 import { useGameResultStore } from "@/stores/gameResultStore"
 import { Button } from "@/components/ui/button"
-import { useEffect, useRef } from "react"
+import { useRef } from "react"
 import { submitGameResult } from "@/actions/game"
 import { Trophy, CheckCircle2, XCircle, Home, Zap } from "lucide-react"
 
