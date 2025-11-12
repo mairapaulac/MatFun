@@ -9,7 +9,7 @@ interface SessionPayload extends IUserSessionData {
   expires: Date;
 }
 
-const secretKey = process.env.AUTH_SECRET || "teste";
+const secretKey = process.env.NEXT_PUBLIC_AUTH_SECRET || "teste";
 
 const key = new TextEncoder().encode(secretKey);
 

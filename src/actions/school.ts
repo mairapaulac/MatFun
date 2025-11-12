@@ -1,17 +1,15 @@
 "use server";
 
-const apiUrl = process.env.API_BASE_URL;
-
 export async function getSchools() {
 
-	const res = await fetch(`${apiUrl}/support/escolas`);
+	const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/support/escolas`);
 
 	const data = await res.json();
 	return data;
 }
 export async function getGradesFromSchools(schoolId:number) {
 
-	const res = await fetch(`${apiUrl}/support/escolas/${schoolId}/anos`);
+	const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/support/escolas/${schoolId}/anos`);
 
 	const data = await res.json();
 	return data;
@@ -20,7 +18,7 @@ export async function getGradesFromSchools(schoolId:number) {
 //fazer dropdown disso aqui abaixo
 export async function getClassesFromGrade(gradeId:number ) {
 
-	const res = await fetch(`${apiUrl}/support/anos/${gradeId}/turmas`) 
+	const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/support/anos/${gradeId}/turmas`) 
 
 	const data = await res.json();
 	return data;

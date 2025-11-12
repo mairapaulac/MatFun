@@ -3,8 +3,6 @@
 import { verifySession } from "./session";
 import { IMatchResultPayload } from "@/types/types";
 
-const apiUrl = process.env.API_BASE_URL;
-
 export async function submitGameResult(payload: IMatchResultPayload) {
   try {
     const { token } = await verifySession();
@@ -13,7 +11,7 @@ export async function submitGameResult(payload: IMatchResultPayload) {
       return { error: "User not authenticated" };
     }
 
-    const response = await fetch(`${apiUrl}/matches`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/matches`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,11 +1,9 @@
 "use server";
 import { verifySession } from "./session";
 
-const apiUrl = process.env.API_BASE_URL;
-
 export default async function getUserAchievements(userId: number) {
   const {token} =await verifySession(); 
-  const response = await fetch(`${apiUrl}/achievements/me?userId=${userId}`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/achievements/me?userId=${userId}`, {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
