@@ -14,15 +14,35 @@ import { Button } from "@/components/ui/button";
 import useFetchUserAchievements from "@/hooks/use-fetch-achievements";
 import { useUserStore } from "@/stores/userStore";
 
+import { modules } from "../module/page";
+
 export default function HomePage() {
   const router = useRouter();
   const { userData } = useUserStore();
   const userId = userData?.id;
   const {data: achievements, isLoading} = useFetchUserAchievements(userId)
   const totalQuestions =
-  achievements
-    ?.filter((a) => a.achievementName !== "Guerreiro Matemático") // exclui a conquista específica
-    .reduce((sum, item) => sum + (item.currentValue || 0), 0) || 0;
+    achievements
+      ?.filter((a) => a.achievementName !== "Guerreiro Matemático") // exclui a conquista específica
+      .reduce((sum, item) => sum + (item.currentValue || 0), 0) || 0;
+
+  const achievementsData = achievements?.filter(
+    (a) => a.achievementName !== "Guerreiro Matemático" && a.currentValue > 0
+  );
+
+  const bestModule =
+    achievementsData && achievementsData.length > 0
+      ? achievementsData.reduce((best, current) => {
+          return current.currentValue > best.currentValue ? current : best;
+        })
+      : null;
+
+  const moduleTitles: { [key: string]: string } = {};
+  modules.forEach(module => {
+    moduleTitles[module.id] = module.title;
+  });
+
+  const displayModuleName = bestModule ? moduleTitles[bestModule.achievementName] || bestModule.achievementName : "Nenhum";
   return (
     <div className="flex flex-col w-full min-h-screen bg-[#24366b] bg-pattern overflow-x-hidden overflow-y-auto">
       <Navbar />
@@ -61,13 +81,20 @@ export default function HomePage() {
           )}
         </div>
 
-        <div className="mb-6 sm:mb-8 animate-slide-in-up">
+        <div className="mb-6 sm:mb-8 grid grid-cols-2 gap-3 sm:gap-4 animate-slide-in-up">
           <StatCard
             icon={BookMarked}
             title={totalQuestions.toString()}
             subtitle="questões acertadas"
             iconColor="#3B82F6"
-            className="h-[80px] sm:h-[100px] md:h-[110px] max-w-sm mx-auto"
+            className="h-[80px] sm:h-[100px] md:h-[110px]"
+          />
+          <StatCard
+            icon={BrainCircuit}
+            title={displayModuleName}
+            subtitle="módulo favorito"
+            iconColor="#10B981"
+            className="h-[80px] sm:h-[100px] md:h-[110px]"
           />
         </div>
 

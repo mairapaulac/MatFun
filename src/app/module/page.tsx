@@ -23,7 +23,7 @@ interface Module {
   iconColor: string;
 }
 
-const modules: Module[] = [
+export const modules: Module[] = [
   {
     id: "geral",
     title: "Geral",
