@@ -28,11 +28,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { format } from "date-fns";
+import { format, parse } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
 import { ISchool } from "@/types/types";
-import { signUpSchema /*signUpType*/ } from "@/lib/schemas";
+import { signUpSchema } from "@/lib/schemas";
 import { ConfirmData } from "./confirmData";
 import { useFetchSchools } from "@/hooks/use-fetch-schools";
 import { useFetchGrades } from "@/hooks/use-fetch-grades";
@@ -43,8 +43,7 @@ export function RegisterForm() {
   const [selectedSchoolId, setSelectedSchoolId] = useState<number | null>(null);
   const [selectedGradeId, setSelectedGradeId] = useState<number | null>(null);
   const [selectedClassId, setSelectedClassId] = useState<number | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false); // Estado de loading
-
+  const [isSubmitting, setIsSubmitting] = useState(false); 
   console.log(selectedClassId, selectedGradeId, selectedSchoolId);
 
   const form = useForm({
@@ -69,7 +68,7 @@ export function RegisterForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true); // Inicia o loading
+    setIsSubmitting(true); 
     
     try {
       const isValid = await form.trigger();
@@ -79,7 +78,7 @@ export function RegisterForm() {
     } catch (error) {
       console.error("Erro na validação:", error);
     } finally {
-      setIsSubmitting(false); // Finaliza o loading
+      setIsSubmitting(false); 
     }
   };
 
@@ -89,7 +88,6 @@ export function RegisterForm() {
     return (
       <div className="flex justify-center items-center h-48">
         <p className="text-white text-lg">Carregando dados iniciais...</p>
-        {/* Você pode substituir isso por um componente de Loading/Spinner mais elaborado */}
       </div>
     );
   }
@@ -114,7 +112,7 @@ export function RegisterForm() {
                       placeholder="Seu nome"
                       className="h-10 md:h-12 text-sm md:text-base"
                       {...field}
-                      disabled={isSubmitting} // Desabilita durante loading
+                      disabled={isSubmitting} 
                     />
                   </FormControl>
                   <FormMessage />
@@ -136,7 +134,7 @@ export function RegisterForm() {
                       placeholder="exemplo@email.com"
                       className="h-10 md:h-12 text-sm md:text-base"
                       {...field}
-                      disabled={isSubmitting} // Desabilita durante loading
+                      disabled={isSubmitting} 
                     />
                   </FormControl>
                   <FormMessage />
@@ -162,10 +160,10 @@ export function RegisterForm() {
                           } ${
                             isSubmitting ? "opacity-50 cursor-not-allowed" : ""
                           }`}
-                          disabled={isSubmitting} // Desabilita durante loading
+                          disabled={isSubmitting} 
                         >
                           {field.value ? (
-                            format(new Date(field.value), "dd/MM/yyyy", { locale: ptBR })
+                            format(parse(field.value, "yyyy-MM-dd", new Date()), "dd/MM/yy", { locale: ptBR })
                           ) : (
                             <span>Selecione uma data</span>
                           )}
@@ -175,7 +173,7 @@ export function RegisterForm() {
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
                         mode="single"
-                        selected={field.value ? new Date(field.value) : undefined}
+                        selected={field.value ? parse(field.value, "yyyy-MM-dd", new Date()) : undefined}
                         onSelect={(date) => {
                           if (!isSubmitting) {
                             field.onChange(date ? format(date, "yyyy-MM-dd") : "");

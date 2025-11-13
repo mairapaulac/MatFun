@@ -1,5 +1,6 @@
 "use client"
 
+import { format, parse } from "date-fns"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { UserDataCard } from "@/components/ui/user-data-card"
@@ -26,6 +27,10 @@ interface ConfirmDataProps {
 export function ConfirmData({ open, onOpenChange, data }: ConfirmDataProps) {
   const router = useRouter()
   const [loading, setLoading] = useState(false);
+
+  const formattedDate = data.dataNascimento
+    ? format(parse(data.dataNascimento, "yyyy-MM-dd", new Date()), "dd/MM/yy")
+    : "";
 
   const handleRegister = async () => {
     setLoading(true);
@@ -60,7 +65,7 @@ export function ConfirmData({ open, onOpenChange, data }: ConfirmDataProps) {
         <UserDataCard data={{
           name: data.name,
           email: data.email,
-          nascimento: data.dataNascimento,
+          nascimento: formattedDate,
           escola: data.schoolName || data.school,
           ano: data.gradeName || data.grade,
           turma: data.classLetter || data.class,
