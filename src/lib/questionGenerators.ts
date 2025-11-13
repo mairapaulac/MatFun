@@ -30,13 +30,13 @@ export type Problem = GeneratedProblem | GeneratedGeometryProblem | CircleFromCi
 export const questionGenerators = {
     algebra: {
         1: [generateLevel1AlgebraProblem],
-        2: [generateOrderOfPrecedenceEquation, generateFirstDegreeEquation, generateExponentProblem, generateSquareRootProblem],
-        3: [generateComplexEquationWithBlanks],
+        2: [generateOrderOfPrecedenceEquation, generateExponentProblem, generateSquareRootProblem],
+        3: [generateComplexEquationWithBlanks, generateFirstDegreeEquation],
     },
     geometry: {
-        1: [() => generateGeometryProblem(["triangle", "rectangle", "parallelogram", "trapezoid"])],
-        2: [() => generateGeometryProblem(["circle"])],
-                3: [() => generateGeometryProblem(["circle_from_circumference", "rectangle_minus_circle"])],
+        1: [() => generateGeometryProblem(["triangle", "rectangle", "parallelogram"])],
+        2: [() => generateGeometryProblem(["circle", "trapezoid"])],
+        3: [() => generateGeometryProblem(["circle_from_circumference", "rectangle_minus_circle"])],
     },
     fraction: {
         1: [() => generateFractionQuestion('×')],

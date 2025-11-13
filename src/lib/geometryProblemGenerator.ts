@@ -25,15 +25,15 @@ export function generateGeometryProblem(allowedShapes: GeometryShape[]): Generat
       break;
 
     case "rectangle":
-      const width = Math.floor(Math.random() * 9) + 1; // 1-9
-      const rectHeight = Math.floor(Math.random() * 9) + 1; // 1-9
+      const width = Math.floor(Math.random() * 9) + 2; // 2-10
+      const rectHeight = Math.floor(Math.random() * 9) + 2; // 2-10
       measurements = { width, height: rectHeight };
       area = width * rectHeight;
       break;
 
     case "parallelogram":
-      const pBase = Math.floor(Math.random() * 9) + 1; // 1-9
-      const pHeight = Math.floor(Math.random() * 9) + 1; // 1-9
+      const pBase = Math.floor(Math.random() * 9) + 2; // 2-10
+      const pHeight = Math.floor(Math.random() * 9) + 2; // 2-10
       measurements = { base: pBase, height: pHeight };
       area = pBase * pHeight;
       break;
@@ -52,7 +52,7 @@ export function generateGeometryProblem(allowedShapes: GeometryShape[]): Generat
       break;
 
     case "circle":
-      const radius = Math.floor(Math.random() * 6) + 1; // 1-6
+      const radius = Math.floor(Math.random() * 6) + 2; // 2-7
       measurements = { radius };
       area = 3 * radius * radius; // π ≈ 3
       break;
