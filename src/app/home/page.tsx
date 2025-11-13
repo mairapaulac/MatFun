@@ -61,20 +61,13 @@ export default function HomePage() {
           )}
         </div>
 
-        <div className="mb-6 sm:mb-8 grid grid-cols-2 gap-3 sm:gap-4 animate-slide-in-up">
-          <StatCard
-            icon={BrainCircuit}
-            title="7 dias"
-            subtitle="seguidos jogados"
-            iconColor="#10B981"
-            className="h-[80px] sm:h-[100px] md:h-[110px]"
-          />
+        <div className="mb-6 sm:mb-8 animate-slide-in-up">
           <StatCard
             icon={BookMarked}
             title={totalQuestions.toString()}
             subtitle="questões acertadas"
             iconColor="#3B82F6"
-            className="h-[80px] sm:h-[100px] md:h-[110px]"
+            className="h-[80px] sm:h-[100px] md:h-[110px] max-w-sm mx-auto"
           />
         </div>
 

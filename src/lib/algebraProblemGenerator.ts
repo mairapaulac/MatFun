@@ -12,8 +12,8 @@ export interface GeneratedProblem {
 
 // Função para gerar problema aleatório
 export function generateLevel1AlgebraProblem(): GeneratedProblem {
-  const firstNumber = Math.floor(Math.random() * 9) + 1; // 1-9
-  const secondNumber = Math.floor(Math.random() * 9) + 1; // 1-9
+  const firstNumber = Math.floor(Math.random() * 9) + 2; // 2-10
+  const secondNumber = Math.floor(Math.random() * 9) + 2; // 2-10
   const result = firstNumber * secondNumber;
 
   // For level 1, we mostly ask for the result.
@@ -155,7 +155,7 @@ export function generateOrderOfPrecedenceEquation(): GeneratedProblem {
   }
 
   export function generateSquareRootProblem(): GeneratedProblem {
-    const root = Math.floor(Math.random() * 14) + 2; // Result 2-15
+    const root = Math.floor(Math.random() * 9) + 2; // Result 2-10
     const perfectSquare = root * root;
 
     return {
